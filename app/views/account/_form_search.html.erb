@@ -1,0 +1,22 @@
+<div class='row'>
+  <%= form_for :search, url: search_accounts_path, method: :get, remote: true do |f| %>
+    <div class='col-12'>
+      <div class='d-flex mt-3'>
+      <%= f.text_field :email, placeholder: 'Full Email Address', class: 'form-control me-3' %>
+      <%= f.button :submit, class: 'btn form-btn' do |f| %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style> 
+
+.form-btn {
+  background-color: #9cdba6;
+  color: green;
+  font-weight: 600;
+}
+
+</style>

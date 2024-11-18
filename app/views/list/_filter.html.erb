@@ -1,0 +1,50 @@
+
+<%= form_for :filters, method: :get do |f| %>
+  <div class='row'>
+    <div class='col-4'>
+      <%= f.label 'Person' %>
+      <%= f.select :account, options_for_select(account_options, params.dig(:filters, 'account')), { prompt: 'Select a Person' }, { class: 'form-select' } %>
+    </div>
+    <div class='col-3'>
+      <%= f.label 'Sort Order' %>
+      <%= f.select :sort_by, options_for_select(sort_options, params.dig(:filters, :sort_by)), { prompt: 'Sort By...'}, { class: 'form-select' } %>
+    </div>
+    <div class="col-3">
+      <%= f.label 'Status' %>
+      <%= f.select :status, options_for_select(claim_options, params.dig(:filters, :status)), {}, { class: 'form-select' } %>
+      
+    </div>
+    <div class='col-2 btn-col'>
+    <%= f.submit 'Filter', class: 'btn' %>
+    </div>
+  </div> 
+<% end %>
+
+<style>
+
+input.btn {
+ background-color: #9cdba6;
+ color: green;
+ font-weight: 600;
+}
+
+input.btn:hover {
+ background-color: #9cdba6;
+ color: green;
+ font-weight: 600;
+}
+
+.btn-col {
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: .7rem;
+  opacity: 0.7;
+  letter-spacing: 0.5px;
+}
+
+</style>

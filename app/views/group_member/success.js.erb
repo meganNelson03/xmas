@@ -1,0 +1,9 @@
+$(".modal-success").html("<%= escape_javascript(render partial: 'group_member/success', locals: { message: message }) %>");
+
+$("#account-<%= escape_javascript(account.id) %>").html("<%= escape_javascript(render partial: 'account/grouped_account_action') %>");
+
+$('#list-item-modal').modal('show')
+
+setTimeout(function() {
+  $(".modal-success div").css('display', 'none');
+}, 4000)

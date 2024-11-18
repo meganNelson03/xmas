@@ -1,0 +1,78 @@
+<div class='results mt-5'>
+
+<% if results.present? %>
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% results.each do |account| %>
+        <tr>
+          <td><%= account.full_name %></td>
+          <td><%= account.email %></td>
+          <td class='table-actions' id='account-<%= account.id %>'>
+            <% if current_account.shares_group?(account) %>
+              <%= render partial: 'grouped_account_action' %>
+            <% elsif account.grouped? %>
+              <%= link_to merge_group_members_path(account.id), class: 'btn', method: :post, remote: true do %>
+                Join and Merge Groups
+              <% end %>
+            <% elsif !account.grouped? %>
+              <%= link_to create_group_member_path(account.id), class: 'btn', method: :post do %>
+                Add
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+  
+<% if results.blank? %>
+  <div class='no-results'>
+    <h5>No one here has that email. Try again?</h5>
+  </div>
+<% end %>
+
+</div>
+
+<style>
+
+.green {
+color: green;
+              }
+.strong {
+  font-weight: 600; }
+
+.table-actions {
+  text-align: right;
+}
+
+table .btn {
+  background-color: #9cdba6;
+  color: green;
+  font-weight: 600;
+}
+
+.no-results {
+  text-align: center;
+}
+
+.results {
+
+}
+
+.table td {
+  background: none;
+  padding: 20px;
+}
+
+.table th {
+  background: none;
+  padding: 20px;
+}
+
+</style>

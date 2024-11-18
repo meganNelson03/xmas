@@ -1,0 +1,65 @@
+<%= render partial: 'header', locals: { account: @account } %>
+
+<%= render 'filter' %>
+
+<section class='list'>
+
+<% if @list_items.blank? %>
+  <%= render partial: 'empty_list', locals: { account: @account } %>
+<% end %>
+
+<% if @list_items.present? %>
+<div class="masonry row gx-5">
+  <% @list_items.each_with_index do |item, index| %>
+    <% if item.owned_by?(current_account) %>
+      <%= render partial: 'list_item/my_item', locals: { item: item } %>
+    <% else %>
+      <%= render partial: 'list_item/item', locals: { item: item } %>
+    <% end %>
+  <% end %>
+</div>
+<%= link_to_next_page @list_items, 'Next Page', class: 'pagination__next' %>
+  <div class="page-load-status">
+    <p class="infinite-scroll-request loader">
+      <%= image_tag 'loader', class: 'loader-img' %>
+    </p>
+    <p class="infinite-scroll-last">You've reached the end of the gifts!</p>
+  </div>
+<% end %>
+</section>
+
+<style>
+
+.infinite-scroll-last {
+  opacity: 0.5;
+  text-align: center;
+  margin-top: 50px;
+  font-weight: 100;
+}
+
+.loader {
+  opacity: 0;
+}
+
+.loader-img {
+  width: 50px;
+}
+
+.opaque {
+opacity: 1;
+}
+
+.infinite-scroll-request {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+
+body {
+  background-image: url(<%= asset_path 'background.svg' %>); 
+  background-size: cover;
+}
+
+
+
+</style>

@@ -1,0 +1,148 @@
+.icon-med-hot-item {
+  color: #FAB12F;
+}
+
+.icon-hot-item {
+  color: #FA812F;
+}
+
+.claimed-by {
+  padding: 0 20px;
+  margin-top: -10px;
+  font-size: .7rem;
+}
+
+.item-link .icon {
+  color: #50B498;
+}
+
+.preheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 300;
+  letter-spacing: .5px;
+}
+
+.body {
+  border-radius: 0 0 10px 10px;
+}
+
+.claim {
+  display: inline;
+}
+
+.claim-banner {
+  position: absolute;
+  background: #9CDBA6;
+  right: -10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  opacity: 0;
+  transition: top ease-in 0.1s;
+  top: -7px;
+  color: #16423C;
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.claim:hover .claim-banner {
+  opacity: 1;
+  top: -20px;
+}
+
+.item {
+  background: white;
+}
+
+.claim {
+
+}
+
+.item-hover .blur::after  {
+  animation: blur-this 0.4s;
+} 
+
+
+  
+@keyframes blur-this {
+  from {
+    backdrop-filter: blur(100px) opacity(0);
+  }
+  to {
+    backdrop-filter: blur(100px) opacity(1);
+  }
+}
+
+
+.item-hover .blur::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  backdrop-filter: blur(100px) opacity(1);
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.body {
+  z-index: 2;
+  position: relative;
+}
+.claim-banner {
+  z-index: 3;
+}
+
+
+.claim {
+  border: none;
+  background-color: #50B498;
+  color: white;
+  border-radius: 5px;
+}
+
+.claim.unclaimed {
+  background-color: #9CDBA6;
+}
+
+
+
+
+  .preheader {
+    padding: 20px;
+  }
+
+.item-box {
+  padding: 0;
+  margin: 0;
+}
+
+.head {
+  position: relative;
+  padding: 20px;
+}
+
+.body {
+  width: 100%;
+  background-color: #ededed;
+  padding: 20px;
+}
+
+.item {
+  margin: 20px;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  transition: all ease-in 0.5s;
+  position: relative;
+}
+
+.item:hover {
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+}

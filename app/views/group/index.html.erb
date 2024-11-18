@@ -1,0 +1,13 @@
+<section class='header'>
+  <div class='row'>
+    <div class='col-12'>
+      <h1>My Group</h1>
+    </div>
+  </div>
+</section>
+
+<% if @group.present? %>
+  <%= render partial: 'my_group', locals: { group: @group } %>
+<% else %>
+  <%= render partial: 'find_group' %>
+<% end %>

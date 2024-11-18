@@ -1,0 +1,20 @@
+<div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h3>Add Wish</h3>
+    </div>
+
+    <% if success %>
+      <div class='success'>
+        Made a wish!
+      </div>
+    <% end %>
+
+    <div class="modal-body">
+      <%= form_for :list_item, url: create_list_item_path, remote: true do |f| %>
+        <%= render partial: 'form_contents', locals: { f: f, list_item: list_item } %>
+      <% end %>
+    </div>
+  </div>
+</div>

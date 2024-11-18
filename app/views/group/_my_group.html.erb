@@ -1,0 +1,14 @@
+<section class='actions mt-5'>
+  <%= link_to new_group_member_path, class: 'pill btn', remote: true do %>
+    <i class="fa-solid fa-plus me-3"></i> Add Members
+  <% end %>
+</section>
+
+<section class='mt-5 members'>
+  <%= render partial: 'group_members', locals: { group_members: group.accounts } %>
+</section>
+
+<style>
+
+
+</style>

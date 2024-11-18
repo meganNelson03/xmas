@@ -1,0 +1,52 @@
+<section class='header pb-5'>
+  <div class='head-content'>
+    <h1>
+      <div class='d-flex justify-space-between'>
+      <% if account.present? %>
+        <%= account.full_name %>
+      <% else %>
+        Everybody's Wishes
+      <% end %>
+      </div>
+    </h1>
+    <div class='description pt-5'>
+      <span class='pill'>
+        <span class='pill-title'>Total Wishes</span> 
+        <span><%= @total %></span>
+      </span>
+      <% if current_account.id != account&.id %>
+      <span class='pill'>
+        <span class='pill-title'>Unclaimed</span> 
+        <span><%= @unclaimed %></span>
+      </span>
+      <span class='pill'>
+        <span class='pill-title'>Claimed by Me</span> 
+        <span><%= @claimed_by_me %></span>
+      </span>
+      <span class='pill red'>
+        <span class='pill-title'>Claimed by Others</span> 
+        <span><%= @claimed_by_others %></span>
+      </span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<style>
+
+
+.pill.red {
+  background-color: #FFAAAA;
+  color: #815454;
+}
+
+.pill {
+  margin-right: 15px;
+  margin-right: 15px;
+  background: #9cdba6;
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: green;
+}
+
+</style>

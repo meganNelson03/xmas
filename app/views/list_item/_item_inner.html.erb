@@ -1,0 +1,42 @@
+<div class="preheader">
+  <span class='name'>
+    <%= item.list.account.full_name %>
+  </span>
+  <span>
+    <% if item.needed? %>
+      <span data-toggle='tooltip' placement='top' title='Most Wanted'>
+        <i class="fa-solid fa-fire icon-hot-item" ></i>
+        <i class="fa-solid fa-fire me-2 icon-hot-item" ></i>
+      </span>
+    <% elsif item.loved? %>
+      <span data-toggle='tooltip' placement='top' title='Kinda Wanted'>
+        <i class="fa-solid fa-fire me-2 icon-med-hot-item" ></i>
+      </span>
+    <% end %>
+
+    <% if item.url.present? %>
+      <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top'}, title: 'Gift URL' do %>
+        <i class="fa-solid fa-link icon"></i>
+      <% end %>
+    <% end %>
+  </span>
+</div>
+<div class='claimed-by'>
+  <% if item.claimed? && !item.claimed_by?(current_account) %>
+    Claimed by <strong><%= item.claimed_by.full_name %></strong>
+  <% end %>
+</div>
+<div class="head">
+  <p><%= item.description %></p>
+</div>
+<div class="body">
+  <span>Price: <%= format_price(item.price) %></span>
+  <span>
+    <% if item.claimed_by?(current_account) %>
+      <%= render partial: 'list_item/claimed', locals: { item: item } %>
+    <% elsif !item.claimed? %>
+      <%= render partial: 'list_item/unclaimed', locals: { item: item } %>
+    <% end %>
+  </span>
+</div>
+<div class='blur'></div>

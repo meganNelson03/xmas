@@ -15,7 +15,5 @@ test:
   database: xmas_test
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  <<: *default
   database: <%= ENV['DATABASE_URL'] %>

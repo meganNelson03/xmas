@@ -2,7 +2,7 @@ module ApplicationHelper
 
   def format_price(price)
     return "$0.00" if price.blank?
-    sprintf("$%2.2f", price)
+    "$" + number_with_precision(price, :precision => 2, :delimiter => ',')
   end
 
   def recipient_options

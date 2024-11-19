@@ -13,7 +13,9 @@
       </div>
       <%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
         <div class="head">
-          <p><%= item.description.truncate(200, omission: '...') %></p>
+          <div class='truncated-text'>
+            <p class='white-space-preline'><%= item.description.truncate(200, omission: '...') %></p>
+          </div>
         </div>
         <div class="body">
           <%= render partial: 'list_item/price', locals: { item: item } %>

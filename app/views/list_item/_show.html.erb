@@ -22,12 +22,12 @@
       </div>
 
       <div class='row'>
-        <% if item.price.present? %>
+        <% if item.low_price.present? %>
           <div class='col-12'>
             <div class='text-container'>
               <label>Price</label>
               <div class='text-content'>
-                <%= format_price(item.price) %>
+                <%= format_price_range(item.low_price, item.high_price) %>
               </div>
             </div>
           </div>

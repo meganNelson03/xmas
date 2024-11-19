@@ -52,11 +52,11 @@ module ApplicationHelper
 
   def priority_options
     [
-      ['I can live without it', 'meh'],
-      ['I want it', 'wanted'],
-      ['I really want it', 'loved'],
-      ['I really really want it', 'adored'],
-      ["I can't live without it", 'needed']
+      ['I can live without it', :meh],
+      ['I want it', :wanted],
+      ['I really want it', :loved],
+      ['I really really want it', :adored],
+      ["I can't live without it", :needed]
     ]
   end
 

@@ -9,11 +9,6 @@
     <%= f.text_field :url, class: 'form-control', value: list_item.url %>
     <%= render_errors(list_item, :url) %> 
   </div>
-  <div class='col-12 mb-3'>
-    <%= f.label :price %>
-    <%= f.number_field :price, step: :any, class: 'form-control', value: list_item.price %>
-    <%= render_errors(list_item, :price) %> 
-  </div>
   <div class='col-12 mb-3 row'>
     <%= f.label 'Price Range' %>
     <div class='col-6'>
@@ -26,7 +21,7 @@
   </div>
   <div class='col-12 mb-5'>
     <%= f.label 'How much do you want this?' %>  
-    <%= f.select :priority, options_for_select(priority_options), { include_blank: true }, class: 'form-select', value: list_item.priority %>
+    <%= f.select :priority, options_for_select(priority_options, action_name == 'new' ? nil : list_item.priority), { include_blank: true }, class: 'form-select' %>
     <%= render_errors(list_item, :priority) %>
   </div>
   <%= f.hidden_field :list_id, value: @current_account.list.id %>

@@ -6,9 +6,7 @@ pin "popper", to: 'popper.js', preload: true
 pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "jquery", to: "https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"
 pin "masonryjs", to: 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js', preload: true
-pin "choicejs", to: 'https://cdnjs.cloudflare.com/ajax/libs/choices.js/1.1.6/choices.min.js'
 pin "infinitescroll", to: "https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js", preload: true
-
 
 pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@7.0.3-1/lib/assets/compiled/rails-ujs.js"
 

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post 'list_item/create', to: 'list_item#create', as: 'create_list_item'
   get 'list_item/:id/edit', to: 'list_item#edit', as: 'edit_list_item'
 
+  get '/list_item/:id', to: 'list_item#show', as: 'show_list_item'
   post "list_item/:id/claim", to: "list_item#claim", as: "claim"
   get "/sign_up", to: "home#sign_up", as: 'sign_up'
   delete 'list_item/:id', to: 'list_item#destroy', as: 'destroy_list_item'

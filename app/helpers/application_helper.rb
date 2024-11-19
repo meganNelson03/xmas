@@ -38,19 +38,17 @@ module ApplicationHelper
 
   def priority_options
     [
+      ['I can live without it', 'meh'],
       ['I want it', 'wanted'],
       ['I really want it', 'loved'],
-      ['I need it', 'needed']
+      ['I really really want it', 'adored'],
+      ["I can't live without it", 'needed']
     ]
   end
 
   def render_errors(object, field)
     return if object.errors.blank? 
     return if object.errors&.messages[field]&.blank?
-
-    p "field"
-    p field 
-    p object.errors&.messages[field]
 
     render partial: "layouts/error", locals: { field: field, error: object.errors.messages[field] } 
   end

@@ -1,6 +1,12 @@
 class ListItemController < ApplicationController
-  before_action :set_list_item, only: [:edit, :update, :destroy]
+  before_action :set_list_item, only: [:show, :edit, :update, :destroy, :claim]
   before_action :verify_in_group, only: [:edit, :update, :destroy]
+
+  def show 
+    respond_to do |format|
+      format.js { render 'show', locals: { list_item: @list_item }}
+    end
+  end
 
   def new
     list_item = ListItem.new 
@@ -55,6 +61,7 @@ class ListItemController < ApplicationController
 
     respond_to do |format|
       format.js
+      format.html { redirect_back fallback_location: lists_path, notice: "You've claimed a wish!" }
     end
   end
 

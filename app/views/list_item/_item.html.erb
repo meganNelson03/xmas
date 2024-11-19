@@ -1,5 +1,5 @@
 <div class="item-box brick col-3" data-controller='claim' data-claim-hover-class='item-hover' data-claim-hover-out-class='item-hover-out' data-claim-target='item'>
-  <div class='item' id='item-<%= item.id %>'>
+  <div class='item <%= item.claimed? ? 'item-claimed' : '' %>' id='item-<%= item.id %>'>
     <%= render partial: 'list_item/item_inner', locals: { item: item } %>
   </div>
 </div>

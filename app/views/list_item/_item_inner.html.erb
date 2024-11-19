@@ -3,19 +3,10 @@
     <%= item.list.account.full_name %>
   </span>
   <span>
-    <% if item.needed? %>
-      <span data-toggle='tooltip' placement='top' title='Most Wanted'>
-        <i class="fa-solid fa-fire icon-hot-item" ></i>
-        <i class="fa-solid fa-fire me-2 icon-hot-item" ></i>
-      </span>
-    <% elsif item.loved? %>
-      <span data-toggle='tooltip' placement='top' title='Kinda Wanted'>
-        <i class="fa-solid fa-fire me-2 icon-med-hot-item" ></i>
-      </span>
-    <% end %>
+    <%= render partial: 'list_item/priority_icon', locals: { item: item } %>
 
     <% if item.url.present? %>
-      <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top'}, title: 'Gift URL' do %>
+      <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top'}, title: 'Gift URL', target: '_blank' do %>
         <i class="fa-solid fa-link icon"></i>
       <% end %>
     <% end %>
@@ -26,9 +17,11 @@
     Claimed by <strong><%= item.claimed_by.full_name %></strong>
   <% end %>
 </div>
+<%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
 <div class="head">
-  <p><%= item.description %></p>
+  <p><%= item.description.truncate(200, omission: '...') %></p>
 </div>
+<% end %>
 <div class="body">
   <span>Price: <%= format_price(item.price) %></span>
   <span>
@@ -39,4 +32,5 @@
     <% end %>
   </span>
 </div>
+
 <div class='blur'></div>

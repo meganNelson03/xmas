@@ -1,63 +1,20 @@
-<div class='row mx-auto pt-lg'>
+<div class='pt-lg d-flex justify-content-center pb-5'>
+  <%= image_tag "cat-with-hat", class: 'logo logo-big' %>
+</div>
+
+<div class='row mx-auto'>
   <div class='col-3'></div>
   <div class='col-6'>
-<div class='card'>
-  <div class='text-center'>
-    <p class='title mb-3'>Have an Account?</p>
-    <div class='mt-5 mb-5'>
-      <%= button_to account_google_oauth2_omniauth_authorize_path, method: :post, :data => {turbo: "false"}, class: 'btn btn-lg sign-up' do %>
-        <i class="fa-brands fa-google me-3"></i>Login with Google
-      <% end %>
+    <div class='card'>
+      <div class='text-center'>
+        <p class='title mt-5 mb-3'>Login or Sign-up Below</p>
+        <div class='mt-5 mb-5'>
+          <%= button_to account_google_oauth2_omniauth_authorize_path(prompt: 'select_account'), method: :post, :data => {turbo: "false"}, class: 'btn btn-lg sign-up' do %>
+            <i class="fa-brands fa-google me-3"></i>Login with Google
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
-  <hr />
-  <div class='mt-3'>
-    <p class='text-center title'>Sign Up</p>
-    <%= render partial: 'form' %>
-  </div>
-</div>
   </div>
   <div class='col-3'></div>
 </div>
-
-<style>
-
-
-
-hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-}
-
-.btn {
-  border-radius: 20px;
-}
-
-label {
-  font-size: .9rem;
-}
-
-.pt-lg {
-  padding-top: 15%;
-}
-
-.title {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.card {
-  border-radius: 25px;
-  border: none;
-  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-}
-
-.btn.sign-up {
-  background: #72BF78;
-  padding: 10px 20px;
-  font-weight: 600;
-}
-
-</style>

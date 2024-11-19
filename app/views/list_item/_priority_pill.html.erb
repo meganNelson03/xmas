@@ -1,0 +1,16 @@
+<div class='pills'>
+  <div class='pill'>
+    <% if item.meh? %>
+      <i class="fa-regular fa-face-meh me-2"></i>
+    <% elsif item.wanted? %>
+      <i class="fa-regular fa-face-smile me-2"></i>
+    <% elsif item.loved? %>
+      <i class="fa-solid fa-face-grin-wide me-2"></i>
+    <% elsif item.adored? %>
+      <i class="fa-solid fa-face-laugh-beam me-2"></i>
+    <% elsif item.needed? %>
+      <i class="fa-solid fa-face-grin-stars me-2"></i>
+    <% end %>
+    <%= item.formatted_priority %>
+  </div>
+</div>

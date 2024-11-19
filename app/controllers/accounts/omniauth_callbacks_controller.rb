@@ -36,13 +36,8 @@ class Accounts::OmniauthCallbacksController < Devise::OmniauthCallbacksControlle
    end
 
    def format_params(params, auth) 
-    if params.blank? || params[:state].blank?
-      params = {} if params.blank?
-      return params.merge(first_name: auth.info.first_name, last_name: auth.info.last_name)
-    end
-
-    first_name, last_name = params[:state].split('_')
-
-    params.merge(first_name: first_name.presence || auth.info.first_name, last_name: last_name || auth.info.last_name)
+    return if auth.blank?
+    params = {}
+    params.merge(first_name: auth.info.first_name, last_name: auth.info.last_name)
    end
 end

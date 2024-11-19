@@ -31,51 +31,14 @@
           </li>
         </ul>
         <form class="">
-          <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'add-to-list btn' do %>
+          <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'add-to-list btn no-border' do %>
             <span class='claim-icon fa-solid fa-gift me-3'></span>Add to My List
           <% end %>
+          <%= link_to destroy_account_session_path, method: :delete, class: 'ms-4 logout-btn btn no-border' do %>
+            <i class="fa-solid fa-arrow-right-from-bracket me-3"></i>Sign Off
+          <% end %>
         </form>
-
       </div>
     </div>
   </nav>
 </div>
-
-<style>
-
-.navbar {
-  padding-top: 1rem;
-}
-
-.add-to-list:hover {
-border: 2px solid #c62e2e;
-color: #c62e2e;
-padding: 7px 15px;
-font-weight: 600;
-}
-
-.add-to-list {
-  border: 2px solid #c62e2e;
-    color: #c62e2e;
-    padding: 7px 15px;
-    font-weight: 600;
-}
-
-.nav-item {
-  letter-spacing: .75px;
-  margin-right: 1rem;
-}
-
-.logo {
-  width: 70px;
-}
-
-
-select {
-  padding: 5px 10px;
-  border-radius: 10px;
-  background: #cccccc;
-  border: none;
-}
-
-</style>

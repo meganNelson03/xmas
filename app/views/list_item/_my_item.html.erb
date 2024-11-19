@@ -1,42 +1,32 @@
 <div class="item-box brick col-3" data-controller='claim' data-claim-hover-class='item-hover' data-claim-hover-out-class='item-hover-out' data-claim-target='item'>
-  <div class='item' id='item-<%= item.id %>'>
-    <div class="preheader">
-      <span class='name'><%= item.list.account.full_name %></span>
-      <span>
-        <% if item.needed? %>
-          <span data-toggle='tooltip' placement='top' title='Most Wanted'>
-            <i class="fa-solid fa-fire icon-hot-item" ></i>
-            <i class="fa-solid fa-fire me-2 icon-hot-item" ></i>
-          </span>
-        <% elsif item.loved? %>
-          <span data-toggle='tooltip' placement='top' title='Kinda Wanted'>
-            <i class="fa-solid fa-fire me-2 icon-med-hot-item" ></i>
-          </span>
-        <% end %>
-        <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top'}, title: 'Gift URL' do %>
-          <i class="fa-solid fa-link icon"></i>
-        <% end %>
-      </span>
-    </div>
-    <div class="head">
-      <p><%= item.description %></p>
-    </div>
-    <div class="body">
-      <%= render partial: 'list_item/price', locals: { item: item } %>
-    </div>
+    <div class='item' id='item-<%= item.id %>'>
+      <div class="preheader">
+        <span class='name'><%= item.list.account.full_name %></span>
+        <span>
+          <%= render partial: 'list_item/priority_icon', locals: { item: item } %>
+          <% if item.url.present? %>
+            <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top'}, title: 'Gift URL', target: '_blank' do %>
+              <i class="fa-solid fa-link icon"></i>
+            <% end %>
+          <% end %>
+        </span>
+      </div>
+      <%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
+        <div class="head">
+          <p><%= item.description.truncate(200, omission: '...') %></p>
+        </div>
+        <div class="body">
+          <%= render partial: 'list_item/price', locals: { item: item } %>
+        </div>
+      <% end %>
   
-    <%= form_for :list_item, url: destroy_list_item_path(item.id), method: :delete, class: 'delete-item-form' do |f| %>
-      <%= f.button :submit, class: 'action delete-item' do %>
-        <i class="fa-solid fa-trash-can"></i>
+      <%= form_for :list_item, url: destroy_list_item_path(item.id), method: :delete, class: 'delete-item-form' do |f| %>
+        <%= f.button :submit, class: 'action delete-item' do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+        <%= link_to edit_list_item_path(item.id), class: 'action edit-item', remote: true do %>
+          <i class="fa-regular fa-pen-to-square"></i>
+        <% end %>
       <% end %>
-      <%= link_to edit_list_item_path(item.id), class: 'action edit-item', remote: true do %>
-        <i class="fa-regular fa-pen-to-square"></i>
-      <% end %>
-    <% end %>
-  </div>
+    </div>
 </div>
-
-<style>
-
-
-</style>

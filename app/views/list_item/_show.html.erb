@@ -1,0 +1,78 @@
+<div class="modal-dialog modal-dialog-centered modal-lg view-modal-dialog">
+  <div class="modal-content">
+
+    <div class='dismiss-modal'>
+      <i class="fa-solid fa-circle-xmark icon-dismiss"></i>
+    </div>
+
+    <div class="modal-header">
+      <h3><%= item.account.first_name %>'s Wish</h3>
+    </div>
+
+    <div class="modal-body">
+      <%= render partial: 'priority_pill', locals: { item: item } %>
+
+      <div class='row'>
+        <% if item.url.present? %>
+          <div class='col-12'>
+            <div class='text-container'>
+              <label>Gift URL</label>
+              <div class='text-content d-flex justify-content-between'>
+                <%= link_to url_for(item.url), target: '_blank' do %>
+                  <%= item.url %>
+                <% end %>
+                <span>
+                  <%= link_to url_for(item.url), target: '_blank' do %>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% if item.price.present? %>
+          <div class='col-12'>
+            <div class='text-container'>
+              <label>Price</label>
+              <div class='text-content'>
+                <%= format_price(item.price) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% if !item.owned_by?(current_account) %>
+        <div class='col-12'>
+          <div class='text-container'>
+            <label>Status</label>
+            <div class='text-content'>
+              <% if item.claimed? %>
+                This wish was claimed by <strong><%= item.claimed_by&.full_name %></strong>
+              <% else %>
+                This wish is open to claim.
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <div class='col-12'>
+          <div class='text-container'>
+            <label>Description</label>
+            <div class='text-content'>
+            <%= item.description %>
+            </div>
+          </div>
+        </div>
+
+        <% if !item.claimed? && !item.owned_by?(current_account) %>
+          <div class='col-12 mt-4 d-flex justify-content-end pb-3 pt-3'>
+            <%= link_to claim_path(item.id), method: :post, class: 'add-to-list btn' do %>
+              Claim this Wish
+            <% end %>
+          </div>
+        <% else %>
+          <div class='pb-5'></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -115,9 +115,9 @@
 
 
 
-  .preheader {
-    padding: 20px;
-  }
+.preheader {
+  padding: 20px;
+}
 
 .item-box {
   padding: 0;
@@ -145,4 +145,29 @@
 
 .item:hover {
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+//
+
+.pills {
+  display: flex;
+}
+
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.text-container {
+  margin-top: 1.5rem;
+}
+
+.text-content {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px 20px;
+  line-height: 2;
 }

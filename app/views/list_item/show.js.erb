@@ -1,0 +1,3 @@
+$("#view-modal").html("<%= escape_javascript(render partial: 'list_item/show', locals: { item: list_item }) %>");
+
+$('#view-modal').modal('show');

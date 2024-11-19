@@ -16,10 +16,10 @@ test:
 
 production:
   primary: &primary_production
-    <<: *default
-    username: <%= ENV['DB_USERNAME'] %>
-    password: <%= ENV['DB_PASSWORD'] %>
+    adapter: postgresql
+    encoding: unicode
     database: <%= ENV['DATABASE_URL'] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   cache:
     <<: *primary_production
     database: xmas_production_cache

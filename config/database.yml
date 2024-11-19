@@ -15,20 +15,7 @@ test:
   database: xmas_test
 
 production:
-  primary: &primary_production
-    adapter: postgresql
-    encoding: unicode
-    pool: 5
-    database: <%= ENV['DATABASE_URL'] %>
-  cache:
-    <<: *primary_production
-    database: xmas_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: xmas_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: xmas_production_cable
-    migrations_paths: db/cable_migrate
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: <%= ENV['DATABASE_URL'] %>

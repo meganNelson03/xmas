@@ -16,6 +16,26 @@ textarea {
   cursor: text;
 }
 
+body::-webkit-scrollbar {
+  width: 0px;
+}
+
+.home-controller .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 90vh;
+  flex-direction: column;
+}
+
+.price-range {
+  background: #f5f4f4;
+  padding: 1px 10px;
+  border-radius: 10px;
+}
+
+
 // Table
 
 .table {

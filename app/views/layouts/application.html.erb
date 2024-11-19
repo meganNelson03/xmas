@@ -29,7 +29,7 @@
     </style>
   </head>
 
-  <body>
+  <body class='<%= controller_name %>-controller'>
     <div class='container'>
       <%= render partial: 'layouts/message' %>
       <div id="list-item-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"></div>
@@ -44,3 +44,16 @@
     </div>
   </body>
 </html>
+
+<style>
+
+.home-controller .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 90vh;
+  flex-direction: column;
+}
+
+</style>

@@ -36,7 +36,7 @@
 
 <% if @list_items.present? %>
   <section class='list'>
-    <div class="masonry row gx-5">
+    <div class="masonry row">
     <% @list_items.each_with_index do |item, index| %>
       <%= render partial: 'list_item/item', locals: { item: item, index: index } %>
     <% end %>

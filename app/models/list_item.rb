@@ -4,8 +4,11 @@ class ListItem < ApplicationRecord
   enum :priority, [:meh, :wanted, :loved, :adored, :needed]
 
   validates :description, presence: true
+  validates :priority, presence: true
   validate :valid_url
   validates :price, numericality: { less_than: 1000000.00, greater_than_or_equal_to: 0.00 }, allow_nil: true
+
+  validate :valid_price_range
 
   scope :unclaimed, -> { where(claimed_by_id: nil) }
   scope :claimed, -> { where.not(claimed_by_id: nil) }
@@ -43,6 +46,29 @@ class ListItem < ApplicationRecord
   end
 
   private
+
+  def valid_price_range
+    return if low_price.blank? && high_price.blank?
+    valid_range = 0..1000000
+
+    if high_price.present? && low_price.blank?
+      errors.add(:cost, ' needs to have a low price point.') 
+    end
+
+    [low_price, high_price].compact_blank.each do |p|
+      if !valid_range.include?(p)
+        errors.add(:cost, ' must be less than a million bucks. Sorry.')
+        return
+      end
+    end
+
+    if low_price.present? && high_price.present?
+      if low_price > high_price
+        errors.add(:cost, ' must be less than the high price.')
+        return 
+      end
+    end
+  end
 
   def valid_url 
     return if url.blank?

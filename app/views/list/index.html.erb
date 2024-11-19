@@ -7,7 +7,7 @@
     <%= render partial: 'empty_list', locals: { account: @account } %>
   <% end %>
   <% if @list_items.present? %>
-    <div class="masonry row gx-5">
+    <div class="masonry row">
       <% @list_items.each_with_index do |item, index| %>
         <% if item.owned_by?(current_account) %>
           <%= render partial: 'list_item/my_item', locals: { item: item } %>

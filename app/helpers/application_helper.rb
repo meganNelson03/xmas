@@ -1,8 +1,22 @@
 module ApplicationHelper
 
-  def format_price(price)
+  def format_price(price, precision = 2)
     return "$0.00" if price.blank?
-    "$" + number_with_precision(price, :precision => 2, :delimiter => ',')
+    "$" + number_with_precision(price, :precision => precision, :delimiter => ',')
+  end
+
+  def format_price_range(low_price = nil, high_price = nil)
+    if low_price.blank? && high_price.blank?
+      return "$0.00"
+    end
+
+    if (value = [low_price, high_price].compact_blank.uniq).length == 1 
+      return format_price(value.first)
+    end
+
+    if low_price.present? && high_price.present?
+      return format_price(low_price, 0) + " - " + format_price(high_price, 0) 
+    end
   end
 
   def recipient_options

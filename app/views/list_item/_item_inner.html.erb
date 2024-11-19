@@ -25,7 +25,7 @@
 </div>
 <% end %>
 <div class="body">
-  <span>Price: <%= format_price(item.price) %></span>
+  <%= render partial: 'list_item/price_range', locals: { item: item } %>
   <span>
     <% if item.claimed_by?(current_account) %>
       <%= render partial: 'list_item/claimed', locals: { item: item } %>

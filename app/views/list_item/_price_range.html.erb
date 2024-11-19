@@ -1,0 +1,17 @@
+<% if item.low_price.present? %>
+  <span class='price-range'>
+    <%= format_price_range(item.low_price, item.high_price) %>
+  </span>
+<% else %>
+  <span style='opacity: 0;'>Price</span>
+<% end %>
+
+<style>
+
+.price-range {
+  background: #f5f4f4;
+  padding: 1px 10px;
+  border-radius: 10px;
+}
+
+</style>

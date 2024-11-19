@@ -51,9 +51,9 @@ class ListController < ApplicationController
     when 'first_name_desc'
       list_items = list_items.reorder(first_name: :desc)
     when 'price_asc'
-      list_items = list_items.reorder('price asc NULLS first')
+      list_items = list_items.reorder('low_price asc NULLS first')
     when 'price_desc'
-      list_items = list_items.reorder('price desc NULLS last')
+      list_items = list_items.reorder('low_price desc NULLS last')
     when 'priority_desc'
       list_items = list_items.reorder(priority: :desc)
     when 'priority_asc'

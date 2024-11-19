@@ -10,26 +10,18 @@
     </div>
 
     <div class="modal-body">
-      <%= render partial: 'priority_pill', locals: { item: item } %>
+      <div class='pills d-flex justify-content-between'>
+        <%= render partial: 'priority_pill', locals: { item: item } %>
+        <% if item.url.present? %>
+          <%= link_to item.url, target: '_blank', class: 'no-link-style' do %>
+            <div class='pill'>
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Gift URL
+            </div>
+          <% end %>
+        <% end %>
+      </div>
 
       <div class='row'>
-        <% if item.url.present? %>
-          <div class='col-12'>
-            <div class='text-container'>
-              <label>Gift URL</label>
-              <div class='text-content d-flex justify-content-between'>
-                <%= link_to url_for(item.url), target: '_blank' do %>
-                  <%= item.url %>
-                <% end %>
-                <span>
-                  <%= link_to url_for(item.url), target: '_blank' do %>
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                  <% end %>
-                </span>
-              </div>
-            </div>
-          </div>
-        <% end %>
         <% if item.price.present? %>
           <div class='col-12'>
             <div class='text-container'>

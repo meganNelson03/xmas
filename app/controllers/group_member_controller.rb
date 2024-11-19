@@ -17,7 +17,7 @@ class GroupMemberController < ApplicationController
       account.update(account_group_id: group.id) 
     end
 
-    redirect_to my_group_path
+    redirect_to group_path
   end
 
   def merge

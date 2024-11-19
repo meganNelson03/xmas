@@ -11,7 +11,7 @@ class Account < ApplicationRecord
   after_create :create_list 
 
   def shares_group?(account)
-    account.account_group_id == account_group_id
+    account.grouped? && (account.account_group_id == account_group_id)
   end
 
   def full_name

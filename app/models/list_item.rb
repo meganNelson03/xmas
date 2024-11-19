@@ -46,14 +46,10 @@ class ListItem < ApplicationRecord
 
   def valid_url 
     return if url.blank?
+    return if url =~ URI::regexp
 
-    regex = /\A(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?\Z/i
-
-    if url.match?(regex)
-      if !(url.starts_with?('http://') || url.starts_with?('https://'))
-        errors.add(:url, " must include http:// or https://")
-        return
-      end 
+    if !(url.starts_with?('http://') || url.starts_with?('https://'))
+      errors.add(:url, " must include http:// or https://") 
     else
       errors.add(:url, ' is not valid')
     end

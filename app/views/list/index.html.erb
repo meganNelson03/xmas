@@ -1,6 +1,6 @@
 <%= render partial: 'header', locals: { account: @account } %>
 
-<%= render partial: 'filter', locals: { is_my_list: @account.id == current_account.id } %>
+<%= render partial: 'filter', locals: { is_my_list: @account&.id == current_account.id } %>
 
 <section class='list'>
   <% if @list_items.blank? %>

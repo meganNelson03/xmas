@@ -1,5 +1,5 @@
 class AddDefaultTags < ActiveRecord::Migration[8.0]
-  def change
+  def up
     Tag.create([
       { name: 'Ask me for Details' },
       { name: 'This is a Reach' },
@@ -9,5 +9,9 @@ class AddDefaultTags < ActiveRecord::Migration[8.0]
       { name: "Don't go Overboard" },
       { name: 'Please Source Ethically' }
     ])
+  end
+
+  def down
+    raise ActiveRecord::IrreversibleMigration
   end
 end

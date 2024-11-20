@@ -1,20 +1,20 @@
 <% if item.wanted? %>
   <span data-toggle='tooltip' placement='top' title='Wanted'>
-    <i class="fa-solid fa-fire me-2 icon-med-hot-item" ></i>
+    <i class="fa-solid fa-fire icon-med-hot-item" ></i>
   </span>
 <% elsif item.loved? %>
   <span data-toggle='tooltip' placement='top' title='Really Wanted'>
-    <i class="fa-solid fa-fire icon-hot-item me-2" ></i>
+    <i class="fa-solid fa-fire icon-hot-item" ></i>
   </span>
 <% elsif item.adored? %>
   <span data-toggle='tooltip' placement='top' title='Really Really Wanted'>
     <i class="fa-solid fa-fire icon-med-hot-item" ></i>
-    <i class="fa-solid fa-fire me-2 icon-med-hot-item" ></i>
+    <i class="fa-solid fa-fire icon-med-hot-item" ></i>
   </span>
 <% elsif item.needed? %>
   <span data-toggle='tooltip' placement='top' title='Most Wanted'>
     <i class="fa-solid fa-fire icon-hot-item" ></i>
     <i class="fa-solid fa-fire icon-hot-item" ></i>
-    <i class="fa-solid fa-fire me-2 icon-hot-item" ></i>
+    <i class="fa-solid fa-fire icon-hot-item" ></i>
   </span>
 <% end %>

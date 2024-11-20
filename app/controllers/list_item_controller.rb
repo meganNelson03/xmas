@@ -35,8 +35,12 @@ class ListItemController < ApplicationController
   end
 
   def update
-    if @list_item.update(list_item_params)
-      redirect_back fallback_location: lists_path
+    respond_to do |format|
+      if @list_item.update(list_item_params)
+        format.js { render js: "window.location.replace('#{request.env["HTTP_REFERER"]}');" }
+      else 
+        format.js { render 'edit', locals: { list_item: @list_item } }
+      end
     end
   end
 

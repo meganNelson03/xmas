@@ -1,3 +1,4 @@
 $("#list-item-modal").html("<%= escape_javascript(render partial: 'list_item/new', locals: { list_item: list_item, success: (defined? success).presence && success.present? }) %>");
 
 $('#list-item-modal').modal('show');
+$('.multiselect-field').select2({ width: 'resolve'});

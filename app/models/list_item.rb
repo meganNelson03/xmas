@@ -1,5 +1,6 @@
 class ListItem < ApplicationRecord
   belongs_to :list
+  has_and_belongs_to_many :tags
 
   enum :priority, [:meh, :wanted, :loved, :adored, :needed]
 

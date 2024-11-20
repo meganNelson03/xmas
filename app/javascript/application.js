@@ -8,6 +8,7 @@ import "controllers"
 import "popper"
 import "bootstrap"
 import "masonryjs"
+import "select2"
 
 import {far} from "@fortawesome/free-regular-svg-icons"
 import {fas} from "@fortawesome/free-solid-svg-icons"
@@ -18,6 +19,8 @@ library.add(far, fas, fab)
 
 $(document).on("ready turbo:load", function(){
   $('[data-toggle="tooltip"]').tooltip()
+
+  $('.multiselect-field').select2({});
   
   if ($('.masonry').length) { 
     let msnry = new Masonry( '.masonry', {

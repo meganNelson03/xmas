@@ -16,6 +16,9 @@
   <% if item.claimed? && !item.claimed_by?(current_account) %>
     Claimed by <strong><%= item.claimed_by.full_name %></strong>
   <% end %>
+  <% if item.tags.present? %>
+    This item is tagged with extra details.
+  <% end %>
 </div>
 <%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
   <div class="head">
@@ -24,6 +27,13 @@
     </div>
   </div>
 <% end %>
+
+<% if item.tags.present? %>
+  <%= link_to show_list_item_path(item.id), class: 'action view-item', data: { toggle: 'tooltip', placement: 'top'}, title: 'This item is tagged', remote: true do %>
+    <i class="fa-solid fa-tag"></i>
+  <% end %>
+<% end %>
+
 <div class="body">
   <%= render partial: 'list_item/price_range', locals: { item: item } %>
   <span>

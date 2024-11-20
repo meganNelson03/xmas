@@ -1,0 +1,2 @@
+class ListItemsTag < ApplicationRecord
+end

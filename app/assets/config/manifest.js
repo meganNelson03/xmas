@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require select2
 //= link_tree ../images
 //= link favicon/site.webmanifest
 //= link application.css

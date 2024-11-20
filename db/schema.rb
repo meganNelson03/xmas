@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_19_210134) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_19_232558) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,6 +50,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_210134) do
     t.float "high_price"
     t.index ["claimed_by_id"], name: "index_list_items_on_claimed_by_id"
     t.index ["list_id"], name: "index_list_items_on_list_id"
+  end
+
+  create_table "list_items_tags", force: :cascade do |t|
+    t.bigint "list_item_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_item_id"], name: "index_list_items_tags_on_list_item_id"
+    t.index ["tag_id"], name: "index_list_items_tags_on_tag_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -199,6 +208,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_210134) do
     t.index ["expires_at"], name: "index_solid_queue_semaphores_on_expires_at"
     t.index ["key", "value"], name: "index_solid_queue_semaphores_on_key_and_value"
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "list_items", "accounts", column: "claimed_by_id"

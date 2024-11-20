@@ -27,6 +27,16 @@ account_ids.each do |id|
   list.reload
 end
 
+tag_values = [
+  { name: 'Expensive' },
+  { name: 'Reach Gift' },
+  { name: 'Ask More' }
+]
+
+tag_values.each do |params|
+  new_tag = Tag.create(params) 
+end
+
 lists = List.all
 
 lists.each do |list|

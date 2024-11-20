@@ -18,7 +18,7 @@ class ListItemController < ApplicationController
 
   def create
     list_item = ListItem.new(list_item_params)
-
+    
     respond_to do |format|
       if list_item.save
         format.js { render 'new', locals: { list_item: ListItem.new, success: true } }
@@ -77,7 +77,10 @@ class ListItemController < ApplicationController
     end
   end
 
+  def update_tags
+  end
+
   def list_item_params
-    params.require(:list_item).permit(:description, :url, :price, :low_price, :high_price, :priority, :list_id)
+    params.require(:list_item).permit(:description, :url, :price, :low_price, :high_price, :priority, :list_id, tag_ids: [])
   end
 end

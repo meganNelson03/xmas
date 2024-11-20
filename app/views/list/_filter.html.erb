@@ -1,3 +1,23 @@
+<% if is_my_list %>
+
+<%= form_for :filters, method: :get do |f| %>
+  <div class='row'>
+    <div class='col-5'>
+      <%= f.label 'Person' %>
+      <%= f.select :account, options_for_select(account_options, params.dig(:filters, 'account')), { prompt: 'Select a Person' }, { class: 'form-select' } %>
+    </div>
+    <div class='col-5'>
+      <%= f.label 'Sort Order' %>
+      <%= f.select :sort_by, options_for_select(sort_options, params.dig(:filters, :sort_by)), { prompt: 'Sort By...'}, { class: 'form-select' } %>
+    </div>
+    <div class='col-2 btn-col'>
+    <%= f.submit 'Filter', class: 'btn' %>
+    </div>
+  </div> 
+<% end %>
+
+
+<% else %>
 
 <%= form_for :filters, method: :get do |f| %>
   <div class='row'>
@@ -12,10 +32,13 @@
     <div class="col-3">
       <%= f.label 'Status' %>
       <%= f.select :status, options_for_select(claim_options, params.dig(:filters, :status)), {}, { class: 'form-select' } %>
-      
     </div>
     <div class='col-2 btn-col'>
     <%= f.submit 'Filter', class: 'btn' %>
     </div>
   </div> 
 <% end %>
+
+<% end %>
+
+

@@ -429,6 +429,9 @@ textarea {
   position: absolute;
   top: 30px;
   transition: top 0.2s ease-in;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .edit-item {

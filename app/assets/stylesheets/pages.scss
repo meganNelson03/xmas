@@ -614,6 +614,11 @@ label {
 font-size: .9rem;
 }
 
+.pill.btn:hover, .pill.btn:focus {
+  background: #9cdba6;
+  color: green;
+}
+
 .pt-lg {
 padding-top: 12%;
 }

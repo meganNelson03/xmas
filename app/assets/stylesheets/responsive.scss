@@ -53,6 +53,10 @@
   white-space: nowrap;
 }
 
+.results {
+  @extend .no-scroll-style;
+  overflow-x: scroll;
+}
 
 @media (max-width: 499px) {
   body > .container {

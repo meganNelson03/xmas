@@ -8,3 +8,4 @@
 //= link controllers/application.js
 //= link controllers/index.js
 //= link controllers/claim_controller.js
+//= link controllers/scroll_controller.js

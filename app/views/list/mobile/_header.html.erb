@@ -1,0 +1,13 @@
+<section class='header pb-5'>
+  <div class='head-content'>
+    <h1>
+      <div class='d-flex justify-content-center font-weight-bold'>
+      <% if account.present? %>
+        <%= account.full_name %>
+      <% else %>
+        Everybody's Wishes
+      <% end %>
+      </div>
+    </h1>
+  </div>
+</section>

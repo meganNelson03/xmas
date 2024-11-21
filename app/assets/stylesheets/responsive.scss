@@ -1,0 +1,228 @@
+
+
+
+.pills {
+  flex-wrap: wrap;
+  @extend .no-scroll-style;
+}
+
+.pill {
+  white-space: nowrap;
+  flex-wrap: nowrap;
+
+}
+
+.pill-title {
+  display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+  @extend .no-scroll-style;
+
+  .pill {
+    display: flex;
+  }
+}
+
+.no-scroll-style::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scroll-style {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.font-weight-strong {
+  font-weight: 600;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.table {
+  overflow-x: scroll;
+}
+
+.table td {
+  white-space: nowrap;
+}
+
+
+@media (max-width: 499px) {
+  body > .container {
+    padding: 20px;
+  }
+
+  .navbar .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 500px) {
+  body > .container {
+    padding: 2rem;
+  }
+
+  .navbar .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+}
+
+@media (min-width: 767px) {
+
+}
+
+@media (max-width: 767px) {
+
+  .btn.sign-up {
+    font-size: 1.2rem;
+  }
+
+  .pill {
+    display: flex;
+  }
+
+  .modal-dialog {
+    margin: 0px; 
+  }
+
+  .modal-content {
+    border-radius: 0px;
+  }
+
+  .modal-body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+  .item {
+    margin: 20px 9px;
+  }
+
+  .description {
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+  }
+
+  .pill, .description .add-to-list {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 989px) {
+
+  .message {
+    left: 10px;
+    top: 10px;
+    font-size: .9rem;
+    right: unset;
+  }
+
+  .message {
+    max-width: 95%;
+    position: fixed;
+    top: 10px;
+    background: lightgreen;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    z-index: 999999;
+    font-weight: 600;
+    font-size: 1rem;
+    transform: translateX(0);
+    transition: all 0.5s forwards;
+    animation: none;
+  }
+  
+
+  .logo {
+    width: 50px;
+  }
+  .logo.logo-big {
+    width: 100px;
+  }
+
+  .navbar {
+  position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9998;
+    background: white;
+  }
+
+  .navbar-collapse {
+    padding-bottom: 2rem;
+  }
+
+  .navbar-nav {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .nav-link {
+    padding: 15px 0;
+    border-bottom: 1px solid lavender;
+  }
+
+  .nav-item:last-of-type .nav-link {
+    border-bottom: none;
+  }
+
+  .content {
+    margin-top: 150px;
+  }
+  .home-controller .content {
+    margin-top: 0;
+  }
+}
+
+//
+
+#scrollButton {
+  background: black;
+  border: none;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 99999;
+}
+
+#scrollButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all .5s ease
+}
+
+#scrollButton.showBtn {
+  opacity: 1;
+  transform: translateY(0)
+}
+
+.modal-backdrop {
+  z-index: 999998 !important;
+}
+
+.modal {
+  z-index: 999999 !important;
+}

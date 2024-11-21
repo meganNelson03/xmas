@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  allow_browser versions: :modern
+  # allow_browser versions: :modern
 
   before_action :set_current_account
   before_action :require_authentication

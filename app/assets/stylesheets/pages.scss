@@ -35,6 +35,9 @@ body::-webkit-scrollbar {
   border-radius: 10px;
 }
 
+.font-weight-bold {
+  font-weight: 700;
+}
 
 // Table
 
@@ -52,6 +55,33 @@ body::-webkit-scrollbar {
 }
 
 // flash messages
+
+.message.with-progress {
+  padding: 0;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.message .text {
+  padding: 15px;
+}
+
+.progress {
+  height: 5px;
+  border-radius: 0px;
+}
+
+.progress-bar {
+  background: green;
+}
+
+.message.move {
+  transform: translateY(-200px);
+  transition: transform .5s ease-in-out;
+}
+
+.progress-bar {
+  transition: none;
+}
 
 .message {
   position: fixed;

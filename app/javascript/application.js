@@ -18,7 +18,13 @@ import "@fortawesome/fontawesome-free"
 library.add(far, fas, fab)
 
 $(document).on("ready turbo:load", function(){
-  $('[data-toggle="tooltip"]').tooltip()
+  $('.progress-bar').animate(
+    { width: '100%' },
+     2500, function() {
+      $('.message').addClass('move')
+  });
+  
+  $('[data-toggle="tooltip"]').tooltip();
 
   $('.multiselect-field').select2({});
   

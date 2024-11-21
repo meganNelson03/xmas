@@ -4,12 +4,12 @@
     <%= f.text_area :description, class: 'form-control', value: list_item.description %> 
     <%= render_errors(list_item, :description) %>
   </div>
-  <div class='col-12 mb-3 mt-3'>
+  <div class='col-12 mb-2 mt-2 mb-lg-3 mb-lg-3'>
     <%= f.label 'Item URL' %>
     <%= f.text_field :url, class: 'form-control', enterkeyhint: "next", value: list_item.url %>
     <%= render_errors(list_item, :url) %> 
   </div>
-  <div class='col-12 mb-3 mt-3 row'>
+  <div class='col-12 mb-2 mt-2 mb-lg-3 mb-lg-3 row'>
     <%= f.label 'Price Range' %>
     <div class='col-6'>
       <%= f.number_field :low_price, step: :any, placeholder: 'Low Price', class: 'form-control', value: list_item.low_price %>
@@ -19,12 +19,12 @@
     </div>
     <%= render_errors(list_item, :cost) %> 
   </div>
-  <div class='col-12 mt-3 mb-3'>
+  <div class='col-12 mb-2 mt-2 mb-lg-3 mb-lg-3'>
     <%= f.label 'How much do you want this?' %>  
     <%= f.select :priority, options_for_select(priority_options, action_name == 'new' ? nil : list_item.priority), { include_blank: true }, class: 'form-select' %>
     <%= render_errors(list_item, :priority) %>
   </div>
-  <div class='col-12 mb-5 mt-3'>
+  <div class='col-12 mb-5 mt-2 mb-lg-5 mb-lg-3'>
     <%= f.label :tags %>
     <%= f.select :tag_ids, options_for_select(Tag.all.order(:name).map { |t| [t.name, t.id] }, list_item.tags.ids), { multiple: 'multiple' }, class: 'form-select multiselect-field' %>
   </div>

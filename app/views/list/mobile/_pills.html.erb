@@ -1,0 +1,29 @@
+<div class='description pt-2 d-flex align-items-center'>
+  <span class='pill d-flex'>
+    <span class='pill-title d-flex'>Total Wishes</span> 
+    <span><%= @total %></span>
+  </span>
+  <% if account == current_account %>
+    <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'add-to-list btn me-4' do %>
+      <span class=''>
+        <span class='pill-title'>
+          <i class="fa-solid fa-plus me-3"></i>Add a Wish
+        </span>
+      </span>
+    <% end %>
+  <% end %>
+  <% if current_account.id != account&.id %>
+  <span class='pill'>
+    <span class='pill-title'>Unclaimed</span> 
+    <span><%= @unclaimed %></span>
+  </span>
+  <span class='pill'>
+    <span class='pill-title'>Claimed by Me</span> 
+    <span><%= @claimed_by_me %></span>
+  </span>
+  <span class='pill red'>
+    <span class='pill-title'>Claimed by Others</span> 
+    <span><%= @claimed_by_others %></span>
+  </span>
+  <% end %>
+</div>

@@ -26,6 +26,7 @@
     body {
       background-image: url(<%= asset_path 'background.svg' %>); 
       background-size: cover;
+      min-height: 100vh;
     }
     </style>
   </head>
@@ -42,6 +43,8 @@
       <div class='content'>
         <%= yield %>
       </div>
+
+      <button id="scrollButton" data-controller='scroll' data-scroll-target='#scrollButton' data-action='click->scroll#scrollToTop'>☝️</button>
     </div>
   </body>
 </html>

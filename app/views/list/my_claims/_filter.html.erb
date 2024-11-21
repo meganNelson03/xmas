@@ -1,0 +1,15 @@
+<%= form_for :filters, method: :get do |f| %>
+  <div class='row'>
+    <div class='col-12 col-md-6 col-lg-5'>
+      <%= f.label 'Recipient' %>
+      <%= f.select :recipient_id, options_for_select(recipient_options, params.dig(:filters, :recipient_id)), { prompt: 'Select a Person' }, { class: 'form-select' } %>
+    </div>
+    <div class='col-12 col-md-6 col-lg-5 mt-3 mt-lg-0'>
+      <%= f.label 'Sort Order' %>
+      <%= f.select :sort_by, options_for_select(sort_options, params.dig(:filters, :sort_by)), { prompt: 'Sort By...'}, { class: 'form-select' } %>
+    </div>
+    <div class='col-12 col-lg-2 mt-4 mt-lg-0 btn-col'>
+    <%= f.submit 'Filter', class: 'btn' %>
+    </div>
+  </div> 
+<% end %>

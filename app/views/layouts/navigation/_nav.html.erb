@@ -8,7 +8,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-md-3">
           <li class="nav-item">
             <%= link_to lists_path, class: 'nav-link' do %>
               All Lists
@@ -30,8 +30,8 @@
               <% end %>
           </li>
         </ul>
-        <form class="">
-          <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'add-to-list btn no-border' do %>
+        <form class="d-flex justify-content-between justify-content-lg-end">
+          <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'ps-0 ps-md-2 add-to-list btn no-border' do %>
             <span class='claim-icon fa-solid fa-gift me-3'></span>Add to My List
           <% end %>
           <%= link_to destroy_account_session_path, method: :delete, class: 'ms-4 logout-btn btn no-border' do %>

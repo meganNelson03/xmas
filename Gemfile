@@ -22,6 +22,7 @@ gem "jbuilder"
 # gem "bcrypt", "~> 3.1.7"
 
 gem 'kaminari'
+gem 'rack-cors'
 
 # testing
 gem 'lorem_ipsum_amet', '~> 0.6.2'

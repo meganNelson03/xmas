@@ -26,9 +26,12 @@
   </div>
 <% end %>
 
-<% if item.tags.present? %>
+<% if !item.tags.present? %>
   <%= link_to show_list_item_path(item.id), class: 'action view-item', data: { toggle: 'tooltip', placement: 'top'}, title: 'This item is tagged', remote: true do %>
-    <i class="fa-solid fa-tag"></i>
+    <span class="fa-stack fa-2x icon-tag">
+      <i class="fa-solid fa-circle fa-stack-2x icon-bg"></i>
+      <i class="fa-solid fa-tag fa-stack-1x fa-inverse icon-fg"></i>
+    </span>
   <% end %>
 <% end %>
 

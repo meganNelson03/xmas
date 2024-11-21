@@ -1,3 +1,8 @@
+a {
+  color: unset;
+  text-decoration: none;
+}
+
 .content {
   padding: 5% 0;
 }
@@ -417,12 +422,16 @@ textarea {
 //
 
 .action .fa-stack {
-  font-size: 1.125rem;
+  font-size: 1rem;
   
 }
 
 .action .icon-bg {
   filter: drop-shadow(5px rgba(0, 0, 0, 0.3));
+}
+
+.action.delete-item {
+  left: 10px;
 }
 
 .delete-item .icon-bg {
@@ -449,16 +458,16 @@ textarea {
 }
 
 .action.view-item {
-  left: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  left: 15px;
+}
+
+.icon-tag .icon-bg {
   font-size: 1rem;
-  background: #56a963;
+  color: #56a963;
 }
 
 .action.edit-item {
-  left: 50px;
+  left: 60px;
 }
 
 .item:hover .action {

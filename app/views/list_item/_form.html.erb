@@ -7,11 +7,17 @@
       
     </div>
 
-    <% if success %>
-      <div class='success'>
-        Made a wish!
-      </div>
-    <% end %>
+    <div class='d-none d-md-block'>
+      <% if success %>
+        <div class='success'>
+          Made a wish!
+        </div>
+      <% end %>
+    </div>
+
+    <div class='d-block d-md-none'>
+      <%= render partial: 'list_item/mobile/success_message', locals: { message: 'Made a wish!' } %>
+    </div>
 
     <div class="modal-body">
       <%= form_for :list_item, url: create_list_item_path, remote: true do |f| %>

@@ -7,7 +7,10 @@ import "jquery"
 import "controllers"
 import "popper"
 import "bootstrap"
-import "masonryjs"
+
+import './external/masonry'
+// import './external/infinitescroll'
+// import "masonryjs"
 import "select2"
 
 import {far} from "@fortawesome/free-regular-svg-icons"
@@ -55,5 +58,5 @@ $(document).on("ready turbo:load", function(){
 });
 
 } catch (error) {
-  alert(error)
+  console.log(error)
 }

@@ -5,7 +5,7 @@ pin "application"
 pin "popper", to: 'popper.js', preload: true
 pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "jquery", to: "https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"
-pin "masonryjs", to: 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js', preload: true
+# pin "masonryjs", to: 'https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js', preload: true
 pin "infinitescroll", to: "https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js", preload: true
 pin "select2", to: "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
 

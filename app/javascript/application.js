@@ -17,6 +17,7 @@ import {library} from "@fortawesome/fontawesome-svg-core"
 import "@fortawesome/fontawesome-free"
 library.add(far, fas, fab)
 
+try {
 $(document).on("ready turbo:load", function(){
   $('.progress-bar').animate(
     { width: '100%' },
@@ -52,3 +53,7 @@ $(document).on("ready turbo:load", function(){
     });
   }
 });
+
+} catch (error) {
+  alert(error)
+}

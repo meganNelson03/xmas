@@ -1,6 +1,7 @@
 $(".modal-success").html("<%= escape_javascript(render partial: 'group_member/success', locals: { message: message }) %>");
 
 $("#account-<%= escape_javascript(account.id) %>").html("<%= escape_javascript(render partial: 'account/grouped_account_action') %>");
+$("#mobile-account-<%= escape_javascript(account.id) %>").html("<%= escape_javascript(render partial: 'account/grouped_account_action') %>");
 
 $('#list-item-modal').modal('show')
 

@@ -1,4 +1,4 @@
-<div class='results mt-5'>
+<div class='results mt-5 d-none d-md-block'>
   <% if results.present? %>
     <table class="table">
       <thead>
@@ -35,4 +35,8 @@
       <h5>No one here has that email. Try again?</h5>
     </div>
   <% end %>
+</div>
+
+<div class='d-block d-md-none'>
+  <%= render partial: 'account/mobile/results', locals: { account: results&.first } %>
 </div>

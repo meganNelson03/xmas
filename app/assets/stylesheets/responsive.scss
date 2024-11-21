@@ -93,6 +93,9 @@
 
   .pill {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   .modal-dialog {

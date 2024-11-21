@@ -1,0 +1,29 @@
+<div class='results mt-5 overflow-visible'>
+  <% if account.present? %>
+    <div class='card light-box-shadow d-flex justify-content-center align-items-center'>
+      <h3 class='font-weight-strong mb-3'><%= account.full_name %></h3>
+      <div class='email'>
+        <p><%= account.email %></p>
+      </div>
+      <div class='actions' id='mobile-account-<%= account.id %>'>
+        <% if current_account.shares_group?(account) %>
+          <%= render partial: 'grouped_account_action' %>
+        <% elsif account.grouped? %>
+          <%= link_to merge_group_members_path(account.id), class: 'btn pill mt-0', method: :post, remote: true do %>
+            Join and Merge Groups
+          <% end %>
+        <% elsif !account.grouped? %>
+          <%= link_to create_group_member_path(account.id), class: 'btn pill mt-0', method: :post do %>
+            Add
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+    
+  <% if account.blank? %>
+    <div class='no-results'>
+      <h5>No one here has that email. Try again?</h5>
+    </div>
+  <% end %>
+</div>

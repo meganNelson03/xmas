@@ -3,6 +3,16 @@ a {
   text-decoration: none;
 }
 
+button {
+  color: unset;
+  text-decoration: none;
+  background: none;
+}
+
+button.claim {
+  background: none !important;
+}
+
 .content {
   padding: 5% 0;
 }

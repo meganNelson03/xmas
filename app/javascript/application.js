@@ -22,12 +22,6 @@ library.add(far, fas, fab)
 
 try {
 $(document).on("ready turbo:load", function(){
-  $('.progress-bar').animate(
-    { width: '100%' },
-     2500, function() {
-      $('.message').addClass('move')
-  });
-  
   $('[data-toggle="tooltip"]').tooltip();
 
   $('.multiselect-field').select2({});

@@ -10,3 +10,4 @@
 //= link controllers/index.js
 //= link controllers/claim_controller.js
 //= link controllers/scroll_controller.js
+//= link controllers/message_controller.js

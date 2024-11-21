@@ -94,6 +94,11 @@ body::-webkit-scrollbar {
   transition: transform .5s ease-in-out;
 }
 
+.move {
+  transform: translateY(-200px);
+  transition: transform .5s ease-in-out;
+}
+
 .progress-bar {
   transition: none;
 }

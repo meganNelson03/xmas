@@ -18,6 +18,10 @@
     Claimed by <strong><%= item.claimed_by.full_name %></strong>
   <% end %>
 </div>
+
+<div class='d-block d-md-none mobile-claim-message-container'>
+</div>
+
 <%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
   <div class="head">
     <div class='truncated-text'>

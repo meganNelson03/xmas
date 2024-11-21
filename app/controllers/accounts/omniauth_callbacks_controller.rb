@@ -1,5 +1,6 @@
 class Accounts::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_action :require_authentication
+  skip_before_action :verify_authenticity_token
   
   def google_oauth2
     account = Account.from_google(from_google_params)

@@ -5,10 +5,16 @@ export default class extends Controller {
   static classes = [ "hover", "hoverOut" ]
 
   blur() {
-    this.itemTarget.classList.add(this.hoverClass)
+    if (!this.isMobile()) {
+      this.itemTarget.classList.add(this.hoverClass)
+    }
   }
 
   unblur() {
     this.itemTarget.classList.remove(this.hoverClass)
+  }
+
+  isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 }

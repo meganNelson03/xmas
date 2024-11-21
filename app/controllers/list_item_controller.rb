@@ -4,7 +4,7 @@ class ListItemController < ApplicationController
 
   def show 
     respond_to do |format|
-      format.js { render 'show', locals: { list_item: @list_item }}
+      format.js { render 'show', locals: { list_item: @list_item }, content_type: 'text/javascript'} 
     end
   end
 

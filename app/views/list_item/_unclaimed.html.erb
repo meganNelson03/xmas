@@ -1,4 +1,7 @@
 <%= button_to claim_path(item.id), data: { action: 'mouseover->claim#blur mouseout->claim#unblur' }, class: "claim unclaimed list-item-#{item.id}", remote: true do %>
-  <span class='claim-icon fa-solid fa-gift' data-action='hover->claim#blur'></span>
+  <span class="fa-stack fa-1x claim-icon" data-action='hover->claim#blur'>
+    <i class="fa-solid fa-square fa-stack-2x icon-bg"></i>
+    <i class="fa-solid fa-gift fa-stack-1x fa-inverse icon-fg"></i>
+  </span>
   <span class='claim-banner'>I'm getting this <i class="fa-regular fa-face-grin-hearts"></i></span>
 <% end %>

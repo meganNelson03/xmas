@@ -1,4 +1,7 @@
 <%= button_to claim_path(item.id), data: { action: 'mouseover->claim#blur mouseout->claim#unblur' }, class: "claim claimed list-item-#{item.id}", remote: true do %>
-  <i class="claim-icon fa-solid fa-square-check"></i>
+  <span class="fa-stack fa-1x claim-icon">
+    <i class="fa-solid fa-square fa-stack-2x icon-bg"></i>
+    <i class="fa-solid fa-square-check fa-stack-1x fa-inverse icon-fg"></i>
+  </span>
   <span class='claim-banner'>Take this off my list <i class="fa-regular fa-face-tired"></i></span>
 <% end %>

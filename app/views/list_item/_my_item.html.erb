@@ -25,10 +25,16 @@
   
       <%= form_for :list_item, url: destroy_list_item_path(item.id), method: :delete, class: 'delete-item-form' do |f| %>
         <%= f.button :submit, class: 'action delete-item' do %>
-          <i class="fa-solid fa-trash-can"></i>
+          <span class="fa-stack fa-2x">
+            <i class="fa-solid fa-circle fa-stack-2x icon-bg"></i>
+            <i class="fa-solid fa-trash-can fa-stack-1x fa-inverse icon-fg"></i>
+          </span>
         <% end %>
         <%= link_to edit_list_item_path(item.id), class: 'action edit-item', remote: true do %>
-          <i class="fa-regular fa-pen-to-square"></i>
+          <span class="fa-stack fa-2x">
+            <i class="fa-solid fa-circle fa-stack-2x icon-bg"></i>
+            <i class="fa-regular fa-pen-to-square fa-stack-1x fa-inverse icon-fg"></i>
+          </span>
         <% end %>
       <% end %>
     </div>

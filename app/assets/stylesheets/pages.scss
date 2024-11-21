@@ -416,22 +416,29 @@ textarea {
 
 //
 
+.action .fa-stack {
+  font-size: 1.125rem;
+  
+}
+
+.action .icon-bg {
+  filter: drop-shadow(5px rgba(0, 0, 0, 0.3));
+}
+
+.delete-item .icon-bg {
+  color: #d75959;
+}
+.edit-item .icon-bg {
+  color: #469746;
+}
+
 .action {
   border: none;
-  border-radius: 100%;
-  background-color: #d75959;
-  color: white;
-  font-size: 1.125rem;
-  width: 30px;
-  height: 30px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  background: none;
   opacity: 0;
   position: absolute;
-  top: 30px;
+  top: 25px;
   transition: top 0.2s ease-in;
-  justify-content: center;
-  align-items: center;
-  display: flex;
 }
 
 .edit-item {
@@ -439,23 +446,6 @@ textarea {
   flex-direction: column;
   justify-content: center;
   font-size: 1rem;
-  background: #56a963;
-}
-
-.delete-item {
-  border: none;
-  border-radius: 100%;
-  background-color: #d75959;
-  color: white;
-  font-size: 1.125rem;
-  width: 30px;
-  height: 30px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  position: absolute;
-  top: 30px;
-  left: 20px;
-  transition: top 0.2s ease-in;
 }
 
 .action.view-item {
@@ -468,12 +458,12 @@ textarea {
 }
 
 .action.edit-item {
-  left: 60px;
+  left: 50px;
 }
 
 .item:hover .action {
   opacity: 1;
-  top: 20px;
+  top: 15px;
 }
 
 
@@ -483,7 +473,14 @@ textarea {
   top: 0;
   left: 0;
 }
- 
+
+.claimed .icon-bg {
+  color: #50B498;
+}
+
+.claimed .icon-fg {
+  color: white;
+}
 
 .claimed-by {
   padding: 0 20px;

@@ -54,6 +54,24 @@
             </div>
           </div>
         </div>
+
+        <% if item.links.present? %>
+        <div class='col-12'>
+          <div class='content-container'>
+            <label>Additional Links</label>
+            <div class='inner-content pills mt-1'>
+              <% item.links.each_with_index do |link, index| %>
+                  <%= link_to link.url, target: '_blank', class: 'no-link-style' do %>
+                    <div class='pill small'>
+                      <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Link <%= index + 1 %>
+                    </div>
+                  <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+
         <% if item.tags.present? %>
           <div class='tags mt-5'>
             <% item.tags.each do |tag| %>

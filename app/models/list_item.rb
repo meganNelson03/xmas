@@ -1,6 +1,9 @@
 class ListItem < ApplicationRecord
   belongs_to :list
   has_and_belongs_to_many :tags
+  has_many :links 
+
+  accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
   enum :priority, [:meh, :wanted, :loved, :adored, :needed]
 

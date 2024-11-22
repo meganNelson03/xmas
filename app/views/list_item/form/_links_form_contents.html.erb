@@ -1,0 +1,22 @@
+<template data-nested-form-target="template">
+  <%= f.fields_for :links, Link.new, child_index: 'NEW_RECORD' do |links_form| %>
+    <%= render partial: "list_item/form/link_fields", locals: { f: links_form } %>
+  <% end %>
+</template>
+
+<%= f.fields_for :links do |links_form| %>
+  <%= render partial: 'list_item/form/link_fields', locals: { f: links_form } %>
+<% end %>
+
+<div data-nested-form-target="target"></div>
+
+<div class='d-block d-md-flex justify-content-between'>
+  <% if list_item&.links&.map(&:errors).map(&:messages).compact_blank.present? %>
+    <span style='margin-top: -15px;'>
+    <%= render partial: "layouts/error_custom", locals: { error: 'Something\'s wrong with the URLs you added.' } %>
+    </span>
+  <% else %>
+    <span></span>
+  <% end %>
+  <button type="button" class='pill small btn mt-1 me-0 mx-auto mx-md-unset' data-action="nested-form#add"><i class="fa-solid fa-plus me-2"></i>Add Another URL</button>
+</div>

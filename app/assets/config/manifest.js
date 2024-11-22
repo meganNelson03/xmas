@@ -1,6 +1,8 @@
 //= require jquery
 //= require jquery_ujs
 //= link jquery.js
+//= link @hotwired--stimulus.js
+//= link @stimulus-components--rails-nested-form.js
 //= link_tree ../images
 //= link favicon/site.webmanifest
 //= link application.css

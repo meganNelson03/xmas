@@ -10,6 +10,7 @@ class ListItemController < ApplicationController
 
   def new
     list_item = ListItem.new 
+    # list_item.links.build
 
     respond_to do |format|
       format.js { render 'new', locals: { list_item: list_item } }
@@ -85,6 +86,10 @@ class ListItemController < ApplicationController
   end
 
   def list_item_params
-    params.require(:list_item).permit(:description, :url, :price, :low_price, :high_price, :priority, :list_id, tag_ids: [])
+    params.require(:list_item).permit(
+      :description, :url, :price, :low_price, 
+      :high_price, :priority, :list_id, 
+      tag_ids: [], links_attributes: [:id, :url, :_destroy]
+    )
   end
 end

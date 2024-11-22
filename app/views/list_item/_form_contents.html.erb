@@ -5,10 +5,13 @@
     <%= render_errors(list_item, :description) %>
   </div>
   <div class='col-12 mb-2 mt-2 mb-lg-3 mb-lg-3'>
-    <%= f.label 'Item URL' %>
+    <%= f.label 'Gift URL' %>
     <%= f.text_field :url, class: 'form-control', enterkeyhint: "next", value: list_item.url %>
     <%= render_errors(list_item, :url) %> 
   </div>
+
+  <%= render partial: 'list_item/form/links_form_contents', locals: { f: f, list_item: list_item } %>
+
   <div class='col-12 mb-2 mt-2 mb-lg-3 mb-lg-3 row'>
     <%= f.label 'Price Range' %>
     <div class='col-6'>

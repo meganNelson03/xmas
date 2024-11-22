@@ -17,7 +17,6 @@ class Accounts::OmniauthCallbacksController < Devise::OmniauthCallbacksControlle
         account.update(last_name: params[:last_name])
       end
 
-      flash[:notice] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect account, event: :authentication
     else
       flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."

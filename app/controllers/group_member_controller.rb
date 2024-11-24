@@ -1,5 +1,9 @@
 class GroupMemberController < ApplicationController
 
+  def index 
+    @group = current_account.groups.find(params[:id])
+  end
+
   def new
     respond_to do |format|
       format.js { render 'new' }
@@ -10,11 +14,11 @@ class GroupMemberController < ApplicationController
     account = Account.find(params[:id])
 
     if current_account.grouped? 
-      account.update(account_group_id: current_account.account_group_id)
+      account.update(group_id: current_account.group_id)
     else
-      group = AccountGroup.create 
-      current_account.update(account_group_id: group.id)
-      account.update(account_group_id: group.id) 
+      group = Group.create 
+      current_account.update(group_id: group.id)
+      account.update(group_id: group.id) 
     end
 
     redirect_to group_path
@@ -24,9 +28,9 @@ class GroupMemberController < ApplicationController
     account = Account.find(params[:id])
 
     if current_account.grouped? && !current_account.shares_group?(account)
-      account.account_group.accounts.update_all(account_group_id: current_account.account_group.id) 
-    elsif account.account_group.present? 
-      current_account.update(account_group_id: account.account_group.id) 
+      account.group.accounts.update_all(group_id: current_account.group.id) 
+    elsif account.group.present? 
+      current_account.update(group_id: account.group.id) 
     end
 
     respond_to do |format|

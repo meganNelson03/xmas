@@ -33,11 +33,14 @@ Rails.application.routes.draw do
   get 'login', to: 'home#index', as: 'login'
 
 
-
-  get 'my_group', to: 'group#index', as: 'group'
+  get 'my_groups', to: 'group#my_groups', as: 'my_groups'
   get 'my_group/accounts/new', to: 'group_member#new', as: 'new_group_member'
   post 'my_group/accounts/:id/create', to: 'group_member#create', as: 'create_group_member'
   post 'my_group/accounts/:id/merge', to: 'group_member#merge', as: 'merge_group_members'
+
+  get 'my_groups/new', to: 'group#new', as: 'new_group'
+  get 'my_groups/:id', to: 'group_member#index', as: 'group'
+  post 'my_groups/create', to: 'group#create', as: 'create_group'
 
   get '/', to: 'home#index', as: 'home'
 

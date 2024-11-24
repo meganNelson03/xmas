@@ -1,7 +1,7 @@
 class ListItem < ApplicationRecord
   belongs_to :list
   has_and_belongs_to_many :tags
-  has_many :links 
+  has_many :links, dependent: :destroy
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 

@@ -10,7 +10,6 @@ class ListItemController < ApplicationController
 
   def new
     list_item = ListItem.new 
-    # list_item.links.build
 
     respond_to do |format|
       format.js { render 'new', locals: { list_item: list_item } }

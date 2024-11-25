@@ -20,15 +20,41 @@
   </section>
 </div>
 
-<section class='actions mt-md-5'>
-  <%= link_to new_group_path, class: 'pill btn justify-content-center justify-content-md-start align-items-center mx-auto mx-md-0', remote: true do %>
+<% if @groups.present? %>
+<section class='mt-md-5'>
+  <%= link_to new_group_path, class: 'pill btn justify-content-center justify-content-md-start align-items-center me-4', remote: true do %>
     <i class="fa-solid fa-plus me-3"></i> Create a Group
   <% end %>
-   <%= link_to new_group_member_path, class: 'pill btn justify-content-center justify-content-md-start align-items-center mx-auto mx-md-0', remote: true do %>
-    <i class="fa-solid fa-plus me-3"></i> Join a Group
+  <%= link_to new_search_groups_path, class: 'pill btn justify-content-center justify-content-md-start align-items-center', remote: true do %>
+    <i class="fa-solid fa-magnifying-glass me-3"></i> Find Your Group
   <% end %>
 </section>
+<% end %>
 
 <% if @groups.present? %>
-  <%= render partial: 'group/my_groups', locals: { groups: @groups } %>
+  <%= render partial: 'group/my_groups', locals: { groups: @groups, toggled_id: @group&.id } %>
+<% end %>
+
+<div id='group-member-container'>
+  <% if @group.present? %>
+    <%= render partial: 'group_member/show_group', locals: { group: @group, group_members: @group.accounts } %>
+  <% end %>
+</div>
+
+<% if @groups.blank? %>
+  <div class='mt-5'>
+  <div class='empty-list'>
+    <div class='mb-3'><i class="fa-solid fa-gifts icon icon-gifts icon-lg"></i></div>
+    <h3>There's nothing here yet.</h3>
+    <h2 class='mt-2'>To get started, you'll need to join or create a group.</h2>
+    <div class='d-flex'>
+      <%= link_to new_search_groups_path, class: 'btn btn-lg input mt-4 add-to-list me-3', remote: true do %>
+        <i class="fa-solid fa-magnifying-glass me-3"></i> Find Your Group
+      <% end %>
+      <%= link_to new_group_path, class: 'btn btn-lg input mt-4 add-to-list', remote: true do %>
+        <i class="fa-solid fa-plus me-3"></i> Create a Group
+      <% end %>
+    </div>
+  </div>
+  </div>
 <% end %>

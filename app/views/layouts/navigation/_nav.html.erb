@@ -34,9 +34,6 @@
           <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'ps-0 ps-md-2 add-to-list btn no-border' do %>
             <span class='claim-icon fa-solid fa-gift me-3'></span>Add to My List
           <% end %>
-          <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'ms-4 ps-0 ps-md-2 add-to-list btn no-border' do %>
-            <span class='claim-icon fa-solid fa-gift me-3'></span>Change Groups
-          <% end %>
           <%= link_to destroy_account_session_path, method: :delete, class: 'ms-4 logout-btn btn no-border' do %>
             <i class="fa-solid fa-arrow-right-from-bracket me-3"></i>
           <% end %>

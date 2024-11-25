@@ -1,0 +1,107 @@
+<section class='mt-5'>
+<div class='overflow-x-scroll no-scroll-style card-members'>
+  <div class='group-card-head'>
+  <div class='actions d-flex justify-content-between'>
+    <div class='pill pill-btn small light'>
+      <%= group.name %>
+    </div>
+  <%= link_to new_group_member_path(group.id), class: 'pill pill-btn small', remote: true do %>
+    <i class="fa-solid fa-plus me-3"></i> Add Members
+  <% end %>
+  </div>
+  </div>
+  <div class='group-card-body'>
+  <table class="table no-scroll-style">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope='col'>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% group_members.each do |account| %>
+        <tr>
+          <td>
+            <% if account.full_name.present? %>
+              <%= account.full_name %>
+            <% else %>
+              Pending
+            <% end %>
+          </td>
+          <td><%= account.email %></td>
+          <td><span class='pill d-inline small light <%= account.status %>'><%= account.status.titleize %></span></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>
+</section>
+
+<style>
+
+.pill.invited {
+  color: green;
+  background-color: #9cdba6;
+}
+
+.green {
+  color: #469746;
+}
+
+.card-members .group-card-head {
+  padding: 2rem 2rem 1rem 2rem;
+}
+
+.card-members .group-card-body {
+  padding: 1rem 2rem 2rem 2rem;
+}
+
+.pill.small {
+  display: flex;
+  align-items: center;
+}
+
+tr:last-of-type td {
+  border-bottom: none;
+}
+
+.group-card.toggled {
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.12s ease-in;
+}
+
+.group-card.toggled .pill {
+  background: #9cdba6;
+  color: green;
+}
+.group-card.toggled h5 {
+  color: green;
+}
+
+.card-members {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: slide-up 0.5s ease-in;
+}
+
+@keyframes slide-up {
+  from {
+    top: 50px;
+    opacity: 0;
+  }
+  to {
+    top: 0px; 
+    opacity: 1;
+  }
+}
+
+.card-members.show {
+  # opacity: 1;
+  # transform: translateY(-50px);
+}
+
+</style>

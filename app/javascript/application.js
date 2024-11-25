@@ -9,9 +9,9 @@ import "popper"
 import "bootstrap"
 
 import './external/masonry'
-// import './external/infinitescroll'
-// import "masonryjs"
+// import './external/slick'
 import "select2"
+import "slickjs"
 
 import {far} from "@fortawesome/free-regular-svg-icons"
 import {fas} from "@fortawesome/free-solid-svg-icons"
@@ -23,6 +23,16 @@ library.add(far, fas, fab)
 try {
 $(document).on("ready turbo:load", function(){
   $('[data-toggle="tooltip"]').tooltip();
+
+  if ($('.carousel .slide').length > 3) {
+    $('.carousel').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      prevArrow:"<button class='carousel-prev arrow'><span class='fa-stack fa-1x claim-icon'><i class='fa-solid fa-circle fa-stack-2x icon-bg green'></i><i class='fa-solid fa-chevron-left fa-stack-1x fa-inverse icon-fg'></i></span></button>",
+      nextArrow:"<button class='carousel-next arrow'><span class='fa-stack fa-1x claim-icon'><i class='fa-solid fa-circle fa-stack-2x icon-bg green'></i><i class='fa-solid fa-chevron-right fa-stack-1x fa-inverse icon-fg'></i></span></button>",
+    });
+  }
 
   $('.multiselect-field').select2({});
   

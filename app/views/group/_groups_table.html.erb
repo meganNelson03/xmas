@@ -1,0 +1,45 @@
+<div class="accordion" id="accordionExample">
+  <% groups.each do |group| %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="header-group-<%= group.id %>">
+        <button class="accordion-button collapsed font-weight-strong d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= group.id %>" aria-expanded="true" aria-controls="collapseOne">
+          <span>
+          <%= group.name %>
+          </span>
+          <% if current_account.requested?(group) %>
+            <span class="input btn small ms-auto green strong pill mt-0">
+              <i class="fa-solid fa-square-check me-2 icon-green"></i> Requested
+            </span>
+          <% elsif !current_account.in_group?(group) %>
+            <%= link_to request_join_group_path(group.id), class: 'input btn pill small ms-auto', method: :post do %>
+              Request to Join
+            <% end %>
+          <% end %>
+        </button>
+      </h2>
+      <div id="collapse-<%= group.id %>" class="accordion-collapse collapse" aria-labelledby="header-group-<%= group.id %>" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <span>
+            <% if group.accounts.present? %>
+              <span class='pill light small d-inline'>Members</span> <%= format_accounts_list(group.accounts) %>
+            <% else %>
+              This group has no members yet.
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+
+.accordion-button::after {
+  margin: 0;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+  background-color: white;
+}
+</style>

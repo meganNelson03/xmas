@@ -19,6 +19,12 @@ module ApplicationHelper
     end
   end
 
+  def format_accounts_list(accounts)
+    accounts.map do |account| 
+      account.first_name
+    end.compact_blank.join(', ')
+  end
+
   def recipient_options
     current_account.groupies.where.not(id: current_account.id).order(first_name: :asc).map {
       |a| [a.full_name, a.id]
@@ -29,6 +35,12 @@ module ApplicationHelper
     current_account.groupies.order(first_name: :asc).map {
       |a| [a.full_name, a.id]
     }
+  end
+
+  def is_valid_email?(email)
+    regex = /^[\w.+\-]+@gmail\.com$/
+
+    email.match?(regex)
   end
 
   def sort_options

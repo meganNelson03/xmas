@@ -1,0 +1,23 @@
+<div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-content">
+    <%= link_to :back, class: 'dismiss-modal' do %>
+      <i class="fa-solid fa-circle-xmark icon-dismiss"></i>
+    <% end %>
+
+    <span class='modal-success'></span>
+
+    <div class="modal-header">
+      <h3>Find a Group</h3>
+    </div>
+
+    <div class="modal-body mb-3">
+      <div class='row'>
+        <div class='group-search-results-container'>
+        <div class='col-12'>
+          <%= render partial: 'group/form_search' %>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

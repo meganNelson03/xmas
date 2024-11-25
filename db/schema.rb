@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_24_181633) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_25_230554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -27,6 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_181633) do
     t.datetime "remember_created_at"
     t.string "provider"
     t.string "uid"
+    t.string "status"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["group_id"], name: "index_accounts_on_group_id"
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
@@ -82,6 +83,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_181633) do
     t.bigint "group_id"
     t.index ["account_id"], name: "index_lists_on_account_id"
     t.index ["group_id"], name: "index_lists_on_group_id"
+  end
+
+  create_table "membership_requests", force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "group_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_membership_requests_on_account_id"
+    t.index ["group_id"], name: "index_membership_requests_on_group_id"
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
@@ -235,6 +246,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_181633) do
   add_foreign_key "links", "list_items"
   add_foreign_key "list_items", "accounts", column: "claimed_by_id"
   add_foreign_key "lists", "groups"
+  add_foreign_key "membership_requests", "accounts"
+  add_foreign_key "membership_requests", "groups"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

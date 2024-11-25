@@ -23,6 +23,7 @@ gem "jbuilder"
 
 gem 'kaminari'
 gem 'rack-cors'
+gem 'aasm'
 
 # testing
 gem 'lorem_ipsum_amet', '~> 0.6.2'

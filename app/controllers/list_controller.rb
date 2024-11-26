@@ -68,8 +68,10 @@ class ListController < ApplicationController
   private 
 
   def set_list_items
-    return ListItem.none if @selected_group.blank?
-    
-    @list_items = ListItem.in_group(@selected_group)
+    if @selected_group.blank?
+      @list_items = ListItem.none
+    else 
+      @list_items = ListItem.in_group(@selected_group)
+    end 
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_25_230554) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_26_002558) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,6 +28,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_25_230554) do
     t.string "provider"
     t.string "uid"
     t.string "status"
+    t.bigint "current_group_id"
+    t.index ["current_group_id"], name: "index_accounts_on_current_group_id"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["group_id"], name: "index_accounts_on_group_id"
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
@@ -243,6 +245,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_25_230554) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accounts", "groups", column: "current_group_id"
   add_foreign_key "links", "list_items"
   add_foreign_key "list_items", "accounts", column: "claimed_by_id"
   add_foreign_key "lists", "groups"

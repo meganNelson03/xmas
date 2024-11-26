@@ -5,11 +5,12 @@ class Account < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
-  has_one :list, dependent: :destroy
+  # has_one :list, dependent: :destroy
+  has_many :lists, dependent: :destroy
 
-  has_many :accounts_groups
+  has_many :accounts_groups, dependent: :delete_all
   has_many :groups, through: :accounts_groups
-  has_many :membership_requests, dependent: :destroy
+  has_many :membership_requests, dependent: :delete_all
 
   default_scope { order(first_name: :asc) } 
 
@@ -25,9 +26,22 @@ class Account < ApplicationRecord
     end
 
     event :active do
+      transitions from: :inactive, to: :active
       transitions from: :invited, to: :active 
     end
   end 
+
+  def current_group
+    return Group.none if current_group_id.blank?
+    
+    groups.find_by(id: current_group_id)
+  end
+
+  def current_list 
+    return if current_group.blank? 
+
+    lists.find_by(group_id: current_group.id)
+  end
 
   def shares_group?(account)
     account.grouped? && (account.group_id == group_id)
@@ -35,6 +49,10 @@ class Account < ApplicationRecord
 
   def in_group?(group)
     groups.include?(group)
+  end
+
+  def has_many_groups?
+    groups.count > 1
   end
 
   def requested?(group)
@@ -47,7 +65,7 @@ class Account < ApplicationRecord
 
   def formatted_name 
     return if first_name.blank? || last_name.blank? 
-    
+
     [first_name, last_name.first + "."].join(" ")
   end
 
@@ -55,9 +73,10 @@ class Account < ApplicationRecord
     groups.present?
   end
 
-  def groupies
-    return Account.none if groups.blank?
-    groups.first.accounts 
+  def members_in_selected_group(group)
+    return Account.none if group.blank?
+
+    group.accounts.where(status: 'active')
   end
 
   def self.from_google(u)

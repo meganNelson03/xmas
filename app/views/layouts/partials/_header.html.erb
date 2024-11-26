@@ -1,0 +1,20 @@
+<% if @selected_group.present? && current_account.has_many_groups? %>
+  <div class='link'>
+    <span class='selected-group-header'>
+      <%= @selected_group.name %> /
+    </span>
+  </div>
+<% end %>
+
+<h1>
+  <div class='d-flex justify-space-between'>
+    <%= title %>
+  </div>
+</h1>
+
+<style>
+.selected-group-header {
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+</style>

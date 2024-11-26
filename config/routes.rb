@@ -33,11 +33,13 @@ Rails.application.routes.draw do
   get 'groups/search', to: 'group#search', as: 'search_groups'
   post 'groups/:id/request', to: 'group#request_to_join', as: 'request_join_group'
 
+
   get 'my_groups', to: 'group#my_groups', as: 'my_groups'
   get 'my_groups/:id/accounts/new', to: 'group_member#new', as: 'new_group_member'
   post 'my_groups/:id/accounts/:account_id/create', to: 'group_member#create', as: 'create_group_member'
   post 'my_groups/:id/accounts/:account_id/merge', to: 'group_member#merge', as: 'merge_group_members'
   post 'my_groups/:id/accounts/invite', to: 'group_member#invite', as: 'invite_group_member'
+  post 'my_groups/:id/switch', to: 'group#switch', as: 'switch_group'
 
   get 'my_groups/new', to: 'group#new', as: 'new_group'
   get 'my_groups/:id', to: 'group_member#index', as: 'group'

@@ -6,7 +6,7 @@
       Add to my List
     <% end %>
   <% elsif !current_account.grouped? %>
-    <%= link_to group_path, class: 'btn btn-lg input mt-4 add-to-list' do %>
+    <%= link_to my_groups_path, class: 'btn btn-lg input mt-4 add-to-list' do %>
       Join a Group
     <% end %>
   <% end %>

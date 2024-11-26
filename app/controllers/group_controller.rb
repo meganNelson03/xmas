@@ -12,9 +12,14 @@ class GroupController < ApplicationController
     @groups = current_account.groups
 
     if params[:group_id].present? 
-      @group = Group.find_by(id: params[:group_id])
+      @group = @groups.find_by(id: params[:group_id])
     else
-      @group = @groups.first 
+      @group = @selected_group
+    end
+
+    respond_to do |format|
+      format.js { render 'group_member/show_group', locals: { group: @group }}
+      format.html
     end
   end
 
@@ -55,6 +60,15 @@ class GroupController < ApplicationController
     current_account.membership_requests.create(group_id: group.id)
 
     redirect_to my_groups_path, notice: "You've requested to join a group! Check back later."
+  end
+
+  def switch
+    group = current_account.groups.find(params[:id])
+
+    current_account.current_group_id = group.id
+    current_account.save!
+
+    redirect_back fallback_location: lists_path, notice: "You've switched to #{group.name}."
   end
 
   private 

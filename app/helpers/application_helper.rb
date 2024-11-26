@@ -26,13 +26,13 @@ module ApplicationHelper
   end
 
   def recipient_options
-    current_account.groupies.where.not(id: current_account.id).order(first_name: :asc).map {
+    current_account.members_in_selected_group(@selected_group).where.not(id: current_account.id).order(first_name: :asc).map {
       |a| [a.full_name, a.id]
     }
   end
 
   def account_options
-    current_account.groupies.order(first_name: :asc).map {
+    current_account.members_in_selected_group(@selected_group).order(first_name: :asc).map {
       |a| [a.full_name, a.id]
     }
   end

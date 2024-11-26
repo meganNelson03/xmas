@@ -2,7 +2,7 @@
   <div class='row <%= groups.count > 3 ? 'carousel' : '' %>'>
     <% @groups.each do |group| %>
       <div class='col-4 slide'>
-        <%= link_to group_path(group.id), remote: true do %>
+        <%= link_to my_groups_path(group_id: group.id), remote: true do %>
         <div class='card group-card <%= toggled_id.present? && toggled_id == group.id ? 'toggled' : '' %>' id='group-<%= group.id %>'>
           <div class='group-card-head'>
             <h5><%= group.name %></h5>

@@ -9,7 +9,6 @@ import "popper"
 import "bootstrap"
 
 import './external/masonry'
-// import './external/slick'
 import "select2"
 import "slickjs"
 

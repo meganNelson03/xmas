@@ -18,6 +18,11 @@ class ApplicationController < ActionController::Base
   def set_group_context 
     return if current_account.groups.blank? 
 
-    @selected_group = current_account.groups.first
+    if current_account.current_group.present? 
+      @selected_group = current_account.current_group
+    else 
+      @selected_group = current_account.groups.first
+      current_account.update(current_group_id: @selected_group.id)
+    end
   end
 end

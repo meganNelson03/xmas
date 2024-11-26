@@ -31,11 +31,26 @@
           </li>
         </ul>
         <form class="d-flex justify-content-between justify-content-lg-end">
-          <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'ps-0 ps-md-2 add-to-list btn no-border' do %>
-            <span class='claim-icon fa-solid fa-gift me-3'></span>Add to My List
+          <% if current_account.has_many_groups? %>
+            <div class="dropdown">
+              <button class="ps-0 ps-md-2 add-to-list btn no-border" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-rotate me-3"></i>Switch Group
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% current_account.groups.each do |group| %>
+                  <%= link_to switch_group_path(group.id), method: :post do %>
+                    <%= group.name %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'ps-0 ps-md-2 add-to-list btn no-border' do %>
+              <span class='claim-icon fa-solid fa-gift me-3'></span>Add to My List
+            <% end %>
           <% end %>
           <%= link_to destroy_account_session_path, method: :delete, class: 'ms-4 logout-btn btn no-border' do %>
-            <i class="fa-solid fa-arrow-right-from-bracket me-3"></i>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
           <% end %>
         </form>
       </div>

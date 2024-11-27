@@ -12,6 +12,8 @@ class Account < ApplicationRecord
   has_many :groups, through: :accounts_groups
   has_many :membership_requests, dependent: :delete_all
 
+  has_one :group, foreign_key: :administrator_id, dependent: :nullify
+
   default_scope { order(first_name: :asc) } 
 
   after_create :create_list 
@@ -53,6 +55,10 @@ class Account < ApplicationRecord
 
   def has_many_groups?
     groups.count > 1
+  end
+
+  def has_a_group? 
+    groups.count > 0
   end
 
   def requested?(group)

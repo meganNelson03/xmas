@@ -1,5 +1,5 @@
 <div class='d-md-none'>
-  <%= render partial: 'list/mobile/header', locals: { account: @account } %>
+  <%= render partial: 'layouts/partials/mobile_header', locals: { title: @account.present? ? @account.full_name : "Everbody's Wishes"} %>
   <%= render partial: 'list/mobile/filter', locals: { is_my_list: @account&.id == current_account.id } %>
   <%= render partial: 'list/mobile/pills', locals: { account: @account } %>
 </div>
@@ -10,10 +10,9 @@
 </div>
 
 <section class='list'>
-  <% if @list_items.blank? %>
+  <% if !current_account.has_a_group? || @list_items.blank? %>
     <%= render partial: 'empty_list', locals: { account: @account } %>
-  <% end %>
-  <% if @list_items.present? %>
+  <% elsif @list_items.present? %>
     <div class="masonry row">
       <% @list_items.each_with_index do |item, index| %>
         <% if item.owned_by?(current_account) %>

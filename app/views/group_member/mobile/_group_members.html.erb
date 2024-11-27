@@ -1,0 +1,44 @@
+<div class="accordion" id="accordionExample">
+  <% group_members.each do |account| %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="header-account-<%= account.id %>">
+        <button class="accordion-button collapsed font-weight-strong d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= account.id %>" aria-expanded="true" aria-controls="collapseOne">
+          <span>
+          <% if account.full_name.present? %>
+            <%= account.full_name %>
+          <% else %>
+            Pending
+          <% end %>
+          </span>
+        </button>
+      </h2>
+      <div id="collapse-<%= account.id %>" class="accordion-collapse collapse" aria-labelledby="header-account-<%= account.id %>" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <span class='d-flex flex-row align-items-center mb-2'>
+            <span class='pill light small d-inline mt-0'>Email</span> <%= account.email %>
+          </span>
+          <span class='d-flex flex-row align-items-center'>
+            <span class='pill light small d-inline mt-0'>Status</span> <%= account.status.titleize %>
+          </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+
+
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+.accordion-button::after {
+  margin: 0;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+  background-color: white;
+}
+</style>

@@ -6,7 +6,7 @@
         <span class='pill-title'>Total Wishes</span> 
         <span><%= @total %></span>
       </span>
-      <% if account == current_account %>
+      <% if account == current_account && @selected_group.present? %>
         <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'add-to-list btn me-4' do %>
           <span class=''>
             <span class='pill-title'>

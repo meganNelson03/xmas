@@ -1,0 +1,25 @@
+
+<section class='header pb-5'>
+  <div class='head-content'>
+      <% if @selected_group.present? %>
+        <div class='link d-flex justify-content-center'>
+          <span class='selected-group-header'>
+            <%= @selected_group.name %> /
+          </span>
+        </div>
+      <% end %>
+      <div class='d-flex justify-content-center font-weight-bold'>
+        <h1>
+          <%= title %>
+        </h1>
+      </div>
+    </h1>
+  </div>
+</section>
+
+<style>
+.selected-group-header {
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+</style>

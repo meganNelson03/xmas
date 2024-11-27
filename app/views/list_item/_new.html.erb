@@ -6,7 +6,10 @@
     <% end %>
 
     <div class="modal-header">
+      <span class='text-center'>
       <h3>Add Wish</h3>
+      <h6 class='font-weight-light'><%= @selected_group.name %></h6>
+      </span>
     </div>
 
     <div class='d-none d-md-block'>
@@ -30,3 +33,11 @@
     </div>
   </div>
 </div>
+
+<style>
+
+.font-weight-light {
+  font-weight: 200;
+}
+
+</style>

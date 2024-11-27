@@ -1,4 +1,3 @@
-<div class='overflow-x-scroll no-scroll-style'>
 <table class="table no-scroll-style">
   <thead>
     <tr>
@@ -10,11 +9,20 @@
   <tbody>
     <% group_members.each do |account| %>
       <tr>
-        <td><%= account.full_name %></td>
+        <td>
+          <% if account.full_name.present? %>
+            <%= account.full_name %>
+          <% else %>
+            Pending
+          <% end %>
+        </td>
         <td><%= account.email %></td>
-        <td><%= account.status %></td>
+        <td>
+          <span class='pill d-inline small light <%= account.status %>'>
+            <%= account.status.titleize %>
+          </span>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-</div>

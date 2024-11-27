@@ -6,11 +6,11 @@
         <p><%= account.email %></p>
       </div>
       <div class='actions' id='mobile-account-<%= account.id %>'>
-        <% if current_account.shares_group?(account) %>
+        <% if account.in_group?(group) %>
           <%= render partial: 'grouped_account_action' %>
         <% else %>
           <%= link_to create_group_member_path(id: group.id, account_id: account.id), class: 'btn pill mt-0', method: :post do %>
-            Add
+            Add to Group
           <% end %>
         <% end %>
       </div>

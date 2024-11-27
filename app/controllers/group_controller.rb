@@ -54,6 +54,27 @@ class GroupController < ApplicationController
     end
   end
 
+  def edit
+    @group = Group.find(params[:id])
+
+    respond_to do |format|
+      format.js { render 'edit', locals: { group: @group } }
+    end
+  end
+
+  def update
+    @group = Group.find(params[:id])
+
+    respond_to do |format|
+      if @group.update(group_params)
+        p "here!!!"
+        format.js { render js: "window.location.replace('#{request.env["HTTP_REFERER"]}');" }
+      else 
+        format.js { render 'edit', locals: { group: @group } }
+      end
+    end
+  end
+
   def request_to_join
     group = Group.find(params[:id])
 
@@ -85,9 +106,6 @@ class GroupController < ApplicationController
     if params[:name].present?
       groups = Group.where('name ILIKE ?', "%#{params[:name]}%") 
     end
-
-    p "!!!"
-    p groups
 
     if params[:email].present? 
       groups = (groups.presence || Group).joins(:accounts).where('accounts.email ILIKE ?', "%#{params[:email]}%")

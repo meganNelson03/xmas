@@ -1,8 +1,8 @@
-<section class='mt-5 pt-5'>
-  <div class='row <%= groups.count > 3 ? 'carousel' : '' %>'>
+<section class='mt-5 pt-5 mobile-overflow'>
+  <div class='row carousel <%= groups.count > 3 ? '' : '' %>' data-carousel-target='slider'>
     <% @groups.each do |group| %>
-      <div class='col-4 slide'>
-        <%= link_to my_groups_path(group_id: group.id), remote: true do %>
+      <div class='col-4 slide' data-slide-index=<%= group.id %>>
+        <%= link_to my_groups_path(group_id: group.id), class: 'link-card', data: { group_id: group.id }, remote: true do %>
         <div class='card group-card <%= toggled_id.present? && toggled_id == group.id ? 'toggled' : '' %>' id='group-<%= group.id %>'>
           <div class='group-card-head'>
             <h5><%= group.name %></h5>
@@ -25,6 +25,34 @@
 </section>
 
 <style>
+
+@media (max-width: 575px) {
+  .arrow {
+    visibility: hidden;
+  }
+  .mobile-overflow {
+    overflow: hidden;
+    margin: -50px;
+    padding: 50px;
+  }
+
+}
+
+@media (max-width: 989px) {
+
+}
+
+@media (min-width: 989px) {
+
+.slick-slide {
+  opacity: 0;
+  visibility: hidden;
+  }
+}
+
+.carousel .slick-track {
+  margin: 0;
+}
 
 .carousel { visibility: hidden; overflow: hidden; }
 .carousel.slick-initialized { visibility: visible; overflow: visible;}
@@ -93,10 +121,7 @@
 	box-sizing: border-box;
  }
 
-.slick-slide {
-  opacity: 0;
-  visibility: hidden;
-}
+
 
 .slick-slide.slick-active {
   opacity: 1;

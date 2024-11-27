@@ -13,3 +13,4 @@
 //= link controllers/claim_controller.js
 //= link controllers/scroll_controller.js
 //= link controllers/message_controller.js
+//= link controllers/carousel_controller.js

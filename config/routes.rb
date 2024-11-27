@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   get 'my_groups/new', to: 'group#new', as: 'new_group'
   get 'my_groups/:id', to: 'group_member#index', as: 'group'
   post 'my_groups/create', to: 'group#create', as: 'create_group'
+  get 'my_groups/:id/edit', to: 'group#edit', as: 'edit_group'
+  patch 'my_groups/:id', to: 'group#update', as: 'update_group'
 
   get '/', to: 'home#index', as: 'home'
 

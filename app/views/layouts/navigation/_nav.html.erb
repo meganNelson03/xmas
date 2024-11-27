@@ -38,13 +38,13 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <% current_account.groups.each do |group| %>
-                  <%= link_to switch_group_path(group.id), method: :post do %>
+                  <%= link_to switch_group_path(group.id), class: 'dropdown-item', method: :post do %>
                     <%= group.name %>
                   <% end %>
                 <% end %>
               </div>
             </div>
-          <% else %>
+          <% elsif @selected_group.present? %>
             <%= link_to new_list_item_path, method: :get, data: { turbo: false, remote: true, toggle: 'modal', target: '#list-item-modal'}, class: 'ps-0 ps-md-2 add-to-list btn no-border' do %>
               <span class='claim-icon fa-solid fa-gift me-3'></span>Add to My List
             <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_26_002558) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_26_024026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,6 +44,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_002558) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.bigint "administrator_id"
+    t.index ["administrator_id"], name: "index_groups_on_administrator_id"
   end
 
   create_table "links", force: :cascade do |t|
@@ -246,6 +248,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_002558) do
   end
 
   add_foreign_key "accounts", "groups", column: "current_group_id"
+  add_foreign_key "groups", "accounts", column: "administrator_id"
   add_foreign_key "links", "list_items"
   add_foreign_key "list_items", "accounts", column: "claimed_by_id"
   add_foreign_key "lists", "groups"

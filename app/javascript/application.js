@@ -23,15 +23,23 @@ try {
 $(document).on("ready turbo:load", function(){
   $('[data-toggle="tooltip"]').tooltip();
 
-  if ($('.carousel .slide').length > 3) {
-    $('.carousel').slick({
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      prevArrow:"<button class='carousel-prev arrow'><span class='fa-stack fa-1x claim-icon'><i class='fa-solid fa-circle fa-stack-2x icon-bg green'></i><i class='fa-solid fa-chevron-left fa-stack-1x fa-inverse icon-fg'></i></span></button>",
-      nextArrow:"<button class='carousel-next arrow'><span class='fa-stack fa-1x claim-icon'><i class='fa-solid fa-circle fa-stack-2x icon-bg green'></i><i class='fa-solid fa-chevron-right fa-stack-1x fa-inverse icon-fg'></i></span></button>",
+  $('.carousel').on('afterChange', function(event, slick, currentSlide, nextSlide){
+    var elt = slick.$slides.get(currentSlide);
+
+    var href = console.log($(elt).find('a').attr('href'))
+    var groupId = $(elt).find('a').data('group-id')
+
+    console.log("href:")
+    console.log(href)
+
+    $.ajax({
+      type: 'GET',
+      url: href,
+      data: {
+        group_id: groupId
+      }
     });
-  }
+  });
 
   $('.multiselect-field').select2({});
   

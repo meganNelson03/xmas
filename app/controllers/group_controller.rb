@@ -51,6 +51,8 @@ class GroupController < ApplicationController
     if group.save 
       group.accounts_groups.create(account_id: current_account.id)
       redirect_to my_groups_path(group_id: group.id), notice: 'Yay! You made a group.'
+    else 
+      redirect_to my_groups_path, notice: 'Something went wrong.'
     end
   end
 

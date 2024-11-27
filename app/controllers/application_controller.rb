@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   # allow_browser versions: :modern
 
+  before_action :require_authentication
   before_action :set_current_account
   before_action :set_group_context
-  before_action :require_authentication
 
   def set_current_account
     @current_account = current_account
@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_group_context 
+    return if current_account.blank?
     return if current_account.groups.blank? 
 
     if current_account.current_group.present? 

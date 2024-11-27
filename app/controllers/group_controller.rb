@@ -47,6 +47,7 @@ class GroupController < ApplicationController
 
   def create 
     group = Group.new(group_params)
+    group.administrator = current_account
 
     if group.save 
       group.accounts_groups.create(account_id: current_account.id)

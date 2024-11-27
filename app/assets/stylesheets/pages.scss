@@ -65,6 +65,11 @@ body::-webkit-scrollbar {
 
 // Accordion
 
+.accordion-body {
+  @extend .no-scroll-style;
+  overflow: scroll;
+}
+
 .accordion-button {
   display: flex;
   justify-content: space-between;
@@ -626,6 +631,7 @@ textarea {
 
 .logo-big {
   width: 160px;
+  height: unset;
 }
 
 .infinite-scroll-last {

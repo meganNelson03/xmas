@@ -4,6 +4,22 @@
       <a class="navbar-brand" href="/">
         <%= image_tag "cat-with-hat", class: 'logo' %>
       </a>
+      <div class='d-md-none'>
+        <% if current_account.has_many_groups? %>
+        <div class="dropdown">
+          <button class="ps-0 ps-md-2 add-to-list btn no-border" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-rotate me-3"></i>Switch Group
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% current_account.groups.each do |group| %>
+              <%= link_to switch_group_path(group.id), class: 'dropdown-item', method: :post do %>
+                <%= group.name %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,16 +48,18 @@
         </ul>
         <form class="d-flex justify-content-between justify-content-lg-end">
           <% if current_account.has_many_groups? %>
-            <div class="dropdown">
-              <button class="ps-0 ps-md-2 add-to-list btn no-border" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-rotate me-3"></i>Switch Group
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <% current_account.groups.each do |group| %>
-                  <%= link_to switch_group_path(group.id), class: 'dropdown-item', method: :post do %>
-                    <%= group.name %>
+            <div class='d-none d-md-block'>
+              <div class="dropdown">
+                <button class="ps-0 ps-md-2 add-to-list btn no-border" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa-solid fa-rotate me-3"></i>Switch Group
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <% current_account.groups.each do |group| %>
+                    <%= link_to switch_group_path(group.id), class: 'dropdown-item', method: :post do %>
+                      <%= group.name %>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </div>
             </div>
           <% elsif @selected_group.present? %>
@@ -49,9 +67,16 @@
               <span class='claim-icon fa-solid fa-gift me-3'></span>Add to My List
             <% end %>
           <% end %>
-          <%= link_to destroy_account_session_path, method: :delete, class: 'ms-4 logout-btn btn no-border' do %>
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <% end %>
+          <div class='d-none d-md-block'>
+            <%= link_to destroy_account_session_path, method: :delete, class: 'ms-4 logout-btn btn no-border' do %>
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <% end %>
+          </div>
+          <div class='d-block d-md-none'>
+            <%= link_to destroy_account_session_path, method: :delete, class: 'logout-btn btn no-border ps-0' do %>
+              <i class="fa-solid fa-arrow-right-from-bracket me-3 ms-0 ps-0"></i> Sign Out
+            <% end %>
+          </div>
         </form>
       </div>
     </div>

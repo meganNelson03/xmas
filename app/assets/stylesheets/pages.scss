@@ -54,6 +54,44 @@ body::-webkit-scrollbar {
   font-weight: 700;
 }
 
+.light-text {
+  font-weight: 100;
+  line-height: 2;
+}
+
+.font-weight-light {
+  font-weight: 200;
+}
+
+// Accordion
+
+.accordion-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+.accordion-button::after {
+  margin: 0;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+  background-color: white;
+}
+
+.accordion-button::after {
+  margin: 0;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+  background-color: white;
+}
+
 // Table
 
 .table {
@@ -718,4 +756,171 @@ font-size: 1.5rem;
 .select2-container--default.select2-container--focus .select2-selection--multiple,
 .select2-selection.select2-selection--multiple {
   border-color: #dee2e6 !important;
+}
+
+// Groups
+
+.group-result {
+  padding: 2rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: white;
+}
+
+
+.light-green {
+  color: #9cdba6;
+}
+
+.card-members-mobile {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
+}
+
+.pill.invited {
+  color: green;
+  background-color: #9cdba6;
+}
+
+.green {
+  color: #469746;
+}
+
+.card-members .group-card-head {
+  padding: 2rem 2rem 1rem 2rem;
+}
+
+.card-members .group-card-body {
+  padding: 1rem 2rem 2rem 2rem;
+}
+
+.pill.small {
+  display: flex;
+  align-items: center;
+}
+
+tr:last-of-type td {
+  border-bottom: none;
+}
+
+.selected-group-header {
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+
+.group-card.toggled {
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.12s ease-in;
+}
+
+.group-card.toggled .pill {
+  background: #9cdba6;
+  color: green;
+}
+.group-card.toggled h5 {
+  color: green;
+}
+
+.card-members {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: slide-up 0.5s ease-in;
+}
+
+@keyframes slide-up {
+  from {
+    top: 50px;
+    opacity: 0;
+  }
+  to {
+    top: 0px; 
+    opacity: 1;
+  }
+}
+
+// Carousel
+
+@media (max-width: 575px) {
+  .arrow {
+    visibility: hidden;
+  }
+  .mobile-overflow {
+    overflow: hidden;
+    margin: -50px;
+    padding: 50px;
+  }
+
+}
+
+@media (min-width: 989px) {
+
+.slick-slide {
+  opacity: 0;
+  visibility: hidden;
+  }
+}
+
+.carousel .slick-track {
+  margin: 0;
+}
+
+.carousel { visibility: hidden; overflow: hidden; }
+.carousel.slick-initialized { visibility: visible; overflow: visible;}
+
+.arrow {
+  opacity: 0.5;
+}
+.arrow:hover {
+  opacity: 1;
+}
+
+.pill.light {
+  background: #ededed;
+  color: gray;
+}
+
+.pills .pill.light {
+  background: #ededed;
+  color: gray;
+}
+
+.carousel, .slick-list {
+  overflow: visible;
+}
+
+.slick-slide {
+  transition: opacity 0.5s ease-in, visibility 0.5s ease-in;
+}
+
+.arrow {
+  position: absolute;
+  border: none;
+  padding: 0;
+  width: auto;
+    width: 50px;
+    z-index: 99999;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.carousel-prev {
+  left: -55px;
+}
+
+.carousel-next {
+  right: -55px;
+}
+
+.slick-slide {
+	padding: 0 8px;
+	box-sizing: border-box;
+ }
+
+.slick-slide.slick-active {
+  opacity: 1;
+  visibility: visible;
 }

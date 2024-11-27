@@ -12,14 +12,10 @@
             <td><%= account.full_name %></td>
             <td><%= account.email %></td>
             <td class='table-actions' id='account-<%= account.id %>'>
-              <% if current_account.shares_group?(account) %>
+              <% if account.in_group?(group) %>
                 <%= render partial: 'grouped_account_action' %>
-              <% elsif account.grouped? %>
-                <%= link_to merge_group_members_path(account.id), class: 'btn', method: :post, remote: true do %>
-                  Join and Merge Groups
-                <% end %>
-              <% elsif !account.grouped? %>
-                <%= link_to create_group_member_path(account.id), class: 'btn', method: :post do %>
+              <% else %>
+                <%= link_to create_group_member_path(id: group.id, account_id: account.id), class: 'btn', method: :post do %>
                   Add
                 <% end %>
               <% end %>
@@ -33,10 +29,16 @@
   <% if results.blank? %>
     <div class='no-results'>
       <h5>No one here has that email. Try again?</h5>
+      <% if is_valid_email?(email) %>
+        <p class='light-text mt-3'>Click the link below to invite <strong><%= email %></strong>. <br />As soon as they sign up, they'll automatically be added to your group.</p>
+        <%= link_to invite_group_member_path(email: email), class: 'btn pill', method: :post do %>
+          Invite New Member
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 </div>
 
 <div class='d-block d-md-none'>
-  <%= render partial: 'account/mobile/results', locals: { account: results&.first } %>
+  <%= render partial: 'account/mobile/results', locals: { account: results&.first, group: group, email: email } %>
 </div>

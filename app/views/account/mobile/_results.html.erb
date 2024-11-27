@@ -6,15 +6,11 @@
         <p><%= account.email %></p>
       </div>
       <div class='actions' id='mobile-account-<%= account.id %>'>
-        <% if current_account.shares_group?(account) %>
+        <% if account.in_group?(group) %>
           <%= render partial: 'grouped_account_action' %>
-        <% elsif account.grouped? %>
-          <%= link_to merge_group_members_path(account.id), class: 'btn pill mt-0', method: :post, remote: true do %>
-            Join and Merge Groups
-          <% end %>
-        <% elsif !account.grouped? %>
-          <%= link_to create_group_member_path(account.id), class: 'btn pill mt-0', method: :post do %>
-            Add
+        <% else %>
+          <%= link_to create_group_member_path(id: group.id, account_id: account.id), class: 'btn pill mt-0', method: :post do %>
+            Add to Group
           <% end %>
         <% end %>
       </div>
@@ -24,6 +20,12 @@
   <% if account.blank? %>
     <div class='no-results'>
       <h5>No one here has that email. Try again?</h5>
+      <% if is_valid_email?(email) %>
+        <p class='light-text mt-3'>Click the link below to invite <strong><%= email %></strong>. <br />As soon as they sign up, they'll automatically be added to your group.</p>
+        <%= link_to invite_group_member_path(email: email), class: 'btn pill' do %>
+          Invite New Member
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 </div>

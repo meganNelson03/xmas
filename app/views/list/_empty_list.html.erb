@@ -1,13 +1,13 @@
 <div class='empty-list mt-5'>
   <div class='mb-3'><i class="fa-solid fa-gifts icon icon-gifts icon-lg"></i></div>
   <h3>There's nothing here yet.</h3>
-  <% if account&.id == current_account.id %>
+  <% if !@selected_group.present? %>
+   <%= link_to my_groups_path, class: 'btn btn-lg input mt-4 add-to-list' do %>
+      Join a Group
+    <% end %>
+  <% elsif account&.id == current_account.id %>
     <%= link_to new_list_item_path, class: 'btn btn-lg input mt-4 add-to-list', remote: true do %>
       Add to my List
-    <% end %>
-  <% elsif !current_account.grouped? %>
-    <%= link_to group_path, class: 'btn btn-lg input mt-4 add-to-list' do %>
-      Join a Group
     <% end %>
   <% end %>
 </div>

@@ -1,0 +1,53 @@
+<div class='d-md-none'>
+  <section class='mt-5'>
+    <div class='no-scroll-style card-members-mobile'>
+      <div class='group-card-head-mobile d-flex justify-content-between align-items-center mb-5'>
+        <h4 class='font-weight-bold mb-0'><%= group.name %></h4>
+        <span>
+        <%= link_to new_group_member_path(group.id), class: '', remote: true do %>
+          <span class="fa-stack fa-1x claim-icon">
+            <i class="fa-solid fa-circle fa-stack-2x icon-bg light-green"></i>
+            <i class="fa-solid fa-plus fa-stack-1x fa-inverse icon-fg green"></i>
+          </span>
+        <% end %>
+        <% if current_account == group.administrator %>
+          <%= link_to edit_group_path(group.id), class: '', remote: true do %>
+            <span class="fa-stack fa-1x claim-icon">
+              <i class="fa-solid fa-circle fa-stack-2x icon-bg light-green"></i>
+              <i class="fa-regular fa-pen-to-square fa-stack-1x fa-inverse icon-fg green"></i>
+            </span>
+          <% end %>
+        <% end %>
+        </span>
+      </div>
+      <%= render partial: 'group_member/mobile/group_members', locals: { group_members: group_members, group: group } %>
+    </div>
+  </section>
+</div>
+
+<div class='d-none d-md-block'>
+  <section class='mt-5'>
+  <div class='overflow-x-scroll no-scroll-style card-members'>
+    <div class='group-card-head'>
+    <div class='actions d-flex justify-content-between'>
+      <div class='pill pill-btn small light'>
+        <%= group.name %>
+      </div>
+      <span class='d-flex flex-row'>
+        <%= link_to new_group_member_path(group.id), class: 'pill pill-btn small', remote: true do %>
+          <i class="fa-solid fa-plus me-3"></i> Add Members
+        <% end %>
+        <% if group.administrator == current_account %>
+          <%= link_to edit_group_path(group.id), class: 'pill pill-btn small', remote: true do %>
+            <i class="fa-regular fa-pen-to-square me-3"></i> Edit Group
+          <% end %>
+        <% end %>
+      </span>
+    </div>
+    </div>
+    <div class='group-card-body'>
+      <%= render partial: 'group_member/group_members', locals: { group_members: group_members, group: group } %>
+    </div>
+  </div>
+  </section>
+</div>

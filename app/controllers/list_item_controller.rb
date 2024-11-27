@@ -10,7 +10,6 @@ class ListItemController < ApplicationController
 
   def new
     list_item = ListItem.new 
-    # list_item.links.build
 
     respond_to do |format|
       format.js { render 'new', locals: { list_item: list_item } }
@@ -77,9 +76,9 @@ class ListItemController < ApplicationController
   end
 
   def verify_in_group
-    if !@list_item.list.account.shares_group?(current_account)
+    if !@list_item.list.in_group?(@selected_group)
       raise 'You are not allowed to update this item.'
-    end
+    end 
   end
 
   def update_tags

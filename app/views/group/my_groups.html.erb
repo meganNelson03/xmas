@@ -1,0 +1,60 @@
+<div class='d-block d-md-none'>
+  <section class='header pb-2'>
+    <div class='head-content'>
+      <h1>
+        <div class='d-flex justify-content-center font-weight-bold'>
+          My Group
+        </div>
+      </h1>
+    </div>
+  </section>
+</div>
+
+<div class='d-none d-md-block'>
+  <section class='header'>
+    <div class='row'>
+      <div class='col-12'>
+        <h1>My Groups</h1>
+      </div>
+    </div>
+  </section>
+</div>
+
+<% if @groups.present? %>
+<section class='mt-md-5 d-flex align-items-center flex-column d-md-block'>
+  <%= link_to new_group_path, class: 'pill btn justify-content-center justify-content-md-start align-items-center me-4', remote: true do %>
+    <i class="fa-solid fa-plus me-3"></i> Create a Group
+  <% end %>
+</section>
+<% end %>
+
+<% if @groups.present? %>
+  <div class=''>
+    <div data-controller='carousel'>
+      <%= render partial: 'group/my_groups', locals: { groups: @groups, toggled_id: @group&.id } %>
+      <div class='hidden' data-current-group-id=<%= @group&.id %> data-carousel-target='currentGroup'>
+    </div>
+    <div id='group-member-container'>
+      <% if @group.present? %>
+        <%= render partial: 'group_member/show_group', locals: { group: @group, group_members: @group.accounts } %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+
+<% if @groups.blank? %>
+  <div class='mt-5'>
+  <div class='empty-list'>
+    <div class='mb-3'><i class="fa-solid fa-gifts icon icon-gifts icon-lg"></i></div>
+    <h3>There's nothing here yet.</h3>
+    <h2 class='mt-2'>To get started, you'll need to create a group.</h2>
+    <div class='d-flex'>
+      <%= link_to new_group_path, class: 'btn btn-lg input mt-4 add-to-list', remote: true do %>
+        <i class="fa-solid fa-plus me-3"></i> Create a Group
+      <% end %>
+    </div>
+  </div>
+  </div>
+<% end %>

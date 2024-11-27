@@ -9,11 +9,11 @@ account_values = [
   { first_name: 'Mister', last_name: 'Whiskers', email: 'j@test.com', password: 'qweqweqwe', password_confirmation: 'qweqweqwe' }
 ]
 
-group = AccountGroup.create
+group = Group.create
 
 account_values.each do |params|
   account = Account.new(params)
-  account.account_group_id = group.id
+  account.group_id = group.id
   account.save!
   account.reload
 end

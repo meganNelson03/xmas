@@ -1,0 +1,28 @@
+<table class="table no-scroll-style">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope='col'>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% group_members.each do |account| %>
+      <tr>
+        <td>
+          <% if account.full_name.present? %>
+            <%= account.full_name %>
+          <% else %>
+            Pending
+          <% end %>
+        </td>
+        <td><%= account.email %></td>
+        <td>
+          <span class='pill d-inline small light <%= account.status %>'>
+            <%= account.status.titleize %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

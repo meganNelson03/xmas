@@ -1,0 +1,7 @@
+console.log("yepp....")
+console.log('<%= escape_javascript(group.id) %>')
+$("#group-member-container").html("<%= escape_javascript(render partial: 'group_member/show_group', locals: { group: group, group_members: group.accounts }) %>");
+$('.card-members').addClass('show')
+
+$('.group-card').removeClass('toggled')
+$('#group-<%= escape_javascript(group.id) %>').addClass('toggled')

@@ -17,7 +17,7 @@ class ListItem < ApplicationRecord
   scope :unclaimed, -> { where(claimed_by_id: nil) }
   scope :claimed, -> { where.not(claimed_by_id: nil) }
   scope :owned_by, -> (account) { where(account_id: account.id) }
-  scope :in_group, -> (account) { joins(list: :account).where(lists: { accounts: { account_group_id: account.account_group_id }}) }
+  scope :in_group, -> (group) { joins(list: :group).where(lists: { groups: { id: group.id }}) }
 
   delegate :account, to: :list
 

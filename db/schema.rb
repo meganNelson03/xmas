@@ -10,21 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_22_000844) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_26_024026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
-
-  create_table "account_groups", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "account_group_id"
+    t.bigint "group_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -32,9 +27,25 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_22_000844) do
     t.datetime "remember_created_at"
     t.string "provider"
     t.string "uid"
-    t.index ["account_group_id"], name: "index_accounts_on_account_group_id"
+    t.string "status"
+    t.bigint "current_group_id"
+    t.index ["current_group_id"], name: "index_accounts_on_current_group_id"
     t.index ["email"], name: "index_accounts_on_email", unique: true
+    t.index ["group_id"], name: "index_accounts_on_group_id"
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "accounts_groups", id: false, force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "group_id", null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.bigint "administrator_id"
+    t.index ["administrator_id"], name: "index_groups_on_administrator_id"
   end
 
   create_table "links", force: :cascade do |t|
@@ -73,7 +84,19 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_22_000844) do
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "group_id"
     t.index ["account_id"], name: "index_lists_on_account_id"
+    t.index ["group_id"], name: "index_lists_on_group_id"
+  end
+
+  create_table "membership_requests", force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "group_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_membership_requests_on_account_id"
+    t.index ["group_id"], name: "index_membership_requests_on_group_id"
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
@@ -224,8 +247,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_22_000844) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accounts", "groups", column: "current_group_id"
+  add_foreign_key "groups", "accounts", column: "administrator_id"
   add_foreign_key "links", "list_items"
   add_foreign_key "list_items", "accounts", column: "claimed_by_id"
+  add_foreign_key "lists", "groups"
+  add_foreign_key "membership_requests", "accounts"
+  add_foreign_key "membership_requests", "groups"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

@@ -1,0 +1,14 @@
+<section class='group-results mt-5'>
+  <% if groups.blank? %>
+    <div class='no-results'>
+      <h5>We couldn't find any matching groups. Try again?</h5>
+      <%= link_to new_search_groups_path, class: 'btn pill input mt-4', remote: true do %>
+        <i class="fa-solid fa-magnifying-glass me-3"></i> Try Again
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if groups.present? %>
+    <%= render partial: 'groups_table', locals: { groups: groups } %>
+  <% end %>
+</section>

@@ -9,9 +9,8 @@ import "popper"
 import "bootstrap"
 
 import './external/masonry'
-// import './external/infinitescroll'
-// import "masonryjs"
 import "select2"
+import "slickjs"
 
 import {far} from "@fortawesome/free-regular-svg-icons"
 import {fas} from "@fortawesome/free-solid-svg-icons"
@@ -23,6 +22,24 @@ library.add(far, fas, fab)
 try {
 $(document).on("ready turbo:load", function(){
   $('[data-toggle="tooltip"]').tooltip();
+
+  $('.carousel').on('afterChange', function(event, slick, currentSlide, nextSlide){
+    var elt = slick.$slides.get(currentSlide);
+
+    var href = console.log($(elt).find('a').attr('href'))
+    var groupId = $(elt).find('a').data('group-id')
+
+    console.log("href:")
+    console.log(href)
+
+    $.ajax({
+      type: 'GET',
+      url: href,
+      data: {
+        group_id: groupId
+      }
+    });
+  });
 
   $('.multiselect-field').select2({});
   

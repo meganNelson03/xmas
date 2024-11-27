@@ -31,7 +31,7 @@
     <%= f.label :tags %>
     <%= f.select :tag_ids, options_for_select(Tag.all.order(:name).map { |t| [t.name, t.id] }, list_item.tags.ids), { multiple: 'multiple' }, class: 'form-select multiselect-field' %>
   </div>
-  <%= f.hidden_field :list_id, value: @current_account.list.id %>
+  <%= f.hidden_field :list_id, value: @current_account.current_list.id %>
   <div class='col-12 d-flex justify-content-between flex-row-reverse'>
     <%= f.submit 'Submit', class: 'btn submit' %>
     <%= link_to :back do %>

@@ -2,7 +2,7 @@ class MigrateAccountsToGroup < ActiveRecord::Migration[8.0]
   def change
     Account.where.not(group_id: nil).each do |account| 
       group = Group.find_by(id: account.group_id)
-      list = account.list 
+      list = account.lists&.first 
 
       next if group.blank?
 

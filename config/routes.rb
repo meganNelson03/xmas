@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   post 'my_groups/:id/accounts/invite', to: 'group_member#invite', as: 'invite_group_member'
   post 'my_groups/:id/switch', to: 'group#switch', as: 'switch_group'
 
+  delete 'my_groups/:id', to: 'group#destroy', as: 'destroy_group'
+
   get 'my_groups/new', to: 'group#new', as: 'new_group'
   get 'my_groups/:id', to: 'group_member#index', as: 'group'
   post 'my_groups/create', to: 'group#create', as: 'create_group'

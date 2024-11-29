@@ -49,8 +49,7 @@ export default class extends Controller {
     var groupId = $(this.currentGroupTarget).data('current-group-id')
   
     var index = $(this.sliderTarget).find(`[data-slide-index="${groupId}"`).data('slick-index')
-  
-    console.log(index)
+
 
     $(this.sliderTarget).slick(this.options()).slick('slickGoTo', index);
   }

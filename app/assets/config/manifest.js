@@ -14,3 +14,4 @@
 //= link controllers/scroll_controller.js
 //= link controllers/message_controller.js
 //= link controllers/carousel_controller.js
+//= link controllers/confirmation_controller.js

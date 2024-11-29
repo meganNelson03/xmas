@@ -65,12 +65,25 @@ class GroupController < ApplicationController
     end
   end
 
+  def destroy 
+    @group = Group.find(params[:id])
+
+    if current_account != group.administrator
+      redirect_to my_groups_path, notice: "You're not allowed to delete this group." and return 
+    end
+
+    if @group.destroy 
+      redirect_to my_groups_path, notice: "Hope you're happy with yourself. The group is gone forever."
+    else 
+      redirect_to my_groups_path, notice: 'Something went wrong. Please try again later.'
+    end
+  end
+
   def update
     @group = Group.find(params[:id])
 
     respond_to do |format|
       if @group.update(group_params)
-        p "here!!!"
         format.js { render js: "window.location.replace('#{request.env["HTTP_REFERER"]}');" }
       else 
         format.js { render 'edit', locals: { group: @group } }

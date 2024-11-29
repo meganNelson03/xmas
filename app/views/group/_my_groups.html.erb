@@ -1,7 +1,7 @@
 <section class='mt-5 pt-5 mobile-overflow'>
   <div class='row carousel <%= groups.count > 3 ? '' : '' %>' data-carousel-target='slider'>
     <% @groups.each do |group| %>
-      <div class='col-4 slide' data-slide-index=<%= group.id %>>
+      <div class='col-4 slide <%= group.id %>' data-slide-index=<%= group.id %>>
         <%= link_to my_groups_path(group_id: group.id), class: 'link-card', data: { group_id: group.id }, remote: true do %>
         <div class='card group-card <%= toggled_id.present? && toggled_id == group.id ? 'toggled' : '' %>' id='group-<%= group.id %>'>
           <div class='group-card-head'>

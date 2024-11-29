@@ -930,3 +930,28 @@ tr:last-of-type td {
   opacity: 1;
   visibility: visible;
 }
+
+// delete
+
+.warning {
+  font-size: 1.125rem;
+  text-align: center;
+  line-height: 2;
+}
+
+.accept {
+  color: green;
+  background: #9cdba6;
+  font-weight: 600;
+}
+
+.delete-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: row;
+  font-size: .9rem;
+  color: gray;
+  top: 10px;
+}

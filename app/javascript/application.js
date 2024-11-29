@@ -20,6 +20,7 @@ import "@fortawesome/fontawesome-free"
 library.add(far, fas, fab)
 
 try {
+
 $(document).on("ready turbo:load", function(){
   $('[data-toggle="tooltip"]').tooltip();
 
@@ -28,9 +29,6 @@ $(document).on("ready turbo:load", function(){
 
     var href = console.log($(elt).find('a').attr('href'))
     var groupId = $(elt).find('a').data('group-id')
-
-    console.log("href:")
-    console.log(href)
 
     $.ajax({
       type: 'GET',

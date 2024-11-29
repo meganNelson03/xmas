@@ -14,7 +14,7 @@ class ListController < ApplicationController
     @claimed_by_me = @totaled_items.where(claimed_by_id: current_account.id).count
     @claimed_by_others = @totaled_items.where.not(claimed_by_id: [nil, current_account.id]).count
 
-    @list_items = @list_items.page(params[:page]).per(10)
+    @list_items = @list_items.distinct.page(params[:page]).per(10)
   end
 
   def my_claims

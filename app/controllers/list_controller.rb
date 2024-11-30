@@ -14,7 +14,7 @@ class ListController < ApplicationController
     @claimed_by_me = @totaled_items.where(claimed_by_id: current_account.id).count
     @claimed_by_others = @totaled_items.where.not(claimed_by_id: [nil, current_account.id]).count
 
-    @list_items = @list_items.distinct.page(params[:page]).per(10)
+    @list_items = @list_items.distinct('list_items.id').page(params[:page]).per(10)
   end
 
   def my_claims
@@ -38,7 +38,7 @@ class ListController < ApplicationController
       list_items = list_items.joins(:list).where(lists: { account_id: params[:recipient_id] })
     end
 
-    if (statuses = status_query(params[:status])).present? 
+    if params[:status] != 'all' && (statuses = status_query(params[:status])).present?
       list_items = list_items.joins(:list).where.not(lists: { account_id: current_account.id }).where(status: statuses)
     end
 
@@ -46,14 +46,10 @@ class ListController < ApplicationController
   end
 
   def sort(list_items, params)
-    return list_items if params.blank?
-    return list_items if (sort = params.dig(:sort_by)).blank?
+    return list_items.order(priority: :desc) if params.blank?
+    return list_items.order(priority: :desc) if (sort = params.dig(:sort_by)).blank?
 
     case sort
-    when 'first_name_asc'
-      list_items = list_items.reorder(first_name: :asc)
-    when 'first_name_desc'
-      list_items = list_items.reorder(first_name: :desc)
     when 'price_asc'
       list_items = list_items.reorder('low_price asc NULLS first')
     when 'price_desc'
@@ -82,9 +78,9 @@ class ListController < ApplicationController
   def status_query(status)
     case status
     when 'all'
-      ['open', 'claimed', 'bought']
+      [nil, 'open', 'claimed', 'bought']
     when 'open'
-      'open'
+      [nil, 'open']
     when 'claimed'
       ['claimed', 'bought']
     when 'bought'

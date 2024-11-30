@@ -45,8 +45,6 @@ module ApplicationHelper
 
   def sort_options
     [
-      ['Name (A to Z)', 'first_name_asc'],
-      ['Name (Z to A)', 'first_name_desc'],
       ['Price (Low to High)', 'price_asc'],
       ['Price (High to Low)', 'price_desc'],
       ['Priority (High to Low)', 'priority_desc'],

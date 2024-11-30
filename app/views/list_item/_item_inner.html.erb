@@ -7,7 +7,7 @@
 
     <% if item.url.present? %>
       <span class='me-2'></span>
-      <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top'}, title: 'Gift URL', target: '_blank' do %>
+      <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top', target: 'tooltip.tooltipElement'}, title: 'Gift URL', target: '_blank' do %>
         <i class="fa-solid fa-link icon"></i>
       <% end %>
     <% end %>

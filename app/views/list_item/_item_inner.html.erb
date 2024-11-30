@@ -50,7 +50,7 @@
       <%= render partial: 'list_item/statuses/bought', locals: { item: item } %>
     <% elsif item.claimed_by?(current_account) %>
       <%= render partial: 'list_item/statuses/claimed', locals: { item: item, disabled: false } %>
-    <% elsif !item.claimed? %>
+    <% elsif !item.is_claimed? %>
       <%= render partial: 'list_item/statuses/unclaimed', locals: { item: item } %>
     <% end %>
   </span>

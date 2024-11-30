@@ -15,7 +15,9 @@
   <% elsif @list_items.present? %>
     <div class="masonry row" data-controller='masonry'>
       <% @list_items.each_with_index do |item, index| %>
-        <% if item.owned_by?(current_account) || item.created_by?(current_account) %>
+        <% if item.created_by?(current_account) && !item.owned_by?(current_account) %>
+          <%= render partial: 'list_item/editable_item', locals: { item: item } %>
+        <% elsif item.owned_by?(current_account) %>
           <%= render partial: 'list_item/my_item', locals: { item: item } %>
         <% else %>
           <%= render partial: 'list_item/item', locals: { item: item } %>

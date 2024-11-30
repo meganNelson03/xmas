@@ -24,6 +24,17 @@
         <% end %>
       </div>
 
+      <% if item.created_by_someone_else? %>
+      <div class='col-12'>
+        <div class='text-container'>
+          <label>Made By</label>
+          <div class='text-content'>
+            This wish was made by <strong><%= item.created_by.full_name %></strong>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
       <div class='row'>
         <% if item.low_price.present? %>
           <div class='col-12'>

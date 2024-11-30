@@ -12,6 +12,12 @@
           <% end %>
         </span>
       </div>
+      <div class='claimed-by'>
+        <% if item.created_by_someone_else? %>
+          <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.full_name %></strong>
+        <% end %>
+      </div>
+
       <%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
         <div class="head">
           <div class='truncated-text'>

@@ -104,7 +104,7 @@ class ListItemController < ApplicationController
   def list_item_params
     params.require(:list_item).permit(
       :description, :url, :price, :low_price, 
-      :high_price, :priority, :list_id, 
+      :high_price, :priority, :list_id, :created_by_id,
       tag_ids: [], links_attributes: [:id, :url, :_destroy]
     )
   end

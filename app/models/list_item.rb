@@ -1,6 +1,7 @@
 class ListItem < ApplicationRecord
   include AASM
   belongs_to :list
+  belongs_to :created_by, class_name: 'Account'
   has_and_belongs_to_many :tags
   has_many :links, dependent: :destroy
 
@@ -58,6 +59,14 @@ class ListItem < ApplicationRecord
 
   def bought_by?(account)
     bought? && claimed_by_id == account.id
+  end
+
+  def created_by?(account)
+    created_by_id == account.id
+  end
+
+  def created_by_someone_else? 
+    list.account_id != created_by_id
   end
 
   def claimed_by 

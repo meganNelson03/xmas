@@ -11,6 +11,7 @@ class Group < ApplicationRecord
   belongs_to :administrator, class_name: 'Account'
 
   validates_length_of :name, minimum: 5, maximum: 30, allow_blank: false 
+  validates_associated :lists
   validate :unique_name
 
   def total_wishes

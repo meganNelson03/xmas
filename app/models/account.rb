@@ -5,13 +5,12 @@ class Account < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
-  # has_one :list, dependent: :destroy
-  has_many :lists, dependent: :destroy
 
+  has_many :lists, dependent: :destroy
   has_many :accounts_groups, dependent: :delete_all
   has_many :groups, through: :accounts_groups
   has_many :membership_requests, dependent: :delete_all
-
+  has_many :list_items, foreign_key: :created_by_id, dependent: :nullify
   has_one :group, foreign_key: :administrator_id, dependent: :nullify
 
   default_scope { order(first_name: :asc) } 

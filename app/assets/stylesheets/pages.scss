@@ -63,6 +63,21 @@ body::-webkit-scrollbar {
   font-weight: 200;
 }
 
+input:disabled, select:disabled {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.blue-green {
+  color: #50B498;
+}
+
+.created-by {
+margin-top: 0px;
+font-size: .7rem;
+}
+
+
 // Accordion
 
 .accordion-body {

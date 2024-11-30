@@ -31,6 +31,17 @@ module ApplicationHelper
     }
   end
 
+  def account_list_options 
+    available_accounts = current_account.members_in_selected_group(@selected_group).where.not(id: current_account.id).order(first_name: :asc)
+    lists = List.where(group_id: @selected_group.id, account_id: available_accounts.ids).joins(:account).order('accounts.first_name asc')
+
+    result = lists.map {
+      |l| [l.account.full_name, l.id]
+    }
+
+    result.unshift(['Myself', current_account.current_list.id])
+  end
+
   def account_options
     current_account.members_in_selected_group(@selected_group).order(first_name: :asc).map {
       |a| [a.full_name, a.id]

@@ -18,6 +18,8 @@
     Bought by <strong><%= item.claimed_by.full_name %></strong>
   <% elsif item.is_claimed? && !item.claimed_by?(current_account) %>
     Claimed by <strong><%= item.claimed_by.full_name %></strong>
+  <% elsif item.created_by_someone_else? %>
+    <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.full_name %></strong>
   <% end %>
 </div>
 

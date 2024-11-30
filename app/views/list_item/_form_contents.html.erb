@@ -1,5 +1,10 @@
 <div class='row'>
   <div class='col-12 mb-3'>
+    <%= f.label 'This wish is for:' %>
+    <%= f.select :list_id, options_for_select(account_list_options, action_name == 'new' ? current_account.current_list&.id : list_item.list&.id), { include_blank: false }, { class: 'form-select', disabled: !f.object.new_record? } %>
+  </div>
+
+  <div class='col-12 mb-3 mt-2'>
     <%= f.label :description %>
     <%= f.text_area :description, class: 'form-control', value: list_item.description %> 
     <%= render_errors(list_item, :description) %>
@@ -23,7 +28,7 @@
     <%= render_errors(list_item, :cost) %> 
   </div>
   <div class='col-12 mb-2 mt-2 mb-lg-3 mb-lg-3'>
-    <%= f.label 'How much do you want this?' %>  
+    <%= f.label 'How much do you (or the giftee) want this?' %>  
     <%= f.select :priority, options_for_select(priority_options, action_name == 'new' ? nil : list_item.priority), { include_blank: true }, class: 'form-select' %>
     <%= render_errors(list_item, :priority) %>
   </div>
@@ -31,7 +36,7 @@
     <%= f.label :tags %>
     <%= f.select :tag_ids, options_for_select(Tag.all.order(:name).map { |t| [t.name, t.id] }, list_item.tags.ids), { multiple: 'multiple' }, data: { target: 'select.multiselect'}, class: 'form-select multiselect-field' %>
   </div>
-  <%= f.hidden_field :list_id, value: @current_account.current_list.id %>
+  <%= f.hidden_field :created_by_id, value: @current_account.id %>
   <div class='col-12 d-flex justify-content-between flex-row-reverse'>
     <%= f.submit 'Submit', class: 'btn submit' %>
     <%= link_to :back do %>

@@ -82,7 +82,7 @@ class ListController < ApplicationController
   def status_query(status)
     case status
     when 'all'
-      nil
+      ['open', 'claimed', 'bought']
     when 'open'
       'open'
     when 'claimed'

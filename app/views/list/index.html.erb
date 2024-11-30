@@ -13,7 +13,7 @@
   <% if !current_account.has_a_group? || @list_items.blank? %>
     <%= render partial: 'empty_list', locals: { account: @account } %>
   <% elsif @list_items.present? %>
-    <div class="masonry row">
+    <div class="masonry row" data-controller='masonry'>
       <% @list_items.each_with_index do |item, index| %>
         <% if item.owned_by?(current_account) %>
           <%= render partial: 'list_item/my_item', locals: { item: item } %>

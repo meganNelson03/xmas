@@ -40,7 +40,7 @@
           <div class='text-container'>
             <label>Status</label>
             <div class='text-content'>
-              <% if item.claimed? %>
+              <% if item.is_claimed? %>
                 This wish was claimed by <strong><%= item.claimed_by&.full_name %></strong>
               <% else %>
                 This wish is open to claim.
@@ -85,7 +85,13 @@
           </div>
         <% end %>
 
-        <% if !item.claimed? && !item.owned_by?(current_account) %>
+        <div class='checkbox-container'>
+          <%= render partial: 'list_item/statuses/bought_checkbox', locals: { item: item } %>
+        </div>
+
+        <% if item.owned_by?(current_account) %>
+          <div class='pb-5'></div>
+        <% elsif item.open? %>
           <div class='col-12 mt-4 d-flex justify-content-end pb-3 pt-3'>
             <%= link_to claim_path(item.id), method: :post, class: 'add-to-list btn' do %>
               Claim this Wish

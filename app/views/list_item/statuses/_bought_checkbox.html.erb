@@ -1,0 +1,10 @@
+<% if item.is_claimed? && item.claimed_by?(current_account) %>
+  <div class='col-12 mt-5'>
+    <%= form_with model: item, url: toggle_purchase_status_path(item.id), data: { remote: true }, class: 'checkbox-form', method: :post do |f| %>
+      <%= f.label :bought, class: 'checkbox d-flex flex-row align-items-center text-black' do %>
+        <%= f.check_box :bought, { checked: item.bought?, onclick: "$('.checkbox-form')[0].requestSubmit()" } %>
+        <span class='with-icon me-3'></span>I've bought this item.
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

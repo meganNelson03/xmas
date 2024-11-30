@@ -38,6 +38,10 @@ class ListController < ApplicationController
       list_items = list_items.joins(:list).where(lists: { account_id: params[:recipient_id] })
     end
 
+    if (statuses = status_query(params[:status])).present? 
+      list_items = list_items.joins(:list).where.not(lists: { account_id: current_account.id }).where(status: statuses)
+    end
+
     return list_items
   end
 
@@ -73,5 +77,18 @@ class ListController < ApplicationController
     else 
       @list_items = ListItem.in_group(@selected_group)
     end 
+  end
+
+  def status_query(status)
+    case status
+    when 'all'
+      nil
+    when 'open'
+      'open'
+    when 'claimed'
+      ['claimed', 'bought']
+    when 'bought'
+      ['bought']
+    end
   end
 end

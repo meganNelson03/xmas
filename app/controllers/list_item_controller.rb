@@ -1,5 +1,5 @@
 class ListItemController < ApplicationController
-  before_action :set_list_item, only: [:show, :edit, :update, :destroy, :claim]
+  before_action :set_list_item, only: [:show, :edit, :update, :destroy, :claim, :toggle_purchase_status]
   before_action :verify_in_group, only: [:edit, :update, :destroy]
 
   def show 
@@ -51,6 +51,10 @@ class ListItemController < ApplicationController
   end
 
   def claim
+    if @list_item.bought? || (@list_item.is_claimed? && !@list_item.claimed_by?(current_account))
+      redirect_back fallback_location: lists_path, notice: "You're not allowed to do that." and return
+    end
+
     if @list_item.claimed_by_id.present?
       @list_item.claimed_by_id = nil
     else
@@ -69,6 +73,22 @@ class ListItemController < ApplicationController
     end
   end
 
+  def toggle_purchase_status
+    if @list_item.open? || !@list_item.claimed_by?(current_account)
+      redirect_back fallback_location: lists_path, notice: "You're not allowed to do that." and return
+    end
+
+    if @list_item.bought? 
+      @list_item.claim!
+    elsif @list_item.claimed?
+      @list_item.mark_as_bought!
+    end
+    
+    respond_to do |format|
+      format.js { render 'toggle_checkbox', locals: { list_item: @list_item } }
+    end
+  end
+
   private
 
   def set_list_item
@@ -79,9 +99,6 @@ class ListItemController < ApplicationController
     if !@list_item.list.in_group?(@selected_group)
       raise 'You are not allowed to update this item.'
     end 
-  end
-
-  def update_tags
   end
 
   def list_item_params

@@ -14,7 +14,9 @@
   </span>
 </div>
 <div class='claimed-by'>
-  <% if item.claimed? && !item.claimed_by?(current_account) %>
+  <% if item.bought? && !item.bought_by?(current_account) %>
+    Bought by <strong><%= item.claimed_by.full_name %></strong>
+  <% elsif item.is_claimed? && !item.claimed_by?(current_account) %>
     Claimed by <strong><%= item.claimed_by.full_name %></strong>
   <% end %>
 </div>
@@ -41,11 +43,13 @@
 
 <div class="body">
   <%= render partial: 'list_item/price_range', locals: { item: item } %>
-  <span>
-    <% if item.claimed_by?(current_account) %>
-      <%= render partial: 'list_item/claimed', locals: { item: item } %>
+  <span class='d-flex flex-row'>
+    <% if item.bought_by?(current_account) %>
+      <%= render partial: 'list_item/statuses/bought', locals: { item: item } %>
+    <% elsif item.claimed_by?(current_account) %>
+      <%= render partial: 'list_item/statuses/claimed', locals: { item: item, disabled: false } %>
     <% elsif !item.claimed? %>
-      <%= render partial: 'list_item/unclaimed', locals: { item: item } %>
+      <%= render partial: 'list_item/statuses/unclaimed', locals: { item: item } %>
     <% end %>
   </span>
 </div>

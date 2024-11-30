@@ -28,7 +28,7 @@
     </div>
     <div class='col-12 col-md-6 col-lg-3 mt-3 mt-lg-0'>
       <%= f.label 'Sort Order' %>
-      <%= f.select :sort_by, options_for_select(sort_options, params.dig(:filters, :sort_by)), { prompt: 'Sort By...'}, { class: 'form-select' } %>
+      <%= f.select :sort_by, options_for_select(sort_options, params.dig(:filters, :sort_by) || 'priority_desc'), { prompt: 'Sort By...'}, { class: 'form-select' } %>
     </div>
     <div class="col-12 col-md-6 col-lg-3 mt-3 mt-lg-0">
       <%= f.label 'Status' %>

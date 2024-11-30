@@ -1,9 +1,12 @@
 class ListItem < ApplicationRecord
+  include AASM
   belongs_to :list
   has_and_belongs_to_many :tags
   has_many :links, dependent: :destroy
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
+
+  after_update :update_status
 
   enum :priority, [:meh, :wanted, :loved, :adored, :needed]
 
@@ -21,16 +24,40 @@ class ListItem < ApplicationRecord
 
   delegate :account, to: :list
 
+  aasm column: :status do 
+    state :open, initial: true 
+    state :claimed
+    state :bought
+
+    event :claim do 
+      transitions from: :open, to: :claimed
+      transitions from: :bought, to: :claimed
+    end
+
+    event :mark_as_bought do 
+      transitions from: :claimed, to: :bought
+    end
+
+    event :reopen do 
+      transitions from: :claimed, to: :open
+      transitions from: :bought, to: :open
+    end
+  end
+
   def owned_by?(account)
     list.account_id == account.id
   end
 
-  def claimed?
+  def is_claimed?
     claimed_by_id.present?
   end
 
   def claimed_by?(account)
     claimed_by_id.present? && claimed_by_id == account.id
+  end
+
+  def bought_by?(account)
+    bought? && claimed_by_id == account.id
   end
 
   def claimed_by 
@@ -50,6 +77,16 @@ class ListItem < ApplicationRecord
   end
 
   private
+
+  def update_status 
+    return if !saved_change_to_attribute?(:claimed_by_id)
+
+    if self.open? && claimed_by_id.present? 
+      self.claim!
+    elsif self.claimed? && claimed_by_id.blank?
+      self.reopen!
+    end
+  end
 
   def valid_price_range
     return if low_price.blank? && high_price.blank?

@@ -57,8 +57,9 @@ module ApplicationHelper
   def claim_options
     [
       ['All', 'all'],
-      ['Unclaimed', 'unclaimed'],
-      ['Claimed', 'claimed']
+      ['Unclaimed', 'open'],
+      ['Claimed', 'claimed'],
+      ['Bought', 'bought']
     ]
   end
 

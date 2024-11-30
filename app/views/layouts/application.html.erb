@@ -40,7 +40,7 @@
       <% if current_account.present? %>
         <%= render 'layouts/navigation/nav' %>
       <% end %>
-      <div class='content'>
+      <div class='content' data-controller='tooltip select'>
         <%= yield %>
       </div>
 

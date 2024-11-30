@@ -1,0 +1,2 @@
+$(".checkbox-container").html("<%= escape_javascript(render partial: 'list_item/statuses/bought_checkbox', locals: { item: list_item }) %>");
+$("#item-<%= escape_javascript(list_item.id) %>").html("<%= escape_javascript(render partial: 'list_item/item_inner', locals: { item: list_item }) %>");

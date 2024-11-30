@@ -1,18 +1,18 @@
 <% if item.wanted? %>
-  <span data-toggle='tooltip' placement='top' title='Wanted'>
+  <span data-toggle='tooltip' placement='top' title='Wanted' data-tooltip-target='tooltipElement'>
     <i class="fa-solid fa-fire icon-med-hot-item" ></i>
   </span>
 <% elsif item.loved? %>
-  <span data-toggle='tooltip' placement='top' title='Really Wanted'>
+  <span data-toggle='tooltip' placement='top' title='Really Wanted' data-tooltip-target='tooltipElement'>
     <i class="fa-solid fa-fire icon-hot-item" ></i>
   </span>
 <% elsif item.adored? %>
-  <span data-toggle='tooltip' placement='top' title='Really Really Wanted'>
+  <span data-toggle='tooltip' placement='top' title='Really Really Wanted' data-tooltip-target='tooltipElement'>
     <i class="fa-solid fa-fire icon-med-hot-item" ></i>
     <i class="fa-solid fa-fire icon-med-hot-item" ></i>
   </span>
 <% elsif item.needed? %>
-  <span data-toggle='tooltip' placement='top' title='Most Wanted'>
+  <span data-toggle='tooltip' placement='top' title='Most Wanted' data-tooltip-target='tooltipElement'>
     <i class="fa-solid fa-fire icon-hot-item" ></i>
     <i class="fa-solid fa-fire icon-hot-item" ></i>
     <i class="fa-solid fa-fire icon-hot-item" ></i>

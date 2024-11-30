@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_26_024026) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_30_041031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,6 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_024026) do
     t.integer "priority", default: 0
     t.float "low_price"
     t.float "high_price"
+    t.string "status"
     t.index ["claimed_by_id"], name: "index_list_items_on_claimed_by_id"
     t.index ["list_id"], name: "index_list_items_on_list_id"
   end

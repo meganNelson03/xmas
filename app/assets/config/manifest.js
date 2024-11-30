@@ -10,8 +10,11 @@
 //= link_directory ../stylesheets .scss
 //= link controllers/application.js
 //= link controllers/index.js
+//= link controllers/masonry_controller.js
 //= link controllers/claim_controller.js
 //= link controllers/scroll_controller.js
 //= link controllers/message_controller.js
 //= link controllers/carousel_controller.js
 //= link controllers/confirmation_controller.js
+//= link controllers/tooltip_controller.js
+//= link controllers/select_controller.js

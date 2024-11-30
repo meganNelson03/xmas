@@ -18,7 +18,7 @@
 
 <% if @list_items.present? %>
   <section class='list'>
-    <div class="masonry row">
+    <div class="masonry row" data-controller='masonry'>
     <% @list_items.each_with_index do |item, index| %>
       <%= render partial: 'list_item/item', locals: { item: item, index: index } %>
     <% end %>

@@ -24,19 +24,19 @@
             <p class='white-space-preline'><%= item.description.truncate(200, omission: '...') %></p>
           </div>
         </div>
-        <div class="body">
-          <%= render partial: 'list_item/price_range', locals: { item: item } %>
-          <span class='d-flex flex-row'>
-            <% if item.bought_by?(current_account) %>
-              <%= render partial: 'list_item/statuses/bought', locals: { item: item } %>
-            <% elsif item.claimed_by?(current_account) %>
-              <%= render partial: 'list_item/statuses/claimed', locals: { item: item, disabled: false } %>
-            <% elsif !item.is_claimed? %>
-              <%= render partial: 'list_item/statuses/unclaimed', locals: { item: item } %>
-            <% end %>
-          </span>
-        </div>
       <% end %>
+      <div class="body">
+        <%= render partial: 'list_item/price_range', locals: { item: item } %>
+        <span class='d-flex flex-row'>
+          <% if item.bought_by?(current_account) %>
+            <%= render partial: 'list_item/statuses/bought', locals: { item: item } %>
+          <% elsif item.claimed_by?(current_account) %>
+            <%= render partial: 'list_item/statuses/claimed', locals: { item: item, disabled: false } %>
+          <% elsif !item.is_claimed? %>
+            <%= render partial: 'list_item/statuses/unclaimed', locals: { item: item } %>
+          <% end %>
+        </span>
+      </div>
   
       <%= form_for :list_item, url: destroy_list_item_path(item.id), method: :delete, class: 'delete-item-form' do |f| %>
         <%= f.button :submit, class: 'action delete-item' do %>

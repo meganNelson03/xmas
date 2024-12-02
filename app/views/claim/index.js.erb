@@ -1,0 +1,3 @@
+$("#claim-requests-container").html("<%= escape_javascript(render partial: 'claim/index', locals: { requests: requests }) %>");
+
+$('#claim-requests-container .modal').modal('show');

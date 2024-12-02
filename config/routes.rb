@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   post 'list_item/create', to: 'list_item#create', as: 'create_list_item'
   get 'list_item/:id/edit', to: 'list_item#edit', as: 'edit_list_item'
 
+  get 'claims/requests', to: 'claim#index', as: 'claim_requests'
+  post 'list_item/:id/claims/create', to: 'claim#create', as: 'create_claim'
+  post 'claims/:id/deny', to: 'claim#deny', as: 'deny_claim_request'
+  post 'claims/:id/accept', to: 'claim#accept', as: 'accept_claim_request'
+
   get '/list_item/:id', to: 'list_item#show', as: 'show_list_item'
   post "list_item/:id/claim", to: "list_item#claim", as: "claim"
   post "list_item/:id/buy", to: "list_item#toggle_purchase_status", as: "toggle_purchase_status"

@@ -18,3 +18,4 @@
 //= link controllers/confirmation_controller.js
 //= link controllers/tooltip_controller.js
 //= link controllers/select_controller.js
+//= link controllers/modal_carousel_controller.js

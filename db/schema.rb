@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_30_202216) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_01_181519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -38,6 +38,18 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_30_202216) do
   create_table "accounts_groups", id: false, force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "group_id", null: false
+  end
+
+  create_table "claims", force: :cascade do |t|
+    t.bigint "requester_id"
+    t.bigint "requestee_id"
+    t.bigint "list_item_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_item_id"], name: "index_claims_on_list_item_id"
+    t.index ["requestee_id"], name: "index_claims_on_requestee_id"
+    t.index ["requester_id"], name: "index_claims_on_requester_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -251,6 +263,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_30_202216) do
   end
 
   add_foreign_key "accounts", "groups", column: "current_group_id"
+  add_foreign_key "claims", "accounts", column: "requestee_id"
+  add_foreign_key "claims", "accounts", column: "requester_id"
+  add_foreign_key "claims", "list_items"
   add_foreign_key "groups", "accounts", column: "administrator_id"
   add_foreign_key "links", "list_items"
   add_foreign_key "list_items", "accounts", column: "claimed_by_id"

@@ -33,9 +33,12 @@
 
   <body class='<%= controller_name %>-controller'>
     <div class='container'>
-      <%= render partial: 'layouts/message' %>
+      <div class='message-container'>
+        <%= render partial: 'layouts/message' %>
+      </div>
       <div id="list-item-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"></div>
       <div id="view-modal" class="modal fade" role="dialog"></div>
+      <div id="claim-requests-container"></div>
 
       <% if current_account.present? %>
         <%= render 'layouts/navigation/nav' %>

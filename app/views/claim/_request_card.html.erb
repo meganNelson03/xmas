@@ -1,0 +1,36 @@
+<% if current_account.requestee_claims.pending.present? %>
+<div class="item-box claim-request-box brick col-12 col-md-6 col-lg-4 col-xl-3">
+  <div class='item claim-request'>
+    <i class="fa-solid fa-circle-exclamation icon-attention blue-green"></i>
+    <%= link_to claim_requests_path, class: 'no-link-style', data: { remote: true, turbo: false } do %> 
+      <div class="head px-4 py-5">
+        <div class='truncated-text'>
+          <p class='mb-0 text-center text-larger'>
+            You have <strong>requests</strong> pending your review
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<style>
+
+.claim-request {
+  border-bottom: 10px solid #ededed;
+}
+
+.text-larger {
+  line-height: 2;
+    font-size: 1.2rem;
+}
+
+.icon-attention {
+  position: absolute;
+    right: -7px;
+    top: -7px;
+    font-size: 1.45rem;
+}
+
+</style>

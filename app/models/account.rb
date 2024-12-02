@@ -13,6 +13,9 @@ class Account < ApplicationRecord
   has_many :list_items, foreign_key: :created_by_id, dependent: :nullify
   has_one :group, foreign_key: :administrator_id, dependent: :nullify
 
+  has_many :claims, foreign_key: :requester_id, dependent: :destroy
+  has_many :claims, foreign_key: :requestee_id, dependent: :destroy
+
   default_scope { order(first_name: :asc) } 
 
   after_create :create_list 
@@ -62,6 +65,14 @@ class Account < ApplicationRecord
 
   def requested?(group)
     membership_requests.where(group_id: group.id).present?
+  end
+
+  def requestee_claims 
+    claims.where(requestee: self)
+  end
+
+  def requester_claims
+    claims.where(requester: self)
   end
 
   def full_name

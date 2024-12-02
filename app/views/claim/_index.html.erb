@@ -1,0 +1,117 @@
+<div class='modal fade d-block modal-carousel' data-modal-carousel-modal-display-class='modal-display' data-controller='modal-carousel' data-modal-carousel-target='modal'>
+  <div class='carousel' data-modal-carousel-target='slider'>
+    <% requests.each_with_index do |claim, index| %>
+      <div class='slide <%= index == requests.count - 1 ? 'last-slide' : '' %>'>
+        <div class="modal-dialog modal-dialog-centered modal-lg view-modal-dialog">
+          <div class="modal-content">
+
+            <div class='dismiss-modal'>
+              <i class="fa-solid fa-circle-xmark icon-dismiss" data-bs-dismiss="modal" data-modal-carousel-target='dismiss-modal'></i>
+            </div>
+
+            <div class="modal-header">
+              <span class='text-center'>
+                <h3>Request</h3>
+                <h6 class='font-weight-light mt-2'><%= claim.requester.first_name %> wants to go in on this wish with you.</h6>
+              </span>
+            </div>
+
+            <div class="modal-body">
+              <div class='row'>
+              
+                <div class='col-12'>
+                  <div class='text-container'>
+                    <label>Wisher</label>
+                    <div class='text-content'>
+                      <span><%= claim.list_item.account.full_name %></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class='col-12'>
+                  <div class='text-container'>
+                    <label>Price</label>
+                    <div class='text-content'>
+                      <span><%= format_price_range(claim.list_item.low_price, claim.list_item.high_price) %></span>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class='col-12'>
+                  <div class='text-container'>
+                    <label>Description</label>
+                    <div class='text-content'>
+                      <span class='white-space-preline'><%= claim.list_item.description.truncate(200, omission: '...') %></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class='col-12 d-flex justify-content-between mt-5'>
+                  <%= link_to deny_claim_request_path(claim.id, is_last_claim: index == requests.count - 1), class: 'btn btn-default cancel px-4 d-flex align-items-center', data: { remote: true, 'modal-carousel-target': 'nextButton', action: 'click->modal-carousel#deny' }, method: :post do %>
+                    Deny
+                  <% end %>
+                  <%= link_to accept_claim_request_path(id: claim.id, is_last_claim: index == requests.count - 1), class: 'btn btn-submit pill px-4', data: { remote: true, 'modal-carousel-target': 'nextButton', action: 'click->modal-carousel#accept' }, method: :post do %>
+                    Accept
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<style>
+
+.slick-track,
+.slick-list {
+-webkit-perspective: 2000;
+-webkit-backface-visibility: hidden;
+}
+
+.message-container {
+
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0; 
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.modal-carousel.show .modal-dialog {
+    transform: none;
+}
+
+.modal-spacer {
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+    height: 800px;
+}
+
+.modal-caoursel .slick-active {
+  height: 100%;
+}
+
+.modal-carousel.modal-display {
+  visibility: visible;
+}
+
+.modal-carousel {
+  visibility: hidden;
+}
+
+.carousel, .slick-list, .slick-track, .slick-slide {
+  height: 100%;
+}
+
+</style>

@@ -14,6 +14,9 @@
     <%= render partial: 'empty_list', locals: { account: @account } %>
   <% elsif @list_items.present? %>
     <div class="masonry row" data-controller='masonry'>
+      <% if params[:page].blank? || params[:page] == 0 %>
+        <%= render partial: 'claim/request_card' %>
+      <% end %>
       <% @list_items.each_with_index do |item, index| %>
         <% if item.created_by?(current_account) && !item.owned_by?(current_account) %>
           <%= render partial: 'list_item/editable_item', locals: { item: item } %>
@@ -33,3 +36,8 @@
       </div>
     <% end %>
 </section>
+
+<style>
+
+
+</style>

@@ -5,6 +5,8 @@ class ListItem < ApplicationRecord
   has_and_belongs_to_many :tags
   has_many :links, dependent: :destroy
 
+  has_many :claims, dependent: :destroy
+
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
   after_update :update_status

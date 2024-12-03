@@ -1,1 +1,7 @@
-$('.message-container').html("<%= escape_javascript(render partial: 'layouts/message', locals: { flash: flash }) %>");
+$('.message-container.d-none').html("<%= escape_javascript(render partial: 'layouts/message', locals: { flash: flash }) %>");
+
+if ("<%= escape_javascript(last) %>" == "true") {
+  var msnry = Masonry.data('.masonry')
+  msnry.remove($('.claim-request-box'))
+  msnry.layout()
+}

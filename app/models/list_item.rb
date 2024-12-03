@@ -9,6 +9,7 @@ class ListItem < ApplicationRecord
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
 
+  after_update :update_primary_claimant
   after_update :update_status
 
   enum :priority, [:meh, :wanted, :loved, :adored, :needed]
@@ -24,7 +25,6 @@ class ListItem < ApplicationRecord
   scope :claimed, -> { where.not(claimed_by_id: nil) }
   scope :owned_by, -> (account) { where(account_id: account.id) }
   scope :in_group, -> (group) { joins(list: :group).where(lists: { groups: { id: group.id }}) }
-
   delegate :account, to: :list
 
   aasm column: :status do 
@@ -47,6 +47,14 @@ class ListItem < ApplicationRecord
     end
   end
 
+  def self.claimed_by(account)
+    records = self.left_joins(:claims)
+    
+    records
+      .where(claimed_by_id: account.id)
+      .or(records.where(claims: { requester_id: account.id, status: 'accepted' }))
+  end
+
   def owned_by?(account)
     list.account_id == account.id
   end
@@ -55,8 +63,41 @@ class ListItem < ApplicationRecord
     claimed_by_id.present?
   end
 
+  def is_multi_claimed? 
+    claims.accepted.present?
+  end
+
+  def claimers
+    Account.where(id: claims.accepted.pluck(:requester_id, :requestee_id)).or(Account.where(id: claimed_by_id))
+  end
+
+  def accepted_claimers 
+    Account.where(id: claims.accepted.pluck(:requester_id))
+  end
+
+  def pending_claimers
+    Account.where(id: claims.pending.pluck(:requester_id))
+  end
+
+  def denied_claimers 
+    Account.where(id: claims.denied.pluck(:requester_id))
+  end
+
+  def claim_for(account)
+    claims.find_by(requester_id: account.id)
+  end
+
   def claimed_by?(account)
     claimed_by_id.present? && claimed_by_id == account.id
+  end
+
+  def has_a_claim?(account)
+    claimed_by_id == account.id ||
+    claim_for(account)&.accepted?
+  end
+
+  def can_request_to_claim?(account)
+    claimed_by_id.present? && claimed_by_id != account.id && claim_for(account).blank?
   end
 
   def bought_by?(account)
@@ -89,7 +130,27 @@ class ListItem < ApplicationRecord
 
   private
 
-  def update_status 
+  def update_primary_claimant
+    return if !saved_change_to_attribute?(:claimed_by_id)
+    return if claimed_by_id.present?
+
+    if claims.accepted.present? 
+      new_claimed_by_id = claims.accepted.first.requester_id      
+    elsif claims.pending.present? 
+      new_claimed_by_id = claims.pending.first.requester_id
+    end 
+
+    if new_claimed_by_id.present? 
+      self.claimed_by_id = new_claimed_by_id
+      self.save(validate: false)
+
+      claims.where(requester_id: new_claimed_by_id).destroy_all
+    else 
+      claims.destroy_all
+    end
+  end
+
+  def update_status
     return if !saved_change_to_attribute?(:claimed_by_id)
 
     if self.open? && claimed_by_id.present? 

@@ -52,7 +52,7 @@ class ListItemController < ApplicationController
 
   def claim
     if @list_item.bought? || (@list_item.is_claimed? && !@list_item.claimed_by?(current_account))
-      redirect_back fallback_location: lists_path, notice: "You're not allowed to do that." and return
+      render_error("You're not allowed to do that.") and return
     end
 
     if @list_item.claimed_by_id.present?
@@ -74,8 +74,8 @@ class ListItemController < ApplicationController
   end
 
   def toggle_purchase_status
-    if @list_item.open? || !@list_item.claimed_by?(current_account)
-      redirect_back fallback_location: lists_path, notice: "You're not allowed to do that." and return
+    if @list_item.open? || !@list_item.has_a_claim?(current_account)
+      render_error("You're not allowed to do that.") and return
     end
 
     if @list_item.bought? 

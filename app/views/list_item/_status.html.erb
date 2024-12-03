@@ -1,0 +1,18 @@
+<div class='claimed-by'> 
+  <% if item.owned_by?(current_account) %>
+  <% elsif item.is_multi_claimed? && item.claimers.include?(current_account) %>
+    Shared with <%= pluralize(item.accepted_claimers.count, 'person') %> 
+  <% elsif item.is_multi_claimed? %>
+    <% if item.bought? %>
+      Bought by the gifters
+    <% else %>
+      Claimed by <strong><%= item.claimers.count %></strong> people
+    <% end %>
+  <% elsif item.bought? && !item.bought_by?(current_account) %>
+    Bought by <strong><%= item.claimed_by.full_name %></strong>
+  <% elsif item.is_claimed? && !item.claimed_by?(current_account) %>
+    Claimed by <strong><%= item.claimed_by.full_name %></strong>
+  <% elsif item.created_by_someone_else? %>
+    <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.full_name %></strong>
+  <% end %>
+</div>

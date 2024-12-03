@@ -1,0 +1,9 @@
+<% if claim.pending? %>
+  <%= link_to destroy_claim_path(claim.id), method: :delete, class: 'add-to-list btn' do %>
+    Rescind Share Request
+  <% end %>
+<% elsif claim.accepted? %>
+  <%= link_to destroy_claim_path(claim.id), method: :delete, class: 'add-to-list btn' do %>
+    Rescind Claim
+  <% end %>
+<% end %>

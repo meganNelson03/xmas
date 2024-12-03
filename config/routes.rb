@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   post 'list_item/:id/claims/create', to: 'claim#create', as: 'create_claim'
   post 'claims/:id/deny', to: 'claim#deny', as: 'deny_claim_request'
   post 'claims/:id/accept', to: 'claim#accept', as: 'accept_claim_request'
+  delete 'claims/:id', to: 'claim#destroy', as: 'destroy_claim'
+
+  post "claims/:id/toggle", to: 'claim#toggle', as: 'toggle_claim'
 
   get '/list_item/:id', to: 'list_item#show', as: 'show_list_item'
   post "list_item/:id/claim", to: "list_item#claim", as: "claim"

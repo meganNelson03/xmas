@@ -1,0 +1,15 @@
+<span class='d-flex flex-row'>
+  <% if item.bought? && item.claimers.include?(current_account) %>
+    <%= render partial: 'list_item/statuses/bought', locals: { item: item } %>
+  <% elsif item.claimed_by?(current_account) %>
+    <%= render partial: 'list_item/statuses/claimed', locals: { item: item, disabled: false } %>
+  <% elsif item.claim_for(current_account)&.pending? %>
+    <%= render partial: 'list_item/statuses/pending' %>
+  <% elsif item.claim_for(current_account)&.accepted? %>
+    <%= render partial: 'claim/statuses/claimed', locals: { item: item, claim: item.claim_for(current_account) } %>
+  <% elsif item.claim_for(current_account)&.revoked? %>
+    <%= render partial: 'claim/statuses/unclaimed', locals: { item: item, claim: item.claim_for(current_account) } %>
+  <% elsif !item.is_claimed? %>
+    <%= render partial: 'list_item/statuses/unclaimed', locals: { item: item } %>
+  <% end %>
+</span>

@@ -1,0 +1,2 @@
+$("#item-<%= escape_javascript(list_item.id) %>").html("<%= escape_javascript(render partial: 'list_item/item_inner', locals: { item: list_item }) %>");
+$(".mobile-claim-message-container").html("<%= escape_javascript(render partial: 'list_item/mobile/claim_message', locals: { claimed: claim.accepted? }) %>");

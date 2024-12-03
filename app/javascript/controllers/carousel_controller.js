@@ -73,7 +73,6 @@ export default class extends Controller {
   }
 
   isSmallScreen() {
-    console.log($(window).width())
     return $(window).width() < 989
   }
 

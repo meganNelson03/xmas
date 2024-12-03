@@ -1,0 +1,3 @@
+$('.message-container').html("<%= escape_javascript(render partial: 'layouts/message', locals: { flash: flash }) %>");
+$('.ask-to-share-container').html("<%= escape_javascript(render partial: 'claim/request_share', locals: { claim: claim }) %>");
+$("#item-<%= escape_javascript(claim.list_item_id) %>").html("<%= escape_javascript(render partial: 'list_item/item_inner', locals: { item: claim.list_item, claim: claim }) %>");

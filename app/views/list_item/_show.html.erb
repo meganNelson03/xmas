@@ -14,7 +14,6 @@
 
     <div class="modal-body">
       <div class='pills d-flex justify-content-between'>
-        <%= render partial: 'priority_pill', locals: { item: item } %>
         <% if item.url.present? %>
           <%= link_to item.url, target: '_blank', class: 'no-link-style' do %>
             <div class='pill'>
@@ -35,6 +34,21 @@
       </div>
       <% end %>
 
+      <% if !item.owned_by?(current_account) %>
+        <div class='col-12'>
+          <div class='text-container'>
+            <label>Status</label>
+            <div class='text-content'>
+              <% if item.is_claimed? %>
+                This wish was claimed by <%= item.claimers.map(&:first_name).to_sentence %>
+              <% else %>
+                This wish is open to claim.
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
       <div class='row'>
         <% if item.low_price.present? %>
           <div class='col-12'>
@@ -45,20 +59,6 @@
               </div>
             </div>
           </div>
-        <% end %>
-        <% if !item.owned_by?(current_account) %>
-        <div class='col-12'>
-          <div class='text-container'>
-            <label>Status</label>
-            <div class='text-content'>
-              <% if item.is_claimed? %>
-                This wish was claimed by <strong><%= item.claimed_by&.full_name %></strong>
-              <% else %>
-                This wish is open to claim.
-              <% end %>
-            </div>
-          </div>
-        </div>
         <% end %>
         <div class='col-12'>
           <div class='text-container'>
@@ -100,23 +100,7 @@
           <%= render partial: 'list_item/statuses/bought_checkbox', locals: { item: item } %>
         </div>
 
-        <% if item.owned_by?(current_account) %>
-          <div class='pb-5'></div>
-        <% elsif item.is_claimed? %>
-          <div class='col-12 mt-4 d-flex justify-content-end pb-3 pt-3'>
-            <%= link_to create_claim_path(item.id), method: :post, class: 'add-to-list btn' do %>
-              Ask to Share Claim
-            <% end %>
-          </div>
-        <% elsif item.open? %>
-          <div class='col-12 mt-4 d-flex justify-content-end pb-3 pt-3'>
-            <%= link_to claim_path(item.id), method: :post, class: 'add-to-list btn' do %>
-              Claim this Wish
-            <% end %>
-          </div>
-        <% else %>
-          <div class='pb-5'></div>
-        <% end %>
+        <%= render partial: 'list_item/actions/view', locals: { item: item } %>
       </div>
     </div>
   </div>

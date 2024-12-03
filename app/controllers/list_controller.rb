@@ -8,17 +8,20 @@ class ListController < ApplicationController
     @account = Account.find_by(id: params.dig(:filters, :account))
 
     @total = @list_items.count
-    @totaled_items = @list_items.joins(:list).where.not(lists: { account_id: current_account.id })
+    @totaled_items = @list_items.joins(:list).left_joins(:claims).where.not(lists: { account_id: current_account.id })
 
     @unclaimed = @totaled_items.where(claimed_by_id: nil).count
-    @claimed_by_me = @totaled_items.where(claimed_by_id: current_account.id).count
+
+    @claimed_by_me = @totaled_items.claimed_by(current_account).count
+
     @claimed_by_others = @totaled_items.where.not(claimed_by_id: [nil, current_account.id]).count
 
     @list_items = @list_items.distinct('list_items.id').page(params[:page]).per(10)
   end
 
   def my_claims
-    @list_items = @list_items.claimed.where(claimed_by_id: current_account.id)
+    @list_items = @list_items.claimed_by(current_account)
+
     @list_items = filter(@list_items, params[:filters])
     @list_items = sort(@list_items, params[:filters])
 

@@ -13,15 +13,8 @@
     <% end %>
   </span>
 </div>
-<div class='claimed-by'>
-  <% if item.bought? && !item.bought_by?(current_account) %>
-    Bought by <strong><%= item.claimed_by.full_name %></strong>
-  <% elsif item.is_claimed? && !item.claimed_by?(current_account) %>
-    Claimed by <strong><%= item.claimed_by.full_name %></strong>
-  <% elsif item.created_by_someone_else? %>
-    <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.full_name %></strong>
-  <% end %>
-</div>
+
+<%= render partial: 'list_item/status', locals: { item: item } %>
 
 <div class='d-block d-md-none mobile-claim-message-container'>
 </div>
@@ -45,15 +38,7 @@
 
 <div class="body">
   <%= render partial: 'list_item/price_range', locals: { item: item } %>
-  <span class='d-flex flex-row'>
-    <% if item.bought_by?(current_account) %>
-      <%= render partial: 'list_item/statuses/bought', locals: { item: item } %>
-    <% elsif item.claimed_by?(current_account) %>
-      <%= render partial: 'list_item/statuses/claimed', locals: { item: item, disabled: false } %>
-    <% elsif !item.is_claimed? %>
-      <%= render partial: 'list_item/statuses/unclaimed', locals: { item: item } %>
-    <% end %>
-  </span>
+  <%= render partial: 'list_item/actions/card', locals: { item: item } %>
 </div>
 
 <div class='blur'></div>

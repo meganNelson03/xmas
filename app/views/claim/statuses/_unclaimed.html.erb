@@ -1,0 +1,9 @@
+<%= button_to toggle_claim_path(claim.id), data: { action: 'mouseover->claim#blur mouseout->claim#unblur' }, class: "claim unclaimed list-item-#{item.id}", remote: true do %>
+  <span class="fa-stack fa-1x claim-icon">
+    <i class="fa-solid fa-square fa-stack-2x icon-bg"></i>
+    <i class="fa-solid fa-square-check fa-stack-1x fa-inverse icon-fg"></i>
+  </span>
+  <div class='d-none d-md-block'>
+    <span class='claim-banner'>I'm getting this too <i class="fa-regular fa-face-grin-hearts"></i></span>
+  </div>
+<% end %>

@@ -22,10 +22,6 @@ export default class extends Controller {
   }
 
   insertConfirmModal(message, element) {
-    console.log("...")
-    console.log(element)
-    console.log($(element).data('group-name'))
-
     var content = `
     <div id="confirm-modal">
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">

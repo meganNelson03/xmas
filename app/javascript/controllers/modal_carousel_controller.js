@@ -5,18 +5,12 @@ export default class extends Controller {
   static classes = [ 'modalDisplay' ]
 
   connect() {
-    console.log("connected")
-
     this.modalTarget.addEventListener('hide.bs.modal', function(event) {
       $('.modal-carousel').removeClass('d-block')
     })
 
-    if (this.isMobile() || this.isSmallScreen()) {
-      this.initMobileSlider()
-    } else {
-      this.initModal()
-      this.initSlider()
-    }
+    this.initModal()
+    this.initSlider()
   }
 
   accept(event) {
@@ -45,24 +39,19 @@ export default class extends Controller {
 
   options () {
     return {
-      infinite: true,
+      infinite: false,
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
-      draggable: false
+      draggable: false,
+      swipe: false,
+      swipeToSlide: false,
+      touchMove: false
     };
   }
 
   unblur() {
     this.modalTarget.classList.add(this.modalDisplayClass)
-  }
-
-  initMobileSlider() {
-    var groupId = $(this.currentGroupTarget).data('current-group-id')
-  
-    var index = $(this.sliderTarget).find(`[data-slide-index="${groupId}"`).data('slick-index')
-
-    $(this.sliderTarget).slick(this.options()).slick('slickGoTo', index);
   }
 
   initModal() {
@@ -72,13 +61,5 @@ export default class extends Controller {
   initSlider() {
     $(this.sliderTarget).slick(this.options())
     this.unblur()
-  }
-
-  isSmallScreen() {
-    return $(window).width() < 989
-  }
-
-  isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 }

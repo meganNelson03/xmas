@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
   before_action :set_current_account
   before_action :set_group_context
 
+  def render_error(message, path = nil)
+    respond_to do |format|
+      format.html { redirect_back fallback_location: lists_path, notice: message }
+      format.js { render 'layouts/error', locals: { message: message }}
+    end
+  end
+
   def set_current_account
     @current_account = current_account
   end

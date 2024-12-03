@@ -1,7 +1,7 @@
 <div class='claimed-by'> 
   <% if item.owned_by?(current_account) %>
   <% elsif item.is_multi_claimed? && item.claimers.include?(current_account) %>
-    Shared with <%= pluralize(item.accepted_claimers.count, 'person') %> 
+    Shared with <%= pluralize(item.accepted_claimers.count, 'other') %> 
   <% elsif item.is_multi_claimed? %>
     <% if item.bought? %>
       Bought by the gifters

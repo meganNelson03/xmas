@@ -68,7 +68,7 @@ class ListItem < ApplicationRecord
   end
 
   def claimers
-    Account.where(id: claims.accepted.pluck(:requester_id, :requestee_id)).or(Account.where(id: claimed_by_id))
+    Account.where(id: claims.accepted.pluck(:requester_id)).or(Account.where(id: claimed_by_id))
   end
 
   def accepted_claimers 

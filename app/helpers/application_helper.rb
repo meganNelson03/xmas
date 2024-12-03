@@ -56,19 +56,23 @@ module ApplicationHelper
 
   def sort_options
     [
+      ['Most Recently Added', 'created_at_desc'],
+      ['Most Recently Updated', 'updated_at_desc'],
       ['Price (Low to High)', 'price_asc'],
       ['Price (High to Low)', 'price_desc'],
       ['Priority (High to Low)', 'priority_desc'],
-      ['Priority (Low to High)', 'priority_asc']
+      ['Priority (Low to High)', 'priority_asc'],
     ]
   end
 
   def claim_options
     [
       ['All', 'all'],
-      ['Unclaimed', 'open'],
+      ['Open', 'open'],
       ['Claimed', 'claimed'],
-      ['Bought', 'bought']
+      ['Claimed by Several', 'shared'],
+      ['Bought', 'bought'],
+      ['Secret', 'secret']
     ]
   end
 

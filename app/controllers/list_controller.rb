@@ -41,8 +41,17 @@ class ListController < ApplicationController
       list_items = list_items.joins(:list).where(lists: { account_id: params[:recipient_id] })
     end
 
-    if params[:status] != 'all' && (statuses = status_query(params[:status])).present?
+    if params[:status].in?(['bought', 'claimed', 'open'])
+      statuses = status_query(params[:status])
       list_items = list_items.joins(:list).where.not(lists: { account_id: current_account.id }).where(status: statuses)
+    end
+
+    if params[:status] == 'secret'
+      list_items = list_items.where(secret: true)
+    end
+
+    if params[:status] == 'shared'
+      list_items = list_items.joins(:list, :claims).where.not(lists: { account_id: current_account.id }).where(claims: { status: 'accepted' })
     end
 
     return list_items
@@ -53,6 +62,8 @@ class ListController < ApplicationController
     return list_items.order(priority: :desc) if (sort = params.dig(:sort_by)).blank?
 
     case sort
+    when 'created_at_desc'
+      list_items = list_items.reorder(created_at: :desc)
     when 'price_asc'
       list_items = list_items.reorder('low_price asc NULLS first')
     when 'price_desc'
@@ -61,6 +72,8 @@ class ListController < ApplicationController
       list_items = list_items.reorder(priority: :desc)
     when 'priority_asc'
       list_items = list_items.reorder(priority: :asc)
+    when 'updated_at_desc'
+      list_items = list_items.reorder(updated_at: :desc)
     else 
       list_items
     end
@@ -82,8 +95,6 @@ class ListController < ApplicationController
 
   def status_query(status)
     case status
-    when 'all'
-      [nil, 'open', 'claimed', 'bought']
     when 'open'
       [nil, 'open']
     when 'claimed'

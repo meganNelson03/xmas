@@ -14,7 +14,7 @@ export default class extends Controller {
     $('.carousel').on('afterChange', function(event, slick, currentSlide, nextSlide){
       var elt = slick.$slides.get(currentSlide);
   
-      var href = console.log($(elt).find('a').attr('href'))
+      var href = $(elt).find('a').attr('href')
       var groupId = $(elt).find('a').data('group-id')
   
       $.ajax({

@@ -1,18 +1,25 @@
-<div class='claimed-by'> 
-  <% if item.owned_by?(current_account) %>
-  <% elsif item.is_multi_claimed? && item.claimers.include?(current_account) %>
-    Shared with <%= pluralize(item.accepted_claimers.count, 'other') %> 
-  <% elsif item.is_multi_claimed? %>
-    <% if item.bought? %>
-      Bought by the gifters
-    <% else %>
-      Claimed by <strong><%= item.claimers.count %></strong> people
+<% if !item.owned_by?(current_account) %>
+  <div class='claimed-by'>
+    <% if item.created_by_someone_else? %>
+      <span class='d-block mb-2'>
+        <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.first_name %></strong>
+      </span>
     <% end %>
-  <% elsif item.bought? && !item.bought_by?(current_account) %>
-    Bought by <strong><%= item.claimed_by.full_name %></strong>
-  <% elsif item.is_claimed? && !item.claimed_by?(current_account) %>
-    Claimed by <strong><%= item.claimed_by.full_name %></strong>
-  <% elsif item.created_by_someone_else? %>
-    <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.full_name %></strong>
-  <% end %>
-</div>
+
+    <span> 
+      <% if item.is_multi_claimed? && item.claimers.include?(current_account) %>
+        <i class="fa-solid fa-user-group me-2 blue-green-dark"></i>Shared with <%= pluralize(item.accepted_claimers.count, 'other') %> 
+      <% elsif item.is_multi_claimed? %>
+        <% if item.bought? %>
+          <i class="fa-solid fa-credit-card me-2 blue-green-dark"></i>Bought by the gifters
+        <% else %>
+          <i class="fa-solid fa-user-group me-2 blue-green"></i>Claimed by <strong><%= item.claimers.count %></strong> people
+        <% end %>
+      <% elsif item.bought? && !item.bought_by?(current_account) %>
+        <i class="fa-solid fa-credit-card me-2 blue-green-dark"></i>Bought by <strong><%= item.claimed_by.first_name %></strong>
+      <% elsif item.is_claimed? && !item.claimed_by?(current_account) %>
+        <i class="fa-solid fa-heart pink-red me-2"></i>Claimed by <strong><%= item.claimed_by.first_name %></strong>
+      <% end %>
+    </span>
+  </div>
+<% end %>

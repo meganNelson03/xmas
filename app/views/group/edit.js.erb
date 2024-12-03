@@ -1,3 +1,5 @@
+$('.modal').modal('hide')
+
 $("#list-item-modal").html("<%= escape_javascript(render partial: 'group/edit', locals: { group: group }) %>");
 
 $('#list-item-modal').modal('show');

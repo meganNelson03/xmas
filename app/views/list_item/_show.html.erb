@@ -50,7 +50,7 @@
       <% end %>
 
       <div class='row'>
-        <% if item.low_price.present? %>
+        <% if item.low_price.present? && item.low_price > 0 %>
           <div class='col-12'>
             <div class='text-container'>
               <label>Price</label>
@@ -100,7 +100,11 @@
           <%= render partial: 'list_item/statuses/bought_checkbox', locals: { item: item } %>
         </div>
 
-        <%= render partial: 'list_item/actions/view', locals: { item: item } %>
+        <% if item.owned_by?(current_account) %>
+          <%= render partial: 'list_item/actions/my_actions', locals: { item: item } %>
+        <% else %>
+          <%= render partial: 'list_item/actions/view', locals: { item: item } %>
+        <% end %>
       </div>
     </div>
   </div>

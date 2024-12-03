@@ -1,0 +1,7 @@
+<%= link_to claim_path(item.id), method: :post, remote: true, class: 'add-to-list btn' do %>
+  <% if item.open? %>
+    Claim this Wish
+  <% elsif item.claimed_by?(current_account) %>
+    <i class="fa-solid fa-heart me-3"></i>Claimed
+  <% end %>
+<% end %>

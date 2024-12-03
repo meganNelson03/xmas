@@ -9,11 +9,15 @@ export default class extends Controller {
       return new Promise((resolve) => {
         dialog.querySelector("[data-behavior='cancel']").addEventListener("click", () => {
           dialog.remove();
-    
+
+          $('.modal').has('.modal-dialog').first().modal('show')
+
           resolve(false);
         }, { once: true })
         dialog.querySelector("[data-behavior='commit']").addEventListener("click", () => {
           dialog.remove();
+
+          $('.modal').has('.modal-dialog').first().modal('show')
   
           resolve(true);
         }, { once: true })
@@ -33,7 +37,7 @@ export default class extends Controller {
         </div>
         <div class="d-flex justify-content-center mt-4">
           <button data-behavior="cancel" data-bs-dismiss="modal" class='btn btn-default cancel me-3'>Cancel</button>
-          <button data-behavior="commit" data-bs-dismiss="modal" class='btn input accept'>Yes, delete this.</button>
+          <button data-behavior="commit" data-bs-dismiss="modal" class='btn input accept'>Yes, delete this</button>
         </div>
       </div>
       </div>
@@ -41,6 +45,8 @@ export default class extends Controller {
     </div>
     </div>
     `
+    $('.modal').has('.modal-dialog').first().modal('hide');
+
     document.body.insertAdjacentHTML('beforeend', content);
      
     $('#confirm-modal .modal').modal('show')

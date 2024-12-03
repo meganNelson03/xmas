@@ -98,12 +98,12 @@ class ListItemController < ApplicationController
   def verify_in_group
     if !@list_item.list.in_group?(@selected_group)
       raise 'You are not allowed to update this item.'
-    end 
+    end
   end
 
   def list_item_params
     params.require(:list_item).permit(
-      :description, :url, :price, :low_price, 
+      :description, :url, :price, :low_price, :secret,
       :high_price, :priority, :list_id, :created_by_id,
       tag_ids: [], links_attributes: [:id, :url, :_destroy]
     )

@@ -75,7 +75,9 @@ class ListController < ApplicationController
       @list_items = ListItem.none
     else 
       @list_items = ListItem.in_group(@selected_group)
-    end 
+    end
+
+    @list_items = @list_items.visible_for(current_account)
   end
 
   def status_query(status)

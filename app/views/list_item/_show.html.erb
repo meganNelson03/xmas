@@ -13,7 +13,14 @@
     </div>
 
     <div class="modal-body">
-      <div class='pills d-flex justify-content-between'>
+      <div class='pills d-flex justify-content-between mobile-small'>
+        <span>
+          <% if item.secret %>
+            <div class='pill'>
+              <i class="fa-solid fa-face-smile-wink me-2"></i>This is a secret
+            </div>
+          <% end %>
+        </span>
         <% if item.url.present? %>
           <%= link_to item.url, target: '_blank', class: 'no-link-style' do %>
             <div class='pill'>

@@ -18,6 +18,7 @@ class ListItem < ApplicationRecord
   validates :priority, presence: true
   validate :valid_url
   validates :price, numericality: { less_than: 1000000.00, greater_than_or_equal_to: 0.00 }, allow_nil: true
+  validate :can_be_secret
 
   validate :valid_price_range
 
@@ -25,6 +26,7 @@ class ListItem < ApplicationRecord
   scope :claimed, -> { where.not(claimed_by_id: nil) }
   scope :owned_by, -> (account) { where(account_id: account.id) }
   scope :in_group, -> (group) { joins(list: :group).where(lists: { groups: { id: group.id }}) }
+
   delegate :account, to: :list
 
   aasm column: :status do 
@@ -45,6 +47,14 @@ class ListItem < ApplicationRecord
       transitions from: :claimed, to: :open
       transitions from: :bought, to: :open
     end
+  end
+
+  def self.visible_for(account)
+    records = self.joins(:list)
+
+    records
+      .where(secret: false, lists: { account_id: account.id })
+      .or(records.where.not(lists: { account_id: account.id }))
   end
 
   def self.claimed_by(account)
@@ -157,6 +167,14 @@ class ListItem < ApplicationRecord
       self.claim!
     elsif self.claimed? && claimed_by_id.blank?
       self.reopen!
+    end
+  end
+
+  def can_be_secret 
+    return if created_by_id != list.account_id
+
+    if secret
+      errors.add(:secret, ": You can't mark your own wish as a secret.")
     end
   end
 

@@ -506,6 +506,14 @@ textarea {
   font-size: .9rem;
 }
 
+@media (max-width: 768px) {
+  .pills.mobile-small .pill {
+    padding: 5px 15px; 
+    font-size: .9rem;
+  }
+}
+
+
 .btn.small {
   padding: 5px 15px;
   font-size: .9rem;

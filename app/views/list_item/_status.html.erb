@@ -1,6 +1,10 @@
 <% if !item.owned_by?(current_account) %>
   <div class='claimed-by'>
-    <% if item.created_by_someone_else? %>
+    <% if item.secret %>
+      <span class='d-block mb-2'>
+        <i class="fa-solid fa-triangle-exclamation blue-green me-2"></i>This wish is a <strong>secret</strong>
+      </span>
+    <% elsif item.created_by_someone_else? %>
       <span class='d-block mb-2'>
         <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.first_name %></strong>
       </span>

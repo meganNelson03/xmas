@@ -44,9 +44,7 @@
   <%= f.hidden_field :created_by_id, value: @current_account.id %>
   <div class='col-12 d-flex justify-content-between flex-row-reverse'>
     <%= f.submit 'Submit', class: 'btn submit' %>
-    <%= link_to :back do %>
-      <button class="btn btn-default cancel" data-bs-dismiss="modal" aria-hidden="true">Cancel</button>
-    <% end %>
+    <div class="btn btn-default cancel cancel-modal" data-bs-dismiss="modal" aria-hidden="true">Cancel</div>
   </div>
 </div>
 

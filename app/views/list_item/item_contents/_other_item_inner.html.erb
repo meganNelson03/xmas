@@ -1,0 +1,44 @@
+<div class="preheader">
+  <span class='name'>
+    <%= item.list.account.full_name %>
+  </span>
+  <span>
+    <%= render partial: 'list_item/priority_icon', locals: { item: item } %>
+
+    <% if item.url.present? %>
+      <span class='me-2'></span>
+      <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top', target: 'tooltip.tooltipElement'}, title: 'Gift URL', target: '_blank' do %>
+        <i class="fa-solid fa-link icon"></i>
+      <% end %>
+    <% end %>
+  </span>
+</div>
+
+<%= render partial: 'list_item/status', locals: { item: item } %>
+
+<div class='d-block d-md-none mobile-claim-message-container'>
+</div>
+
+<%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
+  <div class="head">
+    <div class='truncated-text'>
+      <p class='white-space-preline'><%= item.description.truncate(200, omission: '...') %></p>
+    </div>
+  </div>
+<% end %>
+
+<% if item.tags.present? %>
+  <%= link_to show_list_item_path(item.id), class: 'action view-item', data: { toggle: 'tooltip', placement: 'top'}, title: 'This item is tagged', remote: true do %>
+    <span class="fa-stack fa-2x icon-tag">
+      <i class="fa-solid fa-circle fa-stack-2x icon-bg"></i>
+      <i class="fa-solid fa-tag fa-stack-1x fa-inverse icon-fg"></i>
+    </span>
+  <% end %>
+<% end %>
+
+<div class="body">
+  <%= render partial: 'list_item/price_range', locals: { item: item } %>
+  <%= render partial: 'list_item/actions/card', locals: { item: item } %>
+</div>
+
+<div class='blur'></div>

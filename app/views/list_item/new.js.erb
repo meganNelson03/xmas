@@ -1,6 +1,9 @@
-$("#list-item-modal").html("<%= escape_javascript(render partial: 'list_item/new', locals: { list_item: list_item, success: (defined? success).presence && success.present? }) %>");
+$('#modal-container').html("<%= escape_javascript(render partial: 'layouts/modal/modal_contents', locals: { 
+    modal_id: 'new', 
+    modal_partial: 'list_item/new', 
+    modal_partial_locals: { list_item: list_item, success: local_assigns.fetch(:success, false) }}) %>")
+$("#modal-item-new.modal").modal('show')
 
-$('#list-item-modal').modal('show');
 $('.multiselect-field').select2({ width: 'resolve'});
 
 $(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) {
@@ -8,3 +11,7 @@ $(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) {
     event.preventDefault();
   }
 });
+
+$('.dismiss-modal, .cancel-modal').on('click', function() {
+  $('#modal-item-new.modal').modal('hide');
+})

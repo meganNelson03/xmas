@@ -1,118 +1,111 @@
-<div class="modal-dialog modal-dialog-centered modal-lg view-modal-dialog">
-  <div class="modal-content">
+<div class='dismiss-modal'>
+<i class="fa-solid fa-circle-xmark icon-dismiss" data-bs-dismiss="modal"></i>
+</div>
 
-    <div class='dismiss-modal'>
-      <i class="fa-solid fa-circle-xmark icon-dismiss" data-bs-dismiss="modal"></i>
+<div class="modal-header">
+<span class='text-center'>
+<h3><%= item.account.first_name %>'s Wish</h3>
+<h6 class='font-weight-light'><%= @selected_group.name %></h6>
+</span>
+</div>
+
+<div class="modal-body">
+<div class='pills d-flex justify-content-between mobile-small'>
+<span>
+  <% if item.secret %>
+    <div class='pill'>
+      <i class="fa-solid fa-face-smile-wink me-2"></i>This is a secret
     </div>
-
-    <div class="modal-header">
-      <span class='text-center'>
-        <h3><%= item.account.first_name %>'s Wish</h3>
-        <h6 class='font-weight-light'><%= @selected_group.name %></h6>
-      </span>
+  <% end %>
+</span>
+<% if item.url.present? %>
+  <%= link_to item.url, target: '_blank', class: 'no-link-style' do %>
+    <div class='pill'>
+      <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Gift URL
     </div>
+  <% end %>
+<% end %>
+</div>
 
-    <div class="modal-body">
-      <div class='pills d-flex justify-content-between mobile-small'>
-        <span>
-          <% if item.secret %>
-            <div class='pill'>
-              <i class="fa-solid fa-face-smile-wink me-2"></i>This is a secret
-            </div>
-          <% end %>
-        </span>
-        <% if item.url.present? %>
-          <%= link_to item.url, target: '_blank', class: 'no-link-style' do %>
-            <div class='pill'>
-              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Gift URL
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+<% if item.created_by_someone_else? %>
+<div class='col-12'>
+<div class='text-container'>
+  <label>Made By</label>
+  <div class='text-content'>
+    This wish was made by <strong><%= item.created_by.full_name %></strong>
+  </div>
+</div>
+</div>
+<% end %>
 
-      <% if item.created_by_someone_else? %>
-      <div class='col-12'>
-        <div class='text-container'>
-          <label>Made By</label>
-          <div class='text-content'>
-            This wish was made by <strong><%= item.created_by.full_name %></strong>
-          </div>
-        </div>
-      </div>
+<% if !item.owned_by?(current_account) %>
+<div class='col-12'>
+  <div class='text-container'>
+    <label>Status</label>
+    <div class='text-content'>
+      <% if item.is_claimed? %>
+        This wish was claimed by <%= item.claimers.map(&:first_name).to_sentence %>
+      <% else %>
+        This wish is open to claim.
       <% end %>
-
-      <% if !item.owned_by?(current_account) %>
-        <div class='col-12'>
-          <div class='text-container'>
-            <label>Status</label>
-            <div class='text-content'>
-              <% if item.is_claimed? %>
-                This wish was claimed by <%= item.claimers.map(&:first_name).to_sentence %>
-              <% else %>
-                This wish is open to claim.
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
-      <div class='row'>
-        <% if item.low_price.present? && item.low_price > 0 %>
-          <div class='col-12'>
-            <div class='text-container'>
-              <label>Price</label>
-              <div class='text-content'>
-                <%= format_price_range(item.low_price, item.high_price) %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-        <div class='col-12'>
-          <div class='text-container'>
-            <label>Description</label>
-            <div class='text-content'>
-              <span class='white-space-preline'><%= item.description %></span>
-            </div>
-          </div>
-        </div>
-
-        <% if item.links.present? %>
-        <div class='col-12'>
-          <div class='content-container'>
-            <label>Additional Links</label>
-            <div class='inner-content pills mt-1'>
-              <% item.links.each_with_index do |link, index| %>
-                  <%= link_to link.url, target: '_blank', class: 'no-link-style' do %>
-                    <div class='pill small'>
-                      <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Link <%= index + 1 %>
-                    </div>
-                  <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <% end %>
-
-        <% if item.tags.present? %>
-          <div class='tags mt-5'>
-            <% item.tags.each do |tag| %>
-              <span class='tag'>
-                <i class="fa-solid fa-tag me-2 icon-light"></i><%= tag.name %>
-              </span>
-            <% end %> 
-          </div>
-        <% end %>
-
-        <div class='checkbox-container'>
-          <%= render partial: 'list_item/statuses/bought_checkbox', locals: { item: item } %>
-        </div>
-
-        <% if item.owned_by?(current_account) %>
-          <%= render partial: 'list_item/actions/my_actions', locals: { item: item } %>
-        <% else %>
-          <%= render partial: 'list_item/actions/view', locals: { item: item } %>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>
+<% end %>
+
+<div class='row'>
+<% if item.low_price.present? && item.low_price > 0 %>
+  <div class='col-12'>
+    <div class='text-container'>
+      <label>Price</label>
+      <div class='text-content'>
+        <%= format_price_range(item.low_price, item.high_price) %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class='col-12'>
+  <div class='text-container'>
+    <label>Description</label>
+    <div class='text-content'>
+      <span class='white-space-preline'><%= item.description %></span>
+    </div>
+  </div>
+</div>
+
+<% if item.links.present? %>
+<div class='col-12'>
+  <div class='content-container'>
+    <label>Additional Links</label>
+    <div class='inner-content pills mt-1'>
+      <% item.links.each_with_index do |link, index| %>
+          <%= link_to link.url, target: '_blank', class: 'no-link-style' do %>
+            <div class='pill small'>
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Link <%= index + 1 %>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% if item.tags.present? %>
+  <div class='tags mt-5'>
+    <% item.tags.each do |tag| %>
+      <span class='tag'>
+        <i class="fa-solid fa-tag me-2 icon-light"></i><%= tag.name %>
+      </span>
+    <% end %> 
+  </div>
+<% end %>
+
+<div class='checkbox-container'>
+  <%= render partial: 'list_item/statuses/bought_checkbox', locals: { item: item } %>
+</div>
+
+<% if item.owned_by?(current_account) %>
+  <%= render partial: 'list_item/actions/my_actions', locals: { item: item } %>
+<% else %>
+  <%= render partial: 'list_item/actions/view', locals: { item: item } %>
+<% end %>

@@ -1,0 +1,37 @@
+<div class="preheader">
+  <span class='name'><%= item.list.account.full_name %></span>
+  <span>
+    <%= render partial: 'list_item/priority_icon', locals: { item: item } %>
+    <% if item.url.present? %>
+      <span class='me-2'></span>
+      <%= link_to item.url, class: 'item-link', data: { toggle: 'tooltip', placement: 'top', target: 'tooltip.tooltipElement'}, title: 'Gift URL', target: '_blank' do %>
+        <i class="fa-solid fa-link icon"></i>
+      <% end %>
+    <% end %>
+  </span>
+</div>
+<div class='claimed-by'>
+  <% if item.created_by_someone_else? %>
+    <i class="fa-solid fa-gift me-2 blue-green"></i>Made by <strong><%= item.created_by.full_name %></strong>
+  <% end %>
+</div>
+
+<%= link_to show_list_item_path(item.id), class: 'no-link-style', remote: true do %> 
+  <div class="head">
+    <div class='truncated-text'>
+      <p class='white-space-preline'><%= item.description.truncate(200, omission: '...') %></p>
+    </div>
+  </div>
+  <div class="body">
+    <%= render partial: 'list_item/price_range', locals: { item: item } %>
+  </div>
+<% end %>
+
+<%= form_for :list_item, url: destroy_list_item_path(item.id), method: :delete, class: 'delete-item-form' do |f| %>
+  <%= link_to edit_list_item_path(item.id), class: 'action edit-item', remote: true do %>
+    <span class="fa-stack fa-2x">
+      <i class="fa-solid fa-circle fa-stack-2x icon-bg"></i>
+      <i class="fa-regular fa-pen-to-square fa-stack-1x fa-inverse icon-fg"></i>
+    </span>
+  <% end %>
+<% end %>

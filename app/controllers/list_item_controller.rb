@@ -37,7 +37,7 @@ class ListItemController < ApplicationController
   def update
     respond_to do |format|
       if @list_item.update(list_item_params)
-        format.js { render js: "window.location.replace('#{request.env["HTTP_REFERER"]}');" }
+        format.js { render 'update', locals: { list_item: @list_item } }
       else 
         format.js { render 'edit', locals: { list_item: @list_item } }
       end

@@ -1,14 +1,9 @@
-<div class="modal-dialog modal-dialog-centered modal-lg">
-  <div class="modal-content">
+<div class="modal-header">
+  <h3>Edit Wish</h3>
+</div>
 
-    <div class="modal-header">
-      <h3>Edit Wish</h3>
-    </div>
-
-    <div class="modal-body">
-      <%= form_with model: list_item, url: update_list_item_path(list_item.id), data: { remote: true, controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }, method: :patch do |f| %>
-        <%= render partial: 'form_contents', locals: { f: f, list_item: list_item } %>
-      <% end %>
-    </div>
-  </div>
+<div class="modal-body">
+  <%= form_with model: list_item, url: update_list_item_path(list_item.id), data: { remote: true, controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }, method: :patch do |f| %>
+    <%= render partial: 'form_contents', locals: { f: f, list_item: list_item } %>
+  <% end %>
 </div>

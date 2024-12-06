@@ -1,3 +1,5 @@
-$("#view-modal").html("<%= escape_javascript(render partial: 'list_item/show', locals: { item: list_item }) %>");
-
-$('#view-modal').modal('show');
+$('#modal-container').html("<%= escape_javascript(render partial: 'layouts/modal/modal_contents', locals: { 
+    modal_id: list_item.id, 
+    modal_partial: 'list_item/show', 
+    modal_partial_locals: { item: list_item }}) %>")
+$("#modal-item-<%= escape_javascript(list_item.id) %>.modal").modal('show')

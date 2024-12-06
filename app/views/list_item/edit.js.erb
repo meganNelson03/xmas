@@ -1,6 +1,9 @@
-$("#list-item-modal").html("<%= escape_javascript(render partial: 'list_item/edit', locals: { list_item: list_item, success: (defined? success).presence && success.present? }) %>");
+$('#modal-container').html("<%= escape_javascript(render partial: 'layouts/modal/modal_contents', locals: { 
+    modal_id: list_item.id, 
+    modal_partial: 'list_item/edit', 
+    modal_partial_locals: { list_item: list_item }}) %>")
+$("#modal-item-<%= escape_javascript(list_item.id) %>.modal").modal('show')
 
-$('#list-item-modal').modal('show')
 $('.multiselect-field').select2({ width: 'resolve'});
 
 $(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) {

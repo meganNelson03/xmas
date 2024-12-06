@@ -1,4 +1,5 @@
 $("#<%= escape_javascript(@item_id) %>").html("<%= escape_javascript(render partial: 'list_item/item_inner', locals: { item: @list_item }) %>");
+$(".checkbox-container").html("<%= escape_javascript(render partial: 'list_item/statuses/bought_checkbox', locals: { item: @list_item }) %>");
 $(".mobile-claim-message-container").html("<%= escape_javascript(render partial: 'list_item/mobile/claim_message', locals: { claimed: @list_item.claimed? }) %>");
 
 $('.claim-button-container').html("<%= escape_javascript(render partial: 'list_item/claim_button', locals: { item: @list_item }) %>")

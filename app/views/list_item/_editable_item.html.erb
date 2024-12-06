@@ -26,12 +26,5 @@
         <%= render partial: 'list_item/price_range', locals: { item: item } %>
         <%= render partial: 'list_item/actions/card', locals: { item: item } %>
       </div>
-  
-      <%= link_to edit_list_item_path(item.id), class: 'action edit-item', remote: true do %>
-        <span class="fa-stack fa-2x">
-          <i class="fa-solid fa-circle fa-stack-2x icon-bg"></i>
-          <i class="fa-regular fa-pen-to-square fa-stack-1x fa-inverse icon-fg"></i>
-        </span>
-      <% end %>
     </div>
 </div>

@@ -11,20 +11,22 @@
 
 <div class="modal-body">
 <div class='pills d-flex justify-content-between mobile-small'>
-<span>
-  <% if item.secret %>
-    <div class='pill'>
-      <i class="fa-solid fa-face-smile-wink me-2"></i>This is a secret
-    </div>
+  <span>
+    <% if item.secret %>
+      <div class='pill'>
+        <i class="fa-solid fa-face-smile-wink me-2"></i>This is a secret
+      </div>
+    <% else %>
+      <%= render partial: 'list_item/priority_pill', locals: {item: item} %>
+    <% end %>
+  </span>
+  <% if item.url.present? %>
+    <%= link_to item.url, target: '_blank', class: 'no-link-style' do %>
+      <div class='pill'>
+        <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Gift URL
+      </div>
+    <% end %>
   <% end %>
-</span>
-<% if item.url.present? %>
-  <%= link_to item.url, target: '_blank', class: 'no-link-style' do %>
-    <div class='pill'>
-      <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Gift URL
-    </div>
-  <% end %>
-<% end %>
 </div>
 
 <% if item.created_by_someone_else? %>
@@ -105,6 +107,8 @@
 </div>
 
 <% if item.owned_by?(current_account) %>
+  <%= render partial: 'list_item/actions/my_actions', locals: { item: item } %>
+<% elsif item.created_by?(current_account) %>
   <%= render partial: 'list_item/actions/my_actions', locals: { item: item } %>
 <% else %>
   <%= render partial: 'list_item/actions/view', locals: { item: item } %>

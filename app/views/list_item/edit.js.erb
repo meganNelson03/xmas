@@ -1,8 +1,4 @@
-$('#modal-container').html("<%= escape_javascript(render partial: 'layouts/modal/modal_contents', locals: { 
-    modal_id: list_item.id, 
-    modal_partial: 'list_item/edit', 
-    modal_partial_locals: { list_item: list_item }}) %>")
-$("#modal-item-<%= escape_javascript(list_item.id) %>.modal").modal('show')
+$("#modal-container .modal-content").html("<%= escape_javascript(render partial: 'list_item/edit', locals: { list_item: list_item }) %>")
 
 $('.multiselect-field').select2({ width: 'resolve'});
 

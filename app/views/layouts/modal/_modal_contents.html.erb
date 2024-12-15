@@ -1,3 +1,9 @@
+<div class='d-block'>
+  <% if local_assigns.fetch(:message, false) %>
+    <%= render partial: 'list_item/mobile/success_message', locals: { message: message } %>
+  <% end %>
+</div>
+
 <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" id="modal-item-<%= modal_id %>">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content" id="modal-content-<%= modal_id %>">

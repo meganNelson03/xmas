@@ -1,7 +1,11 @@
+$('.modal').has('.modal-dialog').first().modal('hide');
+
 $('#modal-container').html("<%= escape_javascript(render partial: 'layouts/modal/modal_contents', locals: { 
     modal_id: 'new', 
-    modal_partial: 'list_item/new', 
-    modal_partial_locals: { list_item: list_item, success: local_assigns.fetch(:success, false) }}) %>")
+    modal_partial: 'list_item/new',
+    message: local_assigns.fetch(:message, false), 
+    modal_partial_locals: { list_item: list_item }
+  }) %>")
 $("#modal-item-new.modal").modal('show')
 
 $('.multiselect-field').select2({ width: 'resolve'});

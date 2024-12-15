@@ -21,7 +21,7 @@ class ListItemController < ApplicationController
     
     respond_to do |format|
       if list_item.save
-        format.js { render 'new', locals: { list_item: ListItem.new, success: true } }
+        format.js { render 'new', locals: { list_item: ListItem.new, message: 'You made a wish!' } }
       else
         format.js { render 'new', locals: { list_item: list_item } }
       end
@@ -37,7 +37,8 @@ class ListItemController < ApplicationController
   def update
     respond_to do |format|
       if @list_item.update(list_item_params)
-        format.js { render 'update', locals: { list_item: @list_item } }
+        flash[:notice] = 'You updated a wish!'
+        format.js { render 'update', locals: { list_item: @list_item, flash: flash } }
       else 
         format.js { render 'edit', locals: { list_item: @list_item } }
       end

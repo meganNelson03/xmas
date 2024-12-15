@@ -17,7 +17,7 @@ class Accounts::OmniauthCallbacksController < Devise::OmniauthCallbacksControlle
         account.update(last_name: params[:last_name])
       end
 
-      if account.inactive?
+      if account.inactive? || account.invited?
         account.active! 
       end
 

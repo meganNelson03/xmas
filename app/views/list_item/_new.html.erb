@@ -9,12 +9,6 @@
   </span>
 </div>
 
-<div class='d-block'>
-  <% if success %>
-    <%= render partial: 'list_item/mobile/success_message', locals: { message: 'You made a wish!' } %>
-  <% end %>
-</div>
-
 <div class="modal-body">
   <%= form_with model: list_item, url: create_list_item_path, data: { remote: true, controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
     <%= render partial: 'form_contents', locals: { f: f, list_item: list_item } %>

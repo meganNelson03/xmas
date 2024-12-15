@@ -1,2 +1,3 @@
+$('.message-container').html("<%= escape_javascript(render partial: 'layouts/message', locals: { flash: flash }) %>");
 $("#item-<%= escape_javascript(list_item.id) %>").html("<%= escape_javascript(render partial: 'list_item/item_inner', locals: { item: list_item }) %>");
 $('.modal').modal('hide');
